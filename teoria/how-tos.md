@@ -345,7 +345,52 @@ fmt.Printf("Hola ", unString, ", que gusto verte!")
 ```
 Una última aclaración, notar como siempre antes de un `Scan()`, `Scanln()`, `Scanf()` hay un `Print()`, `Println()`, `Printf()`. Esto se debe a que es necesario indicarle al usuario qué es lo que queremos que haga. Si no pusiéramos esos prints, el usuario no sabría qué hacer, simplemente la pantalla se quedaría en negro y esperando el ingreso de datos que nunca van a ocurrir u ocurrirán por accidente.
 
-## Cómo escribo un if?
+## Qué operadores existen en GO?
+Existen varios tipos de operadores en GO:
+
+ 1. Aritméticos
+ 2. De Comparación
+ 3. Lógicos
+
+Veamos
+1. Aritméticos
+El valor que devuelven estos operadores depende de los operandos. Si se usa el operador con dos enteros, devolverá un entero, dos decimales devolverá un decimal
+
+| Operador | Nombre | Aplica a | Explicación | Tipo
+|--|--|--|--|--|
+| + | suma | `int` `float` `string` | Suma dos elementos | Binario
+| - | resta | `int` `float` | Resta dos números | Binario
+| * | multiplicación | `int` `float` | Multiplica dos números | Binario
+| / | división | `int` `float` | Divide dos números | Binario
+| % | resto de la división | `int` | Divide dos números enteros y devuelve el resto | Binario
+| ++ | incremento | `int` `float` | Es un equivalente a `x = x + 1` | Unario
+| -- | decremento | `int` `float` | Es un equivalente a `x = x - 1` | Unario
+
+2. De Comparación
+El valor que devuelven estos operadores es siempre un `bool` independientemente del tipo de los operandos
+
+| Operador | Nombre | Aplica a | Explicación | Tipo |
+|--|--|--|--|--|
+| == | igualdad | Todos | Devuelve si dos elementos son iguales | Binario
+| != | desigualdad | Todos | Devuelve si dos elementos no son iguales | Binario
+| < | menor | `int` `float` `string` | Devuelve si un elemento es menor que otro | Binario
+| <= | menor o igual | `int` `float` `string` | Devuelve si un elemento es menor o igual que otro | Binario
+| > | mayor | `int` `float` `string` | Devuelve si un elemento es mayor que otro | Binario
+| >= | mayor o igual | `int` `float` `string` | Devuelve si un elemento es mayor o igual que otro | Binario
+
+3. Lógicos
+El valor que devuelven estos operadores son siempre `bool` y se aplican siempre a expresiones `bool`
+
+| Operador | Nombre | Aplica a | Explicación | Tipo |
+|--|--|--|--|--|
+| && | y (and) | `bool` | Devuelve `true` si los dos operandos son `true` | Binario |
+| \|\| | o (or) | `bool` | Devuelve `true` si al menos uno de los dos operandos es `true` | Binario |
+| ! | no (not) | `bool` | Niega el valor de verdad del operando | Unario|
+
+## Qué es un `if`?
+Un `if` es una estructura de control propio de los lenguajes procedurales o imperativos. Es una estructura que permite bifurcar el flujo de un programa en dos dependiendo de cierta condición. Con un `if` uno puede agregar comportamiento variable a un programa si cierta condición se cumple, si no se cumple, o ambas. Los `if`s se pueden anidar la cantidad de veces que necesitemos lo que quiere decir que podemos complejizar la lógica de nuestro programa tanto como queramos.
+
+## Cómo escribo un `if`?
 La sintaxis más sencilla para escribir un `if` es la siguiente:
 ```go
 if <expresion> {
@@ -368,7 +413,7 @@ if numero > 45 {
 }
 ```
 
-También existe una variante más completa que permite ejecutar diferente código dependiendo si la expresión fue `true` o `false`
+Existe una variante más completa que permite ejecutar diferente código dependiendo si la expresión fue `true` o `false`
 ```go
 if <expresion> {
 	<codigoSiVerdadero>
@@ -474,45 +519,59 @@ if edad < 15 {
 ```
 Se ve a simple vista la comodidad de uno con respecto al otro. De todas formas, queda a gusto del quién lee el usar una forma u otra.
 
-## Qué operadores existen en GO?
-Existen varios tipos de operadores en GO:
+## Que es un `switch`?
+Un `switch` es una estructura de control que viene a mejorar la forma en que representamos múltiples caminos (no solo 2) dependiendo de una condición o valor dado. Es como un `if` pero en lugar de solo bifurcar, puede evaluar una expresión _x_ y ejecutar código dependiendo del valor de esa expresión. (Realmente un como un `else if` más legible)
 
- 1. Aritméticos
- 2. De Comparación
- 3. Lógicos
+## Cómo escribo un `switch`?
+El `switch` se escribe de la siguiente forma:
+```go
+switch <expresion> {
+case <expresion>:
+	<codeIfExpresionMatchs>
+case <expresion>:
+	<codeIfExpresionMatchs>
+case <expresion>:
+	<codeIfExpresionMatchs>
+default:
+	<codeIfExpresionDontMatch>
+}
+```
+Donde:
+- `<expresion>` es cualquier expresión que devuelva un valor. Puede ser de cualquier tipo. Dicho valor será comparado luego (uno por uno) con todas las `<expresion>` en los case y la que matchee, será la que ejecute el código.
+- `<codeIfExpresionMatchs>` es cualquier bloque de código válido para GO que será ejecutado si la expresión del case que la contiene matchea.
+- `<codeIfExpresionDontMatch>` es cualquier bloque de código válido para GO que será ejecutado si la expresión de ningún case matcheó.
 
-Veamos
-1. Aritméticos
-El valor que devuelven estos operadores depende de los operandos. Si se usa el operador con dos enteros, devolverá un entero, dos decimales devolverá un decimal
+Ejemplo: Queremos saber dado un `string`, en que día de la semana me encuentro sabiendo que el día 1 es domingo.
+```go
+var diaDeLaSemana string = "martes"
 
-| Operador | Nombre | Aplica a | Explicación | Tipo
-|--|--|--|--|--|
-| + | suma | `int` `float` `string` | Suma dos elementos | Binario
-| - | resta | `int` `float` | Resta dos números | Binario
-| * | multiplicación | `int` `float` | Multiplica dos números | Binario
-| / | división | `int` `float` | Divide dos números | Binario
-| % | resto de la división | `int` | Divide dos números enteros y devuelve el resto | Binario
-| ++ | suma 1 | `int` `float` | Es un equivalente a `x = x + 1` | Unario
-| -- | resta 1 | `int` `float` | Es un equivalente a `x = x - 1` | Unario
+switch diaDeLaSemana {
+case "domingo":
+	fmt.Print(1)
+case "lunes":
+	fmt.Print(2)
+case "martes":
+	fmt.Print(3)
+case "miercoles":
+	fmt.Print(4)
+case "jueves":
+	fmt.Print(5)
+case "viernes":
+	fmt.Print(6)
+case "sabado":
+	fmt.Print(7)
+default:
+	panic("Error!")
+}
+```
 
-2. De Comparación
-El valor que devuelven estos operadores es siempre un `bool` independientemente del tipo de los operandos
-
-| Operador | Nombre | Aplica a | Explicación | Tipo |
-|--|--|--|--|--|
-| == | igualdad | Todos | Devuelve si dos elementos son iguales | Binario
-| != | desigualdad | Todos | Devuelve si dos elementos no son iguales | Binario
-| < | menor | `int` `float` `string` | Devuelve si un elemento es menor que otro | Binario
-| <= | menor o igual | `int` `float` `string` | Devuelve si un elemento es menor o igual que otro | Binario
-| > | mayor | `int` `float` `string` | Devuelve si un elemento es mayor que otro | Binario
-| >= | mayor o igual | `int` `float` `string` | Devuelve si un elemento es mayor o igual que otro | Binario
-
-3. Lógicos
-El valor que devuelven estos operadores son siempre `bool` y se aplican siempre a expresiones `bool`
-
-| Operador | Nombre | Aplica a | Explicación | Tipo |
-|--|--|--|--|--|
-| && | y (and) | `bool` | Devuelve `true` si los dos operandos son `true` | Binario |
-| \|\| | o (or) | `bool` | Devuelve `true` si al menos uno de los dos operandos es `true` | Binario |
-| ! | no (not) | `bool` | Niega el valor de verdad del operando | Unario|
-
+## Qué es un acumulador?
+Un acumulador no es más que una variable común y corriente usada para _acumular_ datos (usualmente valores). Tienen un nombre especial debido a su frecuente aparición en los algoritmos existentes pero no debemos añadirle ningún comportamiento especial ni diferenciarlos de alguna forma en particular del resto de las variables que conocemos.
+Normalmente aparecen en cálculos de totales, sumatorias, productorias, concatenaciones, etc. Y normalmente se ven dentro de ciclos `for`.
+```go
+var acum float32 = 0
+for i := 0; i < 10; i++ {
+	// lo que hace esta iteración es acumular (sumar) los valores del 0 al 9
+	acum = acum + i
+}
+```
