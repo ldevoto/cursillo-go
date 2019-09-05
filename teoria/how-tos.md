@@ -565,6 +565,19 @@ default:
 }
 ```
 
+## Qué es un contador?
+Un contador no es mas que una variable común y corriente usada para _contar_ cosas u ocurrencias. Suelen ser de tipo `int` y el motivo por el que tienen su nombre diferenciado se debe, básicamente, a la alta aparición en programas y algoritmos. Ya sea queriendo calcular un promedio, saber la cantidad de monstruos aniquilados por un personaje o determinar la cantidad de resultados encontrados al buscar en google, por detrás, hay un contador.
+Es muy común verlos dentro de un ciclo `for`.
+```go
+var cont int = 0
+for i := 0; i < 10; i++ {
+	if i % 3 {
+		// contamos la cantidad de multiplos de 3 que hay entre el 0 y el 9
+		cont++
+	}
+}
+```
+
 ## Qué es un acumulador?
 Un acumulador no es más que una variable común y corriente usada para _acumular_ datos (usualmente valores). Tienen un nombre especial debido a su frecuente aparición en los algoritmos existentes pero no debemos añadirle ningún comportamiento especial ni diferenciarlos de alguna forma en particular del resto de las variables que conocemos.
 Normalmente aparecen en cálculos de totales, sumatorias, productorias, concatenaciones, etc. Y normalmente se ven dentro de ciclos `for`.
