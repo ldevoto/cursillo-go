@@ -7,16 +7,16 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  
-  fmt.Println("Ingrese dos números enteros")
-  fmt.Scanf("%d %d", &number1, &number2)
-  if number1 > number2 {
-    fmt.Println("el mayor es el", number1)
-  } else {
-    fmt.Println("el mayor es el", number2)
-  }
+	var number1 int
+	var number2 int
+
+	fmt.Println("Ingrese dos números enteros")
+	fmt.Scanf("%d %d", &number1, &number2)
+	if number1 > number2 {
+		fmt.Println("el mayor es el", number1)
+	} else {
+		fmt.Println("el mayor es el", number2)
+	}	
 }
 ```
 
@@ -27,16 +27,16 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  
-  fmt.Println("Ingrese dos números enteros")
-  fmt.Scanf("%d %d", &number1, &number2)
-  if number1 > number2 {
-    fmt.Println(number1, number2)
-  } else {
-    fmt.Println(number2, number1)
-  }
+	var number1 int
+	var number2 int
+
+	fmt.Println("Ingrese dos números enteros")
+	fmt.Scanf("%d %d", &number1, &number2)
+	if number1 > number2 {
+		fmt.Println(number1, number2)
+	} else {
+		fmt.Println(number2, number1)
+	}
 }
 ```
 
@@ -47,22 +47,22 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  var number3 int
-  var max int
-  
-  fmt.Println("Ingrese tres números enteros")
-  fmt.Scanf("%d %d %d", &number1, &number2, &number3)
-  if number1 > number2 {
-    max = number1
-  } else {
-    max = number2
-  }
-  if number3 > max {
-    max = number3
-  }
-  fmt.Println("el mayor es el", max)
+	var number1 int
+	var number2 int
+	var number3 int
+	var max int
+
+	fmt.Println("Ingrese tres números enteros")
+	fmt.Scanf("%d %d %d", &number1, &number2, &number3)
+	if number1 > number2 {
+		max = number1
+	} else {
+		max = number2
+	}
+	if number3 > max {
+		max = number3
+	}
+	fmt.Println("el mayor es el", max)
 }
 ```
 
@@ -73,29 +73,29 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  var number3 int
-  
-  fmt.Println("Ingrese tres números enteros")
-  fmt.Scanf("%d %d %d", &number1, &number2, &number3)
-  if number1 > number2 {
-    if number2 > number3 {
-      fmt.Println(number1, number2, number3)
-    } else if number1 > number3 {
-      fmt.Println(number1, number3, number2)
-    } else {
-      fmt.Println(number3, number1, number2)
-    }
-  } else {
-    if number1 > number3 {
-      fmt.Println(number2, number1, number3)
-    } else if number2 > number3 {
-      fmt.Println(number2, number3, number1)
-    } else {
-      fmt.Println(number3, number2, number1)
-    }
-  }
+	var number1 int
+	var number2 int
+	var number3 int
+
+	fmt.Println("Ingrese tres números enteros")
+	fmt.Scanf("%d %d %d", &number1, &number2, &number3)
+	if number1 > number2 {
+		if number2 > number3 {
+			fmt.Println(number1, number2, number3)
+		} else if number1 > number3 {
+			fmt.Println(number1, number3, number2)
+		} else {
+			fmt.Println(number3, number1, number2)
+		}
+	} else {
+		if number1 > number3 {
+			fmt.Println(number2, number1, number3)
+		} else if number2 > number3 {
+			fmt.Println(number2, number3, number1)
+		} else {
+			fmt.Println(number3, number2, number1)
+		}
+	}
 }
 ```
 
@@ -106,26 +106,26 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  var number3 int
-  var number4 int
-  var max int
-  
-  fmt.Println("Ingrese cuatro números enteros")
-  fmt.Scanf("%d %d %d %d", &number1, &number2, &number3, &number4)
-  if number1 > number2 {
-    max = number1
-  } else {
-    max = number2
-  }
-  if number3 > max {
-    max = number3
-  }
-  if number4 > max {
-    max = number4
-  }
-  fmt.Println("el mayor es el", max)
+	var number1 int
+	var number2 int
+	var number3 int
+	var number4 int
+	var max int
+
+	fmt.Println("Ingrese cuatro números enteros")
+	fmt.Scanf("%d %d %d %d", &number1, &number2, &number3, &number4)
+	if number1 > number2 {
+		max = number1
+	} else {
+		max = number2
+	}
+	if number3 > max {
+		max = number3
+	}
+	if number4 > max {
+		max = number4
+	}
+	fmt.Println("el mayor es el", max)
 }
 ```
 
@@ -136,52 +136,52 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  var number3 int
-  var number4 int
-  var max int
-  var middleMax int
-  var middleMin int
-  var min int
-  
-  fmt.Println("Ingrese cuatro números enteros")
-  fmt.Scanf("%d %d %d %d", &number1, &number2, &number3, &number4)
-  
-  if number1 > number2 {
-    max = number1
-    middleMax = number2
-  } else {
-    max = number2
-    middleMax = number1
-  }
-  
-  if number3 > max {
-    middleMin = middleMax
-    middleMax = max
-    max = number3
-  } else if number3 > middleMax {
-    middleMin = middleMax
-    middleMax = number3
-  }
-  
-  if number4 > max {
-    min = middleMin
-    middleMin = middleMax
-    middleMax = max
-    max = number4
-  } else if number4 > middleMax {
-    min = middleMin
-    middleMin = middleMax
-    middleMax = number4
-  } else if number4 > middleMin {
-    min = middleMin
-    middleMin = number4
-  } else {
-    min = number4
-  }
-  
-  fmt.Println(max, middleMax, middleMin, min)
+	var number1 int
+	var number2 int
+	var number3 int
+	var number4 int
+	var max int
+	var middleMax int
+	var middleMin int
+	var min int
+
+	fmt.Println("Ingrese cuatro números enteros")
+	fmt.Scanf("%d %d %d %d", &number1, &number2, &number3, &number4)
+
+	if number1 > number2 {
+		max = number1
+		middleMax = number2
+	} else {
+		max = number2
+		middleMax = number1
+	}
+
+	if number3 > max {
+		middleMin = middleMax
+		middleMax = max
+		max = number3
+	} else if number3 > middleMax {
+		middleMin = middleMax
+		middleMax = number3
+	}
+
+	if number4 > max {
+		min = middleMin
+		middleMin = middleMax
+		middleMax = max
+		max = number4
+	} else if number4 > middleMax {
+		min = middleMin
+		middleMin = middleMax
+		middleMax = number4
+	} else if number4 > middleMin {
+		min = middleMin
+		middleMin = number4
+	} else {
+		min = number4
+	}
+
+	fmt.Println(max, middleMax, middleMin, min)
 }
 ```
 
@@ -197,17 +197,17 @@ package main
 import "fmt"
 
 func main() {
-  var number int
-  
-  fmt.Println("Ingrese un numero entero")
-  fmt.Scanf("%d", &number)
-  if number == 0 {
-    fmt.Println("ni par ni impar")
-  } else if number % 2 == 0 {
-    fmt.Println("par")
-  } else {
-    fmt.Println("impar")
-  }
+	var number int
+
+	fmt.Println("Ingrese un numero entero")
+	fmt.Scanf("%d", &number)
+	if number == 0 {
+		fmt.Println("ni par ni impar")
+	} else if number % 2 == 0 {
+		fmt.Println("par")
+	} else {
+		fmt.Println("impar")
+	}
 }
 ```
 
@@ -222,25 +222,25 @@ package main
 import "fmt"
 
 func main() {
-  var number1 int
-  var number2 int
-  var difference int
-  
-  fmt.Println("Ingrese dos números enteros")
-  fmt.Scanf("%d %d", &number1, &number2)
-  difference = number1 - number2
-  if (difference < 0) {
-    difference = difference * -1
-  }
-  if difference >= 130 {
-    fmt.Println("estan bastante distanciados")
-  } else if difference >= 30 {
-    fmt.Println("estan cerca")
-  } else if difference >= 1 {
-    fmt.Println("estan re cerquita")
-  } else {
-    fmt.Println("son iguales")
-  }
+	var number1 int
+	var number2 int
+	var difference int
+
+	fmt.Println("Ingrese dos números enteros")
+	fmt.Scanf("%d %d", &number1, &number2)
+	difference = number1 - number2
+	if (difference < 0) {
+		difference = difference * -1
+	}
+	if difference >= 130 {
+		fmt.Println("estan bastante distanciados")
+	} else if difference >= 30 {
+		fmt.Println("estan cerca")
+	} else if difference >= 1 {
+		fmt.Println("estan re cerquita")
+	} else {
+		fmt.Println("son iguales")
+	}
 }
 ```
 
@@ -259,28 +259,28 @@ package main
 import "fmt"
 
 func main() {
-  var dayOfWeek int
-  
-  fmt.Println("Ingrese un número que representará un día de la semana")
-  fmt.Scanf("%d", &dayOfWeek)
-  switch dayOfWeek {
-    case 0:
-      fmt.Println("domingo.")
-    case 1:
-      fmt.Println("lunes")
-    case 2:
-      fmt.Println("martes")
-    case 3:
-      fmt.Println("miercoles")
-    case 4:
-      fmt.Println("jueves")
-    case 5:
-      fmt.Println("viernes")
-    case 6:
-      fmt.Println("sábado")
-    default:
-      fmt.Println("error")
-  }
+	var dayOfWeek int
+
+	fmt.Println("Ingrese un número que representará un día de la semana")
+	fmt.Scanf("%d", &dayOfWeek)
+	switch dayOfWeek {
+	case 0:
+		fmt.Println("domingo.")
+	case 1:
+		fmt.Println("lunes")
+	case 2:
+		fmt.Println("martes")
+	case 3:
+		fmt.Println("miercoles")
+	case 4:
+		fmt.Println("jueves")
+	case 5:
+		fmt.Println("viernes")
+	case 6:
+		fmt.Println("sábado")
+	default:
+		fmt.Println("error")
+	}
 }
 ```
 
