@@ -1,6 +1,26 @@
 # How To's and What 's
 
-## Como luce la estructura base de un programa en GO?
+- Cómo luce la estructura base de un programa en GO?
+- Qué tipo de datos existen?
+- Como declaro una variable?
+- Cómo cambio el valor de una variable?
+- Cómo declaro una constante?
+- Cómo cambio el valor de una constante?
+- Cómo escribo/imprimo a pantalla?
+- Como leo del teclado?
+- Qué operadores existen en GO?
+- Qué es un `if`?
+- Cómo escribo un `if`?
+- Que es un `switch`?
+- Cómo escribo un `switch`?
+- Qué es un `for`?
+- Cómo escribo un `for`?
+- Cómo escribir un `for`? (segunda parte)
+- Cómo escribir un `for`? (tercera parte)
+- Qué es un contador?
+- Qué es un acumulador?
+
+## Cómo luce la estructura base de un programa en GO?
 ```go
 package main
 
@@ -30,7 +50,7 @@ float32 float64
 complex64 complex128
 ```
 
-## Como declaro una variable?
+## Cómo declaro una variable?
 ```go
 var number int = 1000
 ```
@@ -564,6 +584,209 @@ default:
 	panic("Error!")
 }
 ```
+## Qué es un `for`?
+El `for` es una estructura de repetición usada para ejecutar un mismo código una cierta cantidad de veces o hasta que se cumpla determinada condición. Es una estructura que nos permite manejar mucha cantidad de datos sin tener que saber cuántos al momento de compilación. Piensen en el caso de encontrar un máximo entre 2 valores dados, es sencillo, verdad? qué pasaría si fueran 3? y si fueran 5? y si no supiéramos cuántos datos son? Uno no puede escribir `if`s indefinidamente. Los `if`s que no estén al momento de compilación no podrán ser agregados posteriormente por lo que necesitamos de una estructura que nos permita manejar esta complejidad. Para ello aparece el `for`. Si tuviéramos que encontrar el máximo entre _n_ números nos bastaría con ir comparando números de a pares, compararlos y quedarnos con el mayor y usarlo en la próxima comparación. Al final el valor que nos quede será el mayor. Este tipo de lógica es la que nos permite agregar el `for`
+
+## Cómo escribo un `for`?
+El `for` más habitual se escribe de la siguiente forma:
+```go
+for <preEjecucion>; <condicion>; <posEjecucion> {
+	<codigo>
+}
+```
+Donde:
+- `<preEjecucion>` es una expresión (normalmente una asignación) que es ejecutada **una única vez**  antes de entrar a ejecutar el primer ciclo del `for`.
+- `<condicion>` es una expresión booleana (es decir, que devuelve un `bool`) que será evaluada antes de comenzar **cada**  iteración del `for`.
+- `<posEjecucion>` es una expresión (normalmente un incremento de  variables) que será ejecutada al final de **cada** iteración del `for`.
+- `<codigo>` es cualquier bloque valido para GO que será ejecutado si y solo si `<condicion>` es `true`. 
+
+Entonces pasemos en limpio un poco como es el flujo que hará la estructura de repetición `for`:
+1. Ejecutará `<preEjecucion>` por única vez
+2. Evaluará la expresión `<condicion>`
+3.  Si `<condicion>` es `true`
+	3. a. Ejecutará el `<codigo>` dentro del ciclo
+	3. b. Ejecutará la `<posEjecucion>`
+	3. c. Vuelve al paso 2
+4. Si `<condicion>` es `false`
+	4. a. Sale del ciclo y continúa la ejecución en la primera instrucción que siga luego de la llave de fin del ciclo `for`
+
+Habiendo analizado un poco el funcionamiento abstracto, pongamos un ejemplo para bajarlo más a tierra.
+Imaginemos que queremos simplemente hacer un programa que cuente del 1 al 100. Primero veamos como sería el programa sin la estructura `for`
+```go
+fmt.Println(1)
+fmt.Println(2)
+fmt.Println(3)
+fmt.Println(4)
+fmt.Println(5)
+fmt.Println(6)
+fmt.Println(7)
+... // Cortamos el programa por un tema de espacio
+... // Pero se sobreentiende que la forma de hacerlo es por fuerza bruta con 100 lineas de fmt.Println(...)
+fmt.Println(97)
+fmt.Println(98)
+fmt.Println(99)
+fmt.Println(100)
+```
+
+Ahora veamos de que forma podemos lograrlo usando nuestra estructura `for`
+
+```go
+var i int
+
+for i = 1; i <= 100; i++ {
+	fmt.Println(i)
+}
+```
+
+Bastante más conciso, no? Repasemos como fue el flujo del programa:
+- Declaramos la variable `i` de tipo entero
+- Asignamos 1 a `i` por única vez
+- Preguntamos si `i <= 100` (osea si `1 <= 100`)
+- Como es cierto ejecutamos `fmt.Println(i)` (osea `fmt.Println(1)`)
+- Como no hay mas instrucciones dentro del bloque, ejecutamos `i++` (osea, incrementamos en 1 el valor de `i` quedando en 2)
+- Preguntamos si `i <= 100` (osea si `2 <= 100`)
+- Como es cierto ejecutamos `fmt.Println(i)` (osea `fmt.Println(2)`)
+- Como no hay mas instrucciones dentro del bloque, ejecutamos `i++` (osea, incrementamos en 1 el valor de `i` quedando en 3)
+- Preguntamos si `i <= 100` (osea si `3 <= 100`)
+- Como es cierto ejecutamos `fmt.Println(i)` (osea `fmt.Println(3)`)
+- ..... Y asi podríamos seguir muchas veces más. Para ahorrar espacio, seguiremos con la misma idea pero suponiendo que `i` ya llego al valor de 99
+- Preguntamos si `i <= 100` (osea si `99 <= 100`)
+- Como es cierto ejecutamos `fmt.Println(i)` (osea `fmt.Println(99)`)
+- Como no hay mas instrucciones dentro del bloque, ejecutamos `i++` (osea, incrementamos en 1 el valor de `i` quedando en 100)
+- Preguntamos si `i <= 100` (osea si `100 <= 100`)
+- Como es cierto ejecutamos `fmt.Println(i)` (osea `fmt.Println(100)`)
+- Como no hay mas instrucciones dentro del bloque, ejecutamos `i++` (osea, incrementamos en 1 el valor de `i` quedando en 101)
+- Preguntamos si `i <= 100` (osea si `101 <= 100`)
+- Y por fin llegamos a que la condición no es cierta ya que `101 > 100` por lo que nuestro programa sale del ciclo `for`
+- Y termina exitosamente
+
+Observaciones:
+- Dentro del ciclo `for`  podemos modificar cualquier variable declarada fuera del ciclo incluida la variable `i`. Es una variable más por lo que podríamos modificarla a gusto y provocar que el ciclo termine antes o incluso nunca termine (Si tiene curiosidad, puede intentarlo)
+- La variable `i` que utilizamos en los ejemplos bien podrían llamarse `juanito`, `valor`, `nombre`, etc. Se usa el nombre `i` por convención (normalmente se refieren a índices (index)). Si bien se puede cambiar y usar la que se quiera, no se recomienda hacerlo salvo que sea un tema de legibilidad o esté justificado. 
+- Se pueden anidar ciclos `for` tantos como quieran. Es decir, dentro de un ciclo `for` puede haber otro ciclo `for` y otro y otro (todos los que se quieran). Normalmente a las variables de los diferentes niveles de anidamiento, se les suele ir nombrando como `i`, `j`, `k`, `l` (rara vez se llega tan adentro)
+- Si bien la estructura del `for` que se presentó es la más completa, bien puede obviarse la `<preEjecucion>`, `<posEjecucion>` e incluso la `<condicion>` (Notar que si no se escribe una `<condicion>` el ciclo seguirá por siempre a menos que sea interrumpido)
+
+## Cómo escribir un `for`? (segunda parte)
+Ya vimos la forma más habitual de escribir un ciclo `for`. La misma proponía dividir la estructura en 3 partes, una `<preEjecucion>`, `<condicion>` y `<porEjecucion>`. Dicha división está pensada para cuando uno conoce la cantidad de datos existentes y quiere iterarlos a todos. El problema (o el inconveniente) de esta forma es, que pasa si no conozco la cantidad de datos que voy a iterar? La forma de leer el `for` con dicha estructura sugiere que mi `<preEjecucion>`, `<condicion>` y `<porEjecucion>` comparten una variable en común y que van a estar relacionados de alguna manera. Por ejemplo, vimos como imprimir los números del 1 al 100 usando una variable `i` que usada en las tres secciones y su vinculación era directa: Iniciamos el contador el 1, por cada ejecución aumentamos 1 al contados y lo hacemos hasta que el contador supere el valor de 100. 
+Qué pasaría ahora si queremos repetir una porción de código indefinidamente hasta que cierta condición se satisfaga. Por ejemplo: Pensemoario una respuesta de `"si"` ara realizar algo. 
+- Si la respuesta es `"si"` -> realizamos la acción
+- Si la respuesta es `"no"` -> no realizamos la acción
+- Si la respuesta no es ni `"si"` ni `"no"` -> volvemos a preguntar
+
+Veamos como podemos escribir este `for:`:
+```go
+var respuesta string
+for respuesta != "si" && respuesta != "no" {
+	fmt.Print("Esta seguro que desea borrar todo (si/no)? ")
+	fmt.Scan(&respuesta)
+}
+if respuesta == "si" {
+	fmt.Println("Borrando todo!")
+} else {
+	fmt.Println("No se ha realizado ninguna accion")
+}
+```
+Notar tres cosas:
+1. No hay una `<preEjecucion>`
+2. No hay una `<posEjecucion>`
+3. No están los `;` separadores
+
+El lenguaje nos deja (si es que no están presentes ambos), escribir un `for` con solo una `<condicion>` que será evaluada antes de cada iteración igual que pasaba con el `for` completo. La diferencia principal es que no hay una `<preEjecucion>` ni `<posEjecucion>`. La condición de corte depende de un valor que debería cambiar en el cuerpo del `for` y el cambio no tiene por qué obedecer un patrón (si obedeciera un patrón, usaríamos un for completo). Este tipo de estructura si bien es un `for` en otros lenguajes se conoce como un `while`. En Go no vamos a encontrar un `while` y la justificación que tienen es que sencillamente no son dos loops diferentes, sol lo mismo y por lo tanto deberían nombrarse igual. (Todo lo que se hace con un `while` puede hacerse con un `for` y todo lo que se hace con un `for` puede hacerse con un `while`)
+
+Veamos ahora como reescribiríamos el algoritmo de impresión de los primeros 100 números con nuestro nuevo `for` y veamos a que conclusión llegamos:
+```go
+var i int
+
+i = 1
+for i <= 100 {
+	fmt.Println(i)
+	i++
+}
+```
+Sigue siendo mucho más sencillo que nuestra versión a fuerza bruta (utilizando cien `fmt.Println(..)`) pero hay algo que se siente raro o debería llamar la atención y es que tenemos una inicialización **única** antes de empezar el ciclo `for`, y tenemos cambios que obedecen a un patrón sobre la variable que incide en la condición que ocurre al final de **todas** las ejecuciones del ciclo... Esto sugiere que la primera estructura `for` completa que vimos se amolda mucho mejor a lo que queremos representar que nuestra nueva forma más corta. Una vez más se recuerda que todo lo que hagamos con un `while` (nuestro `for` simple) se puede hacer con un `for` (nuestro `for` completo) ergo, nuestra elección no va a determinar el funcionamiento o no del programa (solo se pretende abrir la discusión y que puedan sacar sus conclusiones de un debate que tiene más años que la humedad).
+Entonces, cuándo elegir uno y cuándo elegir otro? Bueno la respuesta no está tallada en piedra pero si se puede esbozar una especie de regla:
+- Si se precisa una inicialización que ocurra una única vez, una actualización conforme a un patrón en cada iteración y la cantidad de iteraciones es conocida -> debería utilizarse el `for` completo
+- Si por el contrario la cantidad de iteraciones no es conocida y no se debería actualizar nuestra variable de corte conforme a un patrón conocido -> debería utilizarse el `for` simple
+- Para cualquier híbrido entre medio, se apela al buen juicio y legibilidad de lo que se está haciendo
+
+## Cómo escribir un `for`? (tercera parte)
+Ya vimos el `for` completo (con sus 3 partes `<preEjecucion>`,  `<condicion>`, `<posEjecucion>` ), el `for` simple (con su única parte `<condicion>`) y ahora nos toca ver el `for` infinito. Si infinito! 
+Veamos primero como se ve antes de explicar su uso:
+```go
+for {
+	fmt.Println("Esto se repitará indefinidamente")
+}
+```
+Era de esperarse, no? Nuestro `for` infinito no tiene ninguna de las tres partes preexistentes. Nuestro `for` infinito se ejecutará indefinidamente. Al no tener condición de corte, no evaluará jamás ninguna expresión booleana y jamás cortará.
+Es posible que surjan por lo menos dos preguntas al respecto:
+1. Para que lo quiero, en que contexto necesitaría ejecutar algo para siempre (cuál es su función)
+2. Existe alguna forma de cortar la ejecución o realmente es infinito?
+
+Bueno, vamos por partes. Respondamos primero la primer pregunta:
+1. Para que lo quiero, en que contexto necesitaría ejecutar algo para siempre (cuál es su función)
+
+Piensen en un juego. Un juego (por más que jamás lo hayamos pensado) no deja de ser un programa que maneja todas las estructuras que estamos aprendiendo nosotros. Y por lo tanto estamos a solo unos pasos de poder hacer cosas así (o por lo menos de entender que está pasando por detrás..). 
+Un juego, para dar la sensación de realidad, tiene que simular que el tiempo pasa y que las cosas se mueven, colisionan, caen, vuelan, etc.. Pueden pensar un juego como una serie de imágenes que van apareciendo una tras otra. A la medida de la cantidad de imágenes que se ven por segundo se la conoce como FPS (Frames Per Second) o imágenes por segundo. Dichas imágenes que se muestran una tras otra de forma permanente da la sensación de continuidad que sentimos cuando los jugamos. Esto no difiere mucho de una película. Ambos deben mostrar una sucesión de imágenes a gran velocidad para dar esa sensación de estar "vivo". 
+La GRAN diferencia que tienen ambas modalidades es que uno conoce todas las imágenes que va a mostrar y en qué momento mostrarlas de antemano (una película) y el otro no conoce ni las imágenes ni el tiempo (un juego), las tiene que "calcular". Una película siempre va a ser igual, uno no puede hacer que el personaje principal en lugar de hablar con la chica, se tome un helado. En cambio, en un juego, uno toma esas decisiones todo el tiempo. Cada frame, es calculado en base al input del usuario (a lo que el usuario ingresó), a la velocidad de los objetos que están en la escena, a las fuerzas que hayan actuado, a el daño que puede haber recibido, a la gravedad, etc. Todo eso se calcula cada frame. 
+Imaginen que si hubiera un `if` por cada frame y cada caso de frame, el programa tendería a ser infinito. Deberíamos tener una función que dado el estado actual de todo el juego, nos devuelva el nuevo pasado x tiempo y ejecutar esta actualización **indefinidamente**.
+Ahí llegamos. **Indefinidamente**. Indefinidamente quiere decir infinitamente hasta que algo pase. Y que es eso que pasa? Bueno en un juego, puede ser el usuario poniendo `pause`, mostrando una presentación o apretando `Alt+F4`. 
+Cuando uno habla de una ejecución indefinida está hablando de nuestro `for` infinito. Este es un caso más que conocido de ciclos infinitos. Es tan conocido que hasta tiene su propio nombre, lo llaman `game loop`. Y es un perfecto uso para nuestro `for` infinito.
+
+Otro tipo de aplicaciones de ciclos infinitos pueden ser programas ejecutados en micro controladores por ejemplo, un holter. Un holter es un aparato que desde que es prendido, toma la presión de quien lo tiene puesto cada `x` tiempo. Si uno no lo apaga, el holter seguirá censando indefinidamente.
+
+Pero una vez más llegamos a que indefinidamente no es para siempre. Hay excepciones. Como manejamos esas excepciones? Como cortamos el flujo infinito? Para eso vamos a la segunda pregunta
+
+2. Existe alguna forma de cortar la ejecución o realmente es infinito?
+
+Como uno puede ir suponiendo, los ciclos pueden cortarse prematuramente. Todos los ciclos. Y en particular, en los infinitos, es bastante útil.
+Veamos cómo se haría con un ejemplo. Veamos una simplificación de un `game loop`:
+```go
+for {
+	input = readInput() // lee lo que el usuario haya ingresado (arriba, abajo, barra espaciadora, escape, etc)
+	updateCharacter(input) // actualiza la posicion del personaje
+	updatePhysics() // actualiza las posiciones de todos los objetos del juego
+	updateFrame() // en base a todos los objetos en el juego, crea la nueva imagen y la muestra
+	
+	if (input == EXIT_GAME) {
+		break // si el input es EXIT_GAME, rompe el ciclo infinito
+		fmt.Println("Adios")
+	}
+}
+fmt.Println("Algo pasó que saliste del loop")
+```
+En el algoritmo podemos ver que se va a ejecutar dicha secuencia de sucesos indefinidamente hasta que `input` sea igual a `EXIT_GAME`. Cuando esa condición se da, se ejecuta un `break`. Y ese `break` es lo que estábamos buscando. 
+El `break` rompe la ejecución del ciclo que la contiene al momento. Notar que ese `fmt.Println("Adios")` que sigue al `break` nunca será ejecutado. Cuando se rompa la ejecución, el programa seguirá con la próxima instrucción que le siga al `for`, en este caso se ejecutará el `fmt.Println("Algo pasó que saliste del loop")` y continuará normalmente el programa.
+
+El lector avispado podrá notar que se puede hacer lo mismo con el `for` simple en donde la condición sea `input != EXIT_GAME`.
+```go
+for input != EXIT_GAME {
+	input = readInput() // lee lo que el usuario haya ingresado (arriba, abajo, barra espaciadora, escape, etc)
+	...
+}
+fmt.Println("Algo pasó que saliste del loop")
+```
+Es correcto para este ejemplo trivial. El problema real es que ese `break` podría estar (y normalmente lo hace) muchos ifs anidados para adentro con condiciones especiales en las que el `for` simple queda chico. igualmente siempre que se note que con un `for` simple o completo se puede realizar lo mismo, hacerlo con dichas estructuras. El `for` infinito es para casos muy especiales.
+
+Por último existe otra palabra reservada con significado especial dentro de los ciclos y esa es `continue`. `continue` lleva el flujo del programa al final del bloque del `for` y ejecuta la `<posEjecucion>` y `<condicion>` normalmente. Sirve normalmente para optimizar algoritmos y reducir el tiempo de cada ciclo.
+Por ejemplo, siguiendo con el ejemplo del `game loop` si se sabe que cuando el usuario no interactúa con el juego, la imagen no cambia nada (por ejemplo, el solitario de windows), se podría optimizar nuestro juego de la siguiente forma:
+```go
+for {
+	input = readInput() // lee lo que el usuario haya ingresado (arriba, abajo, barra espaciadora, escape, etc)
+	if (input == nil) {
+		continue // si el usuario no interactúa, evitamos la actualizacion de todo el juego ya que seguiría igual
+	}
+	updateCharacter(input) // actualiza la posicion del personaje
+	updatePhysics() // actualiza las posiciones de todos los objetos del juego
+	updateFrame() // en base a todos los objetos en el juego, crea la nueva imagen y la muestra
+	
+	if (input == EXIT_GAME) {
+		break // si el input es EXIT_GAME, rompe el ciclo infinito
+		fmt.Println("Adios")
+	}
+}
+fmt.Println("Algo pasó que saliste del loop")
+```
+En este caso, si el usuario no interactúa con el sistema, el flujo del programa seguirá en la primera linea del `for` de igual forma que lo hubiera hecho si hubiese llegado hasta el final y subido de nuevo. En otras palabras, seguirá por esta instrucción `input = readInput()`
 
 ## Qué es un contador?
 Un contador no es mas que una variable común y corriente usada para _contar_ cosas u ocurrencias. Suelen ser de tipo `int` y el motivo por el que tienen su nombre diferenciado se debe, básicamente, a la alta aparición en programas y algoritmos. Ya sea queriendo calcular un promedio, saber la cantidad de monstruos aniquilados por un personaje o determinar la cantidad de resultados encontrados al buscar en google, por detrás, hay un contador.
