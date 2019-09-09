@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 func main() {
-  fmt.Println("Hola Mundo!")
+	fmt.Println("Hola Mundo!")
 }
 ```
 
@@ -18,9 +18,9 @@ package main
 import "fmt"
 
 func main() {
-  var variable int = 10
-  variable = 123
-  fmt.Print(variable)
+	var variable int = 10
+	variable = 123
+	fmt.Print(variable)
 }
 ```
 
@@ -31,9 +31,9 @@ package main
 import "fmt"
 
 func main() {
-  const constant int = 10
-  constant = 123 //Error: cannot assign to constante
-  fmt.Print(constant)
+	const constant int = 10
+	constant = 123 //Error: cannot assign to constante
+	fmt.Print(constant)
 }
 ```
 
@@ -51,16 +51,16 @@ package main
 import "fmt"
 
 func main() {
-  const soyUnByte byte = 12
-  const soyUnEntero int = 123123
-  const soyUnFloat float32 = 32123.432312
-  const soyUnString string = "un string"
-  const soyUnBool bool = true
-  fmt.Println(soyUnByte)
-  fmt.Println(soyUnEntero)
-  fmt.Println(soyUnFloat)
-  fmt.Println(soyUnString)
-  fmt.Println(soyUnBool)
+	const soyUnByte byte = 12
+	const soyUnEntero int = 123123
+	const soyUnFloat float32 = 32123.432312
+	const soyUnString string = "un string"
+	const soyUnBool bool = true
+	fmt.Println(soyUnByte)
+	fmt.Println(soyUnEntero)
+	fmt.Println(soyUnFloat)
+	fmt.Println(soyUnString)
+	fmt.Println(soyUnBool)
 }
 ```
 
@@ -74,14 +74,14 @@ package main
 import "fmt"
 
 func main() {
-  const number int = 12
-  if number > 50 {
-    fmt.Println("es mayor a 50")
-  } else if number < 50 {
-    fmt.Println("es menor a 50")
-  } else {
-    fmt.Println("es igual a 50")
-  }
+	const number int = 12
+	if number > 50 {
+		fmt.Println("es mayor a 50")
+	} else if number < 50 {
+		fmt.Println("es menor a 50")
+	} else {
+		fmt.Println("es igual a 50")
+	}
 }
 ```
 
@@ -95,15 +95,15 @@ package main
 import "fmt"
 
 func main() {
-  const number int = 12
-  const searchedNumber int = 23
-  if number > searchedNumber {
-    fmt.Println("es mayor a", searchedNumber)
-  } else if number < searchedNumber {
-    fmt.Println("es menor a", searchedNumber)
-  } else {
-    fmt.Println("es igual a", searchedNumber)
-  }
+	const number int = 12
+	const searchedNumber int = 23
+	if number > searchedNumber {
+		fmt.Println("es mayor a", searchedNumber)
+	} else if number < searchedNumber {
+		fmt.Println("es menor a", searchedNumber)
+	} else {
+		fmt.Println("es igual a", searchedNumber)
+	}
 }
 ```
 
@@ -116,12 +116,12 @@ package main
 import "fmt"
 
 func main() {
-  const aString string = "asdf"
-  if aString == "hola" || aString == "chau" {
-    fmt.Println("es un saludo")
-  } else {
-    fmt.Println("no se que es")
-  }
+	const aString string = "asdf"
+	if aString == "hola" || aString == "chau" {
+		fmt.Println("es un saludo")
+	} else {
+		fmt.Println("no se que es")
+	}
 }
 ```
 
@@ -135,15 +135,15 @@ package main
 import "fmt"
 
 func main() {
-  const firstBool bool = true
-  const secondBool bool = false
-  if firstBool && secondBool {
-    fmt.Println("es totalmente cierto")
-  } else if !firstBool && !secondBool {
-    fmt.Println("es totalmente falso")
-  } else {
-    fmt.Println("no se que decirte, estoy confundido..")
-  }
+	const firstBool bool = true
+	const secondBool bool = false
+	if firstBool && secondBool {
+		fmt.Println("es totalmente cierto")
+	} else if !firstBool && !secondBool {
+		fmt.Println("es totalmente falso")
+	} else {
+		fmt.Println("no se que decirte, estoy confundido..")
+	}
 }
 ```
 
@@ -158,8 +158,8 @@ package main
 import "fmt"
 
 func main() {
-  const aString string = "Hola Mundo"
-  fmt.Println(len(aString))
+	const aString string = "Hola Mundo"
+	fmt.Println(len(aString))
 }
 ```
 
@@ -170,13 +170,13 @@ package main
 import "fmt"
 
 func main() {
-  const firstString string = "anything"
-  const secondString string = "something"
-  if firstString > secondString {
-    fmt.Println(secondString, " ", firstString)
-  } else {
-    fmt.Println(firstString, " ", secondString)
-  }
+	const firstString string = "anything"
+	const secondString string = "something"
+	if firstString > secondString {
+		fmt.Println(secondString, " ", firstString)
+	} else {
+		fmt.Println(firstString, " ", secondString)
+	}
 }
 ```
 
@@ -187,8 +187,8 @@ package main
 import "fmt"
 
 func main() {
-  const char byte = 'H'
-  fmt.Printf("%d", char)
+	const char byte = 'H'
+	fmt.Printf("%d", char)
 }
 ```
 
@@ -199,8 +199,8 @@ package main
 import "fmt"
 
 func main() {
-  const num byte = 47
-  fmt.Printf("%c", num)
+	const num byte = 47
+	fmt.Printf("%c", num)
 }
 ```
 
@@ -211,12 +211,12 @@ package main
 import "fmt"
 
 func main() {
-  const firstChar byte = 'a'
-  const secondChar byte = 'A'
-  if firstChar > secondChar {
-    fmt.Printf("%c %c", secondChar, firstChar)
-  } else {
-    fmt.Printf("%c %c", firstChar, secondChar)
-  }
+	const firstChar byte = 'a'
+	const secondChar byte = 'A'
+	if firstChar > secondChar {
+		fmt.Printf("%c %c", secondChar, firstChar)
+	} else {
+		fmt.Printf("%c %c", firstChar, secondChar)
+	}
 }
 ```
