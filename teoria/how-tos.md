@@ -604,11 +604,11 @@ Entonces pasemos en limpio un poco como es el flujo que hará la estructura de r
 1. Ejecutará `<preEjecucion>` por única vez
 2. Evaluará la expresión `<condicion>`
 3.  Si `<condicion>` es `true`
-	3. a. Ejecutará el `<codigo>` dentro del ciclo
-	3. b. Ejecutará la `<posEjecucion>`
-	3. c. Vuelve al paso 2
+	- Ejecutará el `<codigo>` dentro del ciclo
+	- Ejecutará la `<posEjecucion>`
+	- Vuelve al paso 2
 4. Si `<condicion>` es `false`
-	4. a. Sale del ciclo y continúa la ejecución en la primera instrucción que siga luego de la llave de fin del ciclo `for`
+	- Sale del ciclo y continúa la ejecución en la primera instrucción que siga luego de la llave de fin del ciclo `for`
 
 Habiendo analizado un poco el funcionamiento abstracto, pongamos un ejemplo para bajarlo más a tierra.
 Imaginemos que queremos simplemente hacer un programa que cuente del 1 al 100. Primero veamos como sería el programa sin la estructura `for`
