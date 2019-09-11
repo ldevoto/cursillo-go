@@ -1,24 +1,24 @@
 # How To's and What 's
 
-- [Cómo luce la estructura base de un programa en GO?](cómo-luce-la-estructura-base-de-un-programa-en-go)
-- Qué tipo de datos existen?
-- Como declaro una variable?
-- Cómo cambio el valor de una variable?
-- Cómo declaro una constante?
-- Cómo cambio el valor de una constante?
-- Cómo escribo/imprimo a pantalla?
-- Como leo del teclado?
-- Qué operadores existen en GO?
-- Qué es un `if`?
-- Cómo escribo un `if`?
-- Que es un `switch`?
-- Cómo escribo un `switch`?
-- Qué es un `for`?
-- Cómo escribo un `for`?
-- Cómo escribir un `for`? (segunda parte)
-- Cómo escribir un `for`? (tercera parte)
-- Qué es un contador?
-- Qué es un acumulador?
+- [Cómo luce la estructura base de un programa en GO?](#cómo-luce-la-estructura-base-de-un-programa-en-go)
+- [Qué tipo de datos existen?](#qué-tipo-de-datos-existen)
+- [Como declaro una variable?](#cómo-declaro-una-variable)
+- [Cómo cambio el valor de una variable?](#cómo-cambio-el-valor-de-una-variable)
+- [Cómo declaro una constante?](#cómo-declaro-una-constante)
+- [Cómo cambio el valor de una constante?](#cómo-cambio-el-valor-de-una-constante)
+- [Cómo escribo/imprimo a pantalla?](#cómo-escriboimprimo-a-pantalla)
+- [Como leo del teclado?](#como-leo-del-teclado)
+- [Qué operadores existen en GO?](#qué-operadores-existen-en-go)
+- [Qué es un `if`?](#qué-es-un-if)
+- [Cómo escribo un `if`?](#cómo-escribo-un-if)
+- [Que es un `switch`?](#que-es-un-switch)
+- [Cómo escribo un `switch`?](#cómo-escribo-un-switch)
+- [Qué es un `for`?](#qué-es-un-for)
+- [Cómo escribo un `for`?](#cómo-escribo-un-for)
+- [Cómo escribo un `for`? (segunda parte)](#cómo-escribo-un-for-segunda-parte)
+- [Cómo escribo un `for`? (tercera parte)](#cómo-escribo-un-for-tercera-parte)
+- [Qué es un contador?](#qué-es-un-contador)
+- [Qué es un acumulador?](#qué-es-un-acumulador)
 
 ## Cómo luce la estructura base de un programa en GO?
 ```go
@@ -666,7 +666,7 @@ Observaciones:
 - Se pueden anidar ciclos `for` tantos como quieran. Es decir, dentro de un ciclo `for` puede haber otro ciclo `for` y otro y otro (todos los que se quieran). Normalmente a las variables de los diferentes niveles de anidamiento, se les suele ir nombrando como `i`, `j`, `k`, `l` (rara vez se llega tan adentro)
 - Si bien la estructura del `for` que se presentó es la más completa, bien puede obviarse la `<preEjecucion>`, `<posEjecucion>` e incluso la `<condicion>` (Notar que si no se escribe una `<condicion>` el ciclo seguirá por siempre a menos que sea interrumpido)
 
-## Cómo escribir un `for`? (segunda parte)
+## Cómo escribo un `for`? (segunda parte)
 Ya vimos la forma más habitual de escribir un ciclo `for`. La misma proponía dividir la estructura en 3 partes, una `<preEjecucion>`, `<condicion>` y `<porEjecucion>`. Dicha división está pensada para cuando uno conoce la cantidad de datos existentes y quiere iterarlos a todos. El problema (o el inconveniente) de esta forma es, que pasa si no conozco la cantidad de datos que voy a iterar? La forma de leer el `for` con dicha estructura sugiere que mi `<preEjecucion>`, `<condicion>` y `<porEjecucion>` comparten una variable en común y que van a estar relacionados de alguna manera. Por ejemplo, vimos como imprimir los números del 1 al 100 usando una variable `i` que usada en las tres secciones y su vinculación era directa: Iniciamos el contador el 1, por cada ejecución aumentamos 1 al contados y lo hacemos hasta que el contador supere el valor de 100. 
 Qué pasaría ahora si queremos repetir una porción de código indefinidamente hasta que cierta condición se satisfaga. Por ejemplo: Pensemoario una respuesta de `"si"` ara realizar algo. 
 - Si la respuesta es `"si"` -> realizamos la acción
@@ -709,7 +709,7 @@ Entonces, cuándo elegir uno y cuándo elegir otro? Bueno la respuesta no está 
 - Si por el contrario la cantidad de iteraciones no es conocida y no se debería actualizar nuestra variable de corte conforme a un patrón conocido -> debería utilizarse el `for` simple
 - Para cualquier híbrido entre medio, se apela al buen juicio y legibilidad de lo que se está haciendo
 
-## Cómo escribir un `for`? (tercera parte)
+## Cómo escribo un `for`? (tercera parte)
 Ya vimos el `for` completo (con sus 3 partes `<preEjecucion>`,  `<condicion>`, `<posEjecucion>` ), el `for` simple (con su única parte `<condicion>`) y ahora nos toca ver el `for` infinito. Si infinito! 
 Veamos primero como se ve antes de explicar su uso:
 ```go
