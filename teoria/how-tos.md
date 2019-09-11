@@ -1,6 +1,6 @@
 # How To's and What 's
 
-- Cómo luce la estructura base de un programa en GO?
+- [Cómo luce la estructura base de un programa en GO?](cómo-luce-la-estructura-base-de-un-programa-en-go)
 - Qué tipo de datos existen?
 - Como declaro una variable?
 - Cómo cambio el valor de una variable?
