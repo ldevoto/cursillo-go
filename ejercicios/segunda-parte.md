@@ -83,7 +83,7 @@ Notar que lo que se pide simula una función cuadrática del tipo:
 - `"usuario incorrecto"` -> si el usuario ingresado es incorrecto
 - `"password incorrecto"` -> si el usuario ingresado es correcto pero la contraseña es incorrecta
 - `"acceso otorgado"` -> si el usuario y password ingresados son correctos
-- 
+
 #### 17. Basado en el ejercicio anterior, si el acceso es otorgado (después de mostrar dicho mensaje), preguntar al usuario si desea cambiar la contraseña. Si responde afirmativamente, solicitar el ingreso del nuevo password 2 veces e imprimir
 - `"password cambiado exitosamente"` -> si la nueva contraseña ingresada coincide con la confirmación
 - `"error al cambiar el password. Los passwords no coinciden"` -> si la nueva contraseña y su confirmación no coinciden
