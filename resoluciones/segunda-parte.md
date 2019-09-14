@@ -362,7 +362,7 @@ func main() {
 			fmt.Printf("Las raices de la función f(x) = %.2fx^2 + %.2fx + %.2f son:\n", a, b, c)
 			fmt.Printf("x1 = %.2f\nx2 = %.2f\n", x1, x2)
 		} else if discriminant == 0 {
-			x1 = -b
+			x1 = -b / (2 * a)
 			fmt.Printf("Las raices de la función f(x) = %.2fx^2 + %.2fx + %.2f son:\n", a, b, c)
 			fmt.Printf("x1 = x2 = %.2f\n", x1)
 		} else {
