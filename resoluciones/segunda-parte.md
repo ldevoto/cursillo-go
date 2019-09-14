@@ -163,6 +163,8 @@ func main() {
 	} else if number3 > middleMax {
 		middleMin = middleMax
 		middleMax = number3
+	} else {
+		middleMin = number3
 	}
 
 	if number4 > max {
