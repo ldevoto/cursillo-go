@@ -21,6 +21,7 @@
 - [Qué es un acumulador?](#qué-es-un-acumulador)
 - [Qué es un `array`?](#qué-es-un-array)
 - [Cómo uso un `array`?](#cómo-uso-un-array)
+- [Cómo uso un `array`? (segunda parte)](#cómo-uso-un-array-segunda-parte)
 - [Qué es un `slice`?](#qué-es-un-slice)
 - [Cómo uso un `slice`?](#cómo-uso-un-slice)
 
