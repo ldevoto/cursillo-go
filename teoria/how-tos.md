@@ -884,4 +884,4 @@ En memoria veríamos lo siguiente:
 
 Notar cómo se crean dos variables y son diferentes. Modificar una variable no modifica la otra (y es lo que uno querría excepto casos especiales). Lo que hace Go por detrás es, crear una variable nueva y copiar el valor de `numero1` a `numero2`. Una actualización de `numero1` solo impactará en `numero1` y `numero2` permanecerá igual.
 
-Así que resumiendo, qué es un `array`? Es un conjunto de datos de igual tipo que se almacenan de forma consecutiva en memoria a los cuales podemos acceder a través de la etiqueta que representa el `array` más un desplazamiento o índice comenzando desde 0.
+Así que resumiendo, qué es un `array`? Es un conjunto de datos de igual tipo que se almacenan de forma consecutiva en memoria a los cuales podemos acceder a través de la etiqueta que representa el comienzo del `array` mas un desplazamiento o índice comenzando desde 0.
