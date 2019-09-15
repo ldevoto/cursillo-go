@@ -19,6 +19,8 @@
 - [Cómo escribo un `for`? (tercera parte)](#cómo-escribo-un-for-tercera-parte)
 - [Qué es un contador?](#qué-es-un-contador)
 - [Qué es un acumulador?](#qué-es-un-acumulador)
+- [Qué es un `array`?](#qué-es-un-array)
+- [Cómo uso un `array`?](#cómo-uso-un-array)
 
 ## Cómo luce la estructura base de un programa en GO?
 ```go
