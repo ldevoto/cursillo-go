@@ -823,7 +823,11 @@ var unNumero int = 10
 Lo que estamos haciendo es guardarnos la dirección de memoria que va a contener ese `10` en la etiqueta `unNumero`. Esto nos permite poder obtener el valor de `unNumero`, cambiarlo, usarlo para hacer calculos, etc. 
 Veamos como se vería nuestra memoria antes de ejecutar la declaración:
 
+![Imagen de memoria vacía](../imagenes/memoria-vacia.png)
+
 Veamos como quedaría la memoria luego de nuestra declaración:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-1.png)
 
 Como vemos, `unNumero` _apunta_ a la casilla `3` de la memoria y el valor `10` es lo que contiene dicha casilla. Si ahora asignamos un `5` a `unNumero`
 ```go
@@ -831,12 +835,16 @@ unNumero = 5
 ```
 Lo que vemos en la memoria sería lo siguiente:
 
+![Imagen de memoria con unNumero](../imagenes/memoria-2.png)
+
 Vemos que donde antes había un `10` ahora hay un `5` pero `unNumero` sigue _apuntando_ a la casilla `3`.
 Bien, declaremos ahora una variable de tipo `float64` 
 ```go
 var unFloat float64 = 11.5
 ```
 y veamos como queda la memoria:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-floats.png)
 
 Ahora nuestra variable `unFloat` apunta a la casilla (dirección) `6`. Por qué a la `6` y no a la `10` o a la `4`? Porque es el Sistema Operativo el que le otorga al programa los espacios libres en base a como mejor lo crea conveniente, sencillamente por eso. El programa solo le pide al Sistema Operativo cuánto espacio necesita y el Sistema Operativo le responde con una dirección en memoria donde puede guardar dicho valor (para nuestro ejemplo todos los tipos de datos ocupan lo mismo aunque en realidad no sea así).
 
@@ -846,6 +854,8 @@ var unArray [5]int = [5]int{2, 3, 1, 6, 9}
 ```
 En memoria veríamos algo como esto:
 
+![Imagen de memoria con unNumero](../imagenes/memoria-array.png)
+
 Notemos que la etiqueta `unArray` apunta solo a la dirección `2` (no a la dirección de todos los elementos) y que los 5 números que declaramos aparecen en orden y uno después del otro en direcciones contiguas. Ahora, vimos ya que quiere decir una **referencia** (no es más que una flecha, un puntero a un dato) y nos falta ver a qué nos referimos cuando hablamos de **índice**. 
 Para hacerlo vamos a acceder a un elemento del `array`, digamos el segundo. El código para acceder al segundo elemento es el siguiente
 ```go
@@ -853,11 +863,15 @@ unArray[1]
 ```
 Si vemos la memoria en este punto vemos lo siguiente:
 
+![Imagen de memoria con unNumero](../imagenes/memoria-array-desplazamiento-1.png)
+
 Podemos deducir entonces que ese índice nos indica a qué posición del array queremos acceder (comenzando desde 0) ya sea para lectura o escritura. Veamos que pasa si queremos quedarnos con el tercer valor en una variable auxiliar
 ```go
 var auxiliar int = unArray[2]
 ```
 La memoria quedaría como a continuación:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-array-copia.png)
 
 Si prestaron atención habrán notado que `auxiliar` ahora apunta a la dirección `8` y que tiene el valor `1` (la copia del valor apuntado por `unArray` con un índice de `2`). Y viéndolo uno podría preguntarse, por qué se creó otra variable y se copió el valor en lugar de apuntar `auxiliar` a la dirección de `unArray` + un desplazamiento de  `2` (osea a `4`)? Y la respuesta es: porque así funciona GO (y el resto de los lenguajes). La respuesta real es que uno no quiere definir una variable para usar su referencia, quiere hacerlo para usar su valor. Por eso todas las operaciones se hacen a nivel del valor al que apuntan y no a la dirección de donde viven. Pensemos en el caso en que declaramos dos variables como lo que sigue
 ```go
@@ -865,6 +879,8 @@ var numero1 int = 4
 var numero2 int = numero1
 ```
 En memoria veríamos lo siguiente:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-copia-valores.png)
 
 Notar cómo se crean dos variables y son diferentes. Modificar una variable no modifica la otra (y es lo que uno querría excepto casos especiales). Lo que hace Go por detrás es, crear una variable nueva y copiar el valor de `numero1` a `numero2`. Una actualización de `numero1` solo impactará en `numero1` y `numero2` permanecerá igual.
 
