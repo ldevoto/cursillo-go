@@ -816,15 +816,17 @@ for i := 0; i < 10; i++ {
 La respuesta corta a qué es un `array` es bastante concisa: es un conjunto de datos de igual tipo referenciados por un nombre y accesibles a través de un índice.
 Esta respuesta posiblemente no sirva de mucho a menos que ya se tenga una noción previa de qué es o cómo luce un `array` por lo que a continuación podemos encontrar una explicación un tanto más completa.
 
-Repasemos primero qué es un `int`, un `float`, un `bool`, etc. Estos son tipos de datos primitivos (que vienen con el lenguaje) y declaran variables que guardarán valores de dichos tipos. Pero... que es declarar una variable? Bueno, declarar una variable (o constante) es asignarle a una etiqueta (un nombre que nosotros elegimos) una dirección de memoria en la que estará su valor. Así si uno define un `int` de la siguiente forma:
+Repasemos primero qué es un `int`, un `float`, un `bool`, etc. Estos son tipos de datos primitivos (que vienen con el lenguaje) y declaran variables que guardarán valores de dichos tipos. Pero... que es declarar una variable? Bueno, declarar una variable (o constante) es asignarle a una etiqueta (un nombre que nosotros elegimos) una dirección de memoria en la que se guardará su valor.
+La memoria puede pensarse como un lugar en donde podemos guardar cosas dividido en porciones iguales en donde cada porción está identificada por una dirección. A continuación podemos encontrar una representación simplificada de una memoria:
+
+![Imagen de memoria vacía](../imagenes/memoria-vacia.png)
+
+ Podemos ver que la memoria está dividida en varios pedazos, y que cada pedazo tiene una dirección única arrancando desde 0 hasta n (dependerá la capacidad de la memoria) .
+Sigamos con la idea anterior en la que proponíamos primero ver qué pasa con los tipos de datos primitivos. Tratemos de entender que sucede si uno define un `int` de la siguiente forma:
 ```go
 var unNumero int = 10
 ```
 Lo que estamos haciendo es guardarnos la dirección de memoria que va a contener ese `10` en la etiqueta `unNumero`. Esto nos permite poder obtener el valor de `unNumero`, cambiarlo, usarlo para hacer calculos, etc. 
-Veamos como se vería nuestra memoria antes de ejecutar la declaración:
-
-![Imagen de memoria vacía](../imagenes/memoria-vacia.png)
-
 Veamos como quedaría la memoria luego de nuestra declaración:
 
 ![Imagen de memoria con unNumero](../imagenes/memoria-1.png)
