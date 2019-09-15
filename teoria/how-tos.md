@@ -887,3 +887,105 @@ En memoria veríamos lo siguiente:
 Notar cómo se crean dos variables y son diferentes. Modificar una variable no modifica la otra (y es lo que uno querría excepto casos especiales). Lo que hace Go por detrás es, crear una variable nueva y copiar el valor de `numero1` a `numero2`. Una actualización de `numero1` solo impactará en `numero1` y `numero2` permanecerá igual.
 
 Así que resumiendo, qué es un `array`? Es un conjunto de datos de igual tipo que se almacenan de forma consecutiva en memoria a los cuales podemos acceder a través de la etiqueta que representa el comienzo del `array` mas un desplazamiento o índice comenzando desde 0.
+
+## Cómo uso un `array`?
+Dividamos esta pregunta en 3:
+- Cómo defino un `array`?
+- Cómo obtengo el valor de un elemento del `array`?
+- Cómo cambio el valor de un elemento del `array`?
+
+Empecemos
+- Cómo defino un `array`?
+
+Para definir un `array` hacen falta dos cosas, saber el tipo de elementos que va a contener y el tamaño del mismo. Para definirlo se hace de la siguiente forma
+```go
+var unArray [<n>]<tipo>
+```
+Donde:
+- `<n>` es la cantidad de elementos que va a tener el `array` (el tamaño)
+- `<tipo>` es de que tipo van a ser todos los elementos del `array`
+
+Podemos deducir entonces que un `array` solo puede contener un número finito de datos determinado por `<n>` y que todos los datos de dicho `array` deben ser del mismo tipo. Si quisiéramos agregar más elementos que `<n>` al array nos daría un error.
+
+Veamos un ejemplo. Tenemos un e-commerce que vende productos en internet y querémos ofrecerle a los clientes que visitan nuestro sistema poder realizar pagos en cuotas. Queremos que el usuario pueda pagar en 1, 2, 3, 6 o 12 cuotas. Para eso lo primero que pensamos es en definir un `array` de la siguiente forma
+```go
+var cuotas [5]int
+```
+Aquí estamos declarando una variable `cuotas` que va guardar un `array` de `5` números `enteros` que representarán las cuotas disponibles para un pago. Dicho `array` queremos que contenga todas las cuotas disponibles (que ya conocemos) por lo que podríamos inicializarlo con esos valores. Al igual que el resto de los tipos de datos, los `array` pueden ser inicializados al momento de declararlos y la forma de hacerlo es la siguiente
+```go
+var cuotas [5]int = [5]int{1, 2, 3, 6, 12}
+```
+Bien, ahora nuestro `array` de cuotas ya cuenta con las cuotas disponibles que queremos ofrecer a los clientes. Ahora, de nada nos sirve un `array` si no podemos acceder a sus elementos por lo que sigamos con el segundo punto
+
+- Cómo obtengo el valor de un elemento del array?
+
+Los valores de los elementos del `array` son accedidos a través del nombre + un desplazamiento. Este desplazamiento es conocido como `indice`. El índice nos dice a qué elemento del array queremos acceder. Supongamos que queremos mostrar solo el primer elemento del `array`, o sea la cuota 1
+```go
+fmt.Printf("La primer couta disponible es %d", cuotas[0])
+
+> La primer couta disponible es 1
+```
+Notar que para acceder a un elemento en particular, es necesario indicar el `indice` del elemento y que el `indice` comienza en 0 (esto es así en casi todos los lenguajes).
+Lo que estamos haciendo es acceder al primer elemento del `array` de cuotas y obtener su contenido (en este caso el valor `1`).
+Qué pasaría si quiero mostrar todas las cuotas disponibles?
+Bueno, una forma de hacerlo sería así
+```go
+fmt.Printf("couta disponible: %d\n", cuotas[0])
+fmt.Printf("couta disponible: %d\n", cuotas[1])
+fmt.Printf("couta disponible: %d\n", cuotas[2])
+fmt.Printf("couta disponible: %d\n", cuotas[3])
+fmt.Printf("couta disponible: %d\n", cuotas[4])
+
+> couta disponible: 1
+> couta disponible: 2
+> couta disponible: 3
+> couta disponible: 6
+> couta disponible: 12
+```
+Como podemos ver no difiere mucho de la primer forma, solo fuimos cambiando el valor del indice y pudimos acceder a todos los elementos del `array`. Ahora, es un tanto repetitivo, no? No se puede hacer de otra forma? Porque uno bien podría preguntarse, y que gano usando un `array` en lugar de 5 variables `cuota1`, `cuota2`, `cuota3` ,`cuota4` y `cuota5`? Y la respuesta es: Claro que se puede hacer de otra forma y allí vamos.
+```go
+var i int
+for i = 0; i < len(cuotas); i++ {
+	fmt.Printf("couta disponible: %d\n", cuotas[i])
+}
+
+> couta disponible: 1
+> couta disponible: 2
+> couta disponible: 3
+> couta disponible: 6
+> couta disponible: 12
+```
+Esta forma es cómo se trabajan los `array` en realidad. Es raro acceder a un elemento en particular del `array` con un número literal como índice. Lo habitual es recorrer los `array` desde el `indice = 0` hasta el `indice = len(array) - 1` (`len()` es una función que dado un `array` devuelve su largo). Notar que si accediéramos al `indice = len(array)` estaríamos tratando de acceder a un elemento fuera del rango válido. Por ejemplo
+```go
+var unArray [4]float64 = [4]float64{12, 2.3, 3, 5.5}
+fmt.Print(unArray[0]) // 12
+fmt.Print(unArray[1]) // 2.3
+fmt.Print(unArray[2]) // 3
+fmt.Print(unArray[3]) // 5.5
+fmt.Print(unArray[4]) // Error: nos pasamos del limite
+fmt.Print(unArray[len(unArray)] // Error: es exactamente lo mismo que el anterior, el array tiene 4 elementos y estamos tratando de acceder al de indice 4, osea al 5to elemento
+
+> 12
+> 2.3
+> 3
+> 5.5
+> Error!!!
+```
+
+Por último qué pasaría si quiero cambiar alguna de las cuotas disponibles? Lo que nos lleva a la última pregunta
+- Cómo cambio el valor de un elemento del `array`?
+
+Supongamos que ya no queremos ofrecer más el pago en 3 cuotas, sino que ahora queremos ofrecer en 4 (en lugar de 3). La forma en la que podemos hacer esto es cambiando el valor de dicho elemento del `array`. Veamos como sería
+```go
+// cuotas antes -> {1, 2, 3, 6, 12}
+cuotas[2] = 4
+// cuotas despues -> {1, 2, 4, 6, 12}
+```
+Qué hicimos? Accedimos al tercer elemento del `array` y cambiamos su valor por un `4` quedando cuotas como se muestra en la tercer linea. Es bastante intuitivo si uno lo piensa en detalle. 
+
+Resumiendo:
+- Tanto para acceder al valor de un elemento como para cambiarlo se hace a través de un `indice` (un desplazamiento) que comienza en 0 y termina en el tamaño del array menos 1. 
+- Tratar de acceder por fuera de dichos límites resultará en un error. 
+- La función `len(<array>)` devuelve el largo de `<array>`. 
+- El `indice` usado para acceder a un elemento puede ser tanto un literal como una variable. 
+- Para iterar un `array`, o sea acceder a todos sus elementos de a uno por vez se utiliza la estructura de control `for` en su forma completa. 
