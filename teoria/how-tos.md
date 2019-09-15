@@ -19,6 +19,8 @@
 - [Cómo escribo un `for`? (tercera parte)](#cómo-escribo-un-for-tercera-parte)
 - [Qué es un contador?](#qué-es-un-contador)
 - [Qué es un acumulador?](#qué-es-un-acumulador)
+- [Qué es un `array`?](#qué-es-un-array)
+- [Cómo uso un `array`?](#cómo-uso-un-array)
 
 ## Cómo luce la estructura base de un programa en GO?
 ```go
@@ -811,3 +813,181 @@ for i := 0; i < 10; i++ {
 	acum = acum + i
 }
 ```
+
+## Qué es un `array`?
+La respuesta corta a qué es un `array` es bastante concisa: es un conjunto de datos de igual tipo referenciados por un nombre y accesibles a través de un índice.
+Esta respuesta posiblemente no sirva de mucho a menos que ya se tenga una noción previa de qué es o cómo luce un `array` por lo que a continuación podemos encontrar una explicación un tanto más completa.
+
+Repasemos primero qué es un `int`, un `float`, un `bool`, etc. Estos son tipos de datos primitivos (que vienen con el lenguaje) y declaran variables que guardarán valores de dichos tipos. Pero... que es declarar una variable? Bueno, declarar una variable (o constante) es asignarle a una etiqueta (un nombre que nosotros elegimos) una dirección de memoria en la que se guardará su valor.
+La memoria puede pensarse como un lugar en donde podemos guardar cosas dividido en porciones iguales en donde cada porción está identificada por una dirección. A continuación podemos encontrar una representación simplificada de una memoria:
+
+![Imagen de memoria vacía](../imagenes/memoria-vacia.png)
+
+ Podemos ver que la memoria está dividida en varios pedazos, y que cada pedazo tiene una dirección única arrancando desde 0 hasta n (dependerá la capacidad de la memoria) .
+Sigamos con la idea anterior en la que proponíamos primero ver qué pasa con los tipos de datos primitivos. Tratemos de entender que sucede si uno define un `int` de la siguiente forma:
+```go
+var unNumero int = 10
+```
+Lo que estamos haciendo es guardarnos la dirección de memoria que va a contener ese `10` en la etiqueta `unNumero`. Esto nos permite poder obtener el valor de `unNumero`, cambiarlo, usarlo para hacer calculos, etc. 
+Veamos como quedaría la memoria luego de nuestra declaración:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-1.png)
+
+Como vemos, `unNumero` _apunta_ a la casilla `3` de la memoria y el valor `10` es lo que contiene dicha casilla. Si ahora asignamos un `5` a `unNumero`
+```go
+unNumero = 5
+```
+Lo que vemos en la memoria sería lo siguiente:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-2.png)
+
+Vemos que donde antes había un `10` ahora hay un `5` pero `unNumero` sigue _apuntando_ a la casilla `3`.
+Bien, declaremos ahora una variable de tipo `float64` 
+```go
+var unFloat float64 = 11.5
+```
+y veamos como queda la memoria:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-floats.png)
+
+Ahora nuestra variable `unFloat` apunta a la casilla (dirección) `6`. Por qué a la `6` y no a la `10` o a la `4`? Porque es el Sistema Operativo el que le otorga al programa los espacios libres en base a como mejor lo crea conveniente, sencillamente por eso. El programa solo le pide al Sistema Operativo cuánto espacio necesita y el Sistema Operativo le responde con una dirección en memoria donde puede guardar dicho valor (para nuestro ejemplo todos los tipos de datos ocupan lo mismo aunque en realidad no sea así).
+
+Bien, habiendo visto cómo es el manejo y asignación de memoria de los tipos más comunes, volvamos al caso de los `arrays`. Un `array`, cómo bien explica el comienzo de este apartado, es un conjunto de datos **referenciado** por un nombre y accesible a través de un **índice**. Definamos un `array` y veamos como quedaría en memoria
+```go
+var unArray [5]int = [5]int{2, 3, 1, 6, 9}
+```
+En memoria veríamos algo como esto:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-array.png)
+
+Notemos que la etiqueta `unArray` apunta solo a la dirección `2` (no a la dirección de todos los elementos) y que los 5 números que declaramos aparecen en orden y uno después del otro en direcciones contiguas. Ahora, vimos ya que quiere decir una **referencia** (no es más que una flecha, un puntero a un dato) y nos falta ver a qué nos referimos cuando hablamos de **índice**. 
+Para hacerlo vamos a acceder a un elemento del `array`, digamos el segundo. El código para acceder al segundo elemento es el siguiente
+```go
+unArray[1]
+```
+Si vemos la memoria en este punto vemos lo siguiente:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-array-desplazamiento-1.png)
+
+Podemos deducir entonces que ese índice nos indica a qué posición del array queremos acceder (comenzando desde 0) ya sea para lectura o escritura. Veamos que pasa si queremos quedarnos con el tercer valor en una variable auxiliar
+```go
+var auxiliar int = unArray[2]
+```
+La memoria quedaría como a continuación:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-array-copia.png)
+
+Si prestaron atención habrán notado que `auxiliar` ahora apunta a la dirección `8` y que tiene el valor `1` (la copia del valor apuntado por `unArray` con un índice de `2`). Y viéndolo uno podría preguntarse, por qué se creó otra variable y se copió el valor en lugar de apuntar `auxiliar` a la dirección de `unArray` + un desplazamiento de  `2` (osea a `4`)? Y la respuesta es: porque así funciona GO (y el resto de los lenguajes). La respuesta real es que uno no quiere definir una variable para usar su referencia, quiere hacerlo para usar su valor. Por eso todas las operaciones se hacen a nivel del valor al que apuntan y no a la dirección de donde viven. Pensemos en el caso en que declaramos dos variables como lo que sigue
+```go
+var numero1 int = 4
+var numero2 int = numero1
+```
+En memoria veríamos lo siguiente:
+
+![Imagen de memoria con unNumero](../imagenes/memoria-copia-valores.png)
+
+Notar cómo se crean dos variables y son diferentes. Modificar una variable no modifica la otra (y es lo que uno querría excepto casos especiales). Lo que hace Go por detrás es, crear una variable nueva y copiar el valor de `numero1` a `numero2`. Una actualización de `numero1` solo impactará en `numero1` y `numero2` permanecerá igual.
+
+Así que resumiendo, qué es un `array`? Es un conjunto de datos de igual tipo que se almacenan de forma consecutiva en memoria a los cuales podemos acceder a través de la etiqueta que representa el comienzo del `array` mas un desplazamiento o índice comenzando desde 0.
+
+## Cómo uso un `array`?
+Dividamos esta pregunta en 3:
+- Cómo defino un `array`?
+- Cómo obtengo el valor de un elemento del `array`?
+- Cómo cambio el valor de un elemento del `array`?
+
+Empecemos
+- Cómo defino un `array`?
+
+Para definir un `array` hacen falta dos cosas, saber el tipo de elementos que va a contener y el tamaño del mismo. Para definirlo se hace de la siguiente forma
+```go
+var unArray [<n>]<tipo>
+```
+Donde:
+- `<n>` es la cantidad de elementos que va a tener el `array` (el tamaño)
+- `<tipo>` es de que tipo van a ser todos los elementos del `array`
+
+Podemos deducir entonces que un `array` solo puede contener un número finito de datos determinado por `<n>` y que todos los datos de dicho `array` deben ser del mismo tipo. Si quisiéramos agregar más elementos que `<n>` al array nos daría un error.
+
+Veamos un ejemplo. Tenemos un e-commerce que vende productos en internet y querémos ofrecerle a los clientes que visitan nuestro sistema poder realizar pagos en cuotas. Queremos que el usuario pueda pagar en 1, 2, 3, 6 o 12 cuotas. Para eso lo primero que pensamos es en definir un `array` de la siguiente forma
+```go
+var cuotas [5]int
+```
+Aquí estamos declarando una variable `cuotas` que va guardar un `array` de `5` números `enteros` que representarán las cuotas disponibles para un pago. Dicho `array` queremos que contenga todas las cuotas disponibles (que ya conocemos) por lo que podríamos inicializarlo con esos valores. Al igual que el resto de los tipos de datos, los `array` pueden ser inicializados al momento de declararlos y la forma de hacerlo es la siguiente
+```go
+var cuotas [5]int = [5]int{1, 2, 3, 6, 12}
+```
+Bien, ahora nuestro `array` de cuotas ya cuenta con las cuotas disponibles que queremos ofrecer a los clientes. Ahora, de nada nos sirve un `array` si no podemos acceder a sus elementos por lo que sigamos con el segundo punto
+
+- Cómo obtengo el valor de un elemento del array?
+
+Los valores de los elementos del `array` son accedidos a través del nombre + un desplazamiento. Este desplazamiento es conocido como `indice`. El índice nos dice a qué elemento del array queremos acceder. Supongamos que queremos mostrar solo el primer elemento del `array`, o sea la cuota 1
+```go
+fmt.Printf("La primer couta disponible es %d", cuotas[0])
+
+> La primer couta disponible es 1
+```
+Notar que para acceder a un elemento en particular, es necesario indicar el `indice` del elemento y que el `indice` comienza en 0 (esto es así en casi todos los lenguajes).
+Lo que estamos haciendo es acceder al primer elemento del `array` de cuotas y obtener su contenido (en este caso el valor `1`).
+Qué pasaría si quiero mostrar todas las cuotas disponibles?
+Bueno, una forma de hacerlo sería así
+```go
+fmt.Printf("couta disponible: %d\n", cuotas[0])
+fmt.Printf("couta disponible: %d\n", cuotas[1])
+fmt.Printf("couta disponible: %d\n", cuotas[2])
+fmt.Printf("couta disponible: %d\n", cuotas[3])
+fmt.Printf("couta disponible: %d\n", cuotas[4])
+
+> couta disponible: 1
+> couta disponible: 2
+> couta disponible: 3
+> couta disponible: 6
+> couta disponible: 12
+```
+Como podemos ver no difiere mucho de la primer forma, solo fuimos cambiando el valor del indice y pudimos acceder a todos los elementos del `array`. Ahora, es un tanto repetitivo, no? No se puede hacer de otra forma? Porque uno bien podría preguntarse, y que gano usando un `array` en lugar de 5 variables `cuota1`, `cuota2`, `cuota3` ,`cuota4` y `cuota5`? Y la respuesta es: Claro que se puede hacer de otra forma y allí vamos.
+```go
+var i int
+for i = 0; i < len(cuotas); i++ {
+	fmt.Printf("couta disponible: %d\n", cuotas[i])
+}
+
+> couta disponible: 1
+> couta disponible: 2
+> couta disponible: 3
+> couta disponible: 6
+> couta disponible: 12
+```
+Esta forma es cómo se trabajan los `array` en realidad. Es raro acceder a un elemento en particular del `array` con un número literal como índice. Lo habitual es recorrer los `array` desde el `indice = 0` hasta el `indice = len(array) - 1` (`len()` es una función que dado un `array` devuelve su largo). Notar que si accediéramos al `indice = len(array)` estaríamos tratando de acceder a un elemento fuera del rango válido. Por ejemplo
+```go
+var unArray [4]float64 = [4]float64{12, 2.3, 3, 5.5}
+fmt.Print(unArray[0]) // 12
+fmt.Print(unArray[1]) // 2.3
+fmt.Print(unArray[2]) // 3
+fmt.Print(unArray[3]) // 5.5
+fmt.Print(unArray[4]) // Error: nos pasamos del limite
+fmt.Print(unArray[len(unArray)] // Error: es exactamente lo mismo que el anterior, el array tiene 4 elementos y estamos tratando de acceder al de indice 4, osea al 5to elemento
+
+> 12
+> 2.3
+> 3
+> 5.5
+> Error!!!
+```
+
+Por último qué pasaría si quiero cambiar alguna de las cuotas disponibles? Lo que nos lleva a la última pregunta
+- Cómo cambio el valor de un elemento del `array`?
+
+Supongamos que ya no queremos ofrecer más el pago en 3 cuotas, sino que ahora queremos ofrecer en 4 (en lugar de 3). La forma en la que podemos hacer esto es cambiando el valor de dicho elemento del `array`. Veamos como sería
+```go
+// cuotas antes -> {1, 2, 3, 6, 12}
+cuotas[2] = 4
+// cuotas despues -> {1, 2, 4, 6, 12}
+```
+Qué hicimos? Accedimos al tercer elemento del `array` y cambiamos su valor por un `4` quedando cuotas como se muestra en la tercer linea. Es bastante intuitivo si uno lo piensa en detalle. 
+
+Resumiendo:
+- Tanto para acceder al valor de un elemento como para cambiarlo se hace a través de un `indice` (un desplazamiento) que comienza en 0 y termina en el tamaño del array menos 1. 
+- Tratar de acceder por fuera de dichos límites resultará en un error. 
+- La función `len(<array>)` devuelve el largo de `<array>`. 
+- El `indice` usado para acceder a un elemento puede ser tanto un literal como una variable. 
+- Para iterar un `array`, o sea acceder a todos sus elementos de a uno por vez se utiliza la estructura de control `for` en su forma completa. 
