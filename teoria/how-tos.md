@@ -21,6 +21,8 @@
 - [Qué es un acumulador?](#qué-es-un-acumulador)
 - [Qué es un `array`?](#qué-es-un-array)
 - [Cómo uso un `array`?](#cómo-uso-un-array)
+- [Qué es un `slice`?](#qué-es-un-slice)
+- [Cómo uso un `slice`?](#cómo-uso-un-slice)
 
 ## Cómo luce la estructura base de un programa en GO?
 ```go
@@ -991,3 +993,129 @@ Resumiendo:
 - La función `len(<array>)` devuelve el largo de `<array>`. 
 - El `indice` usado para acceder a un elemento puede ser tanto un literal como una variable. 
 - Para iterar un `array`, o sea acceder a todos sus elementos de a uno por vez se utiliza la estructura de control `for` en su forma completa. 
+
+## Cómo uso un `array`? (segunda parte)
+Hay algunas cosas que no hablamos de los `array` que pueden llegar a ser útiles en mayor o menos medida y ellas son
+
+- Si no inicializo un `array`, que valores toma?
+- Puedo copiar un `array` a otro `array`?
+- Cómo agrego elementos a un `array` ya definido?
+
+Veamos
+- Si no inicializo un `array`, que valores toma?
+
+La respuesta es que toma los valores por default del tipo de dato de los elementos. Por ejemplo:
+```go
+var arraySinInicializar [3]int
+fmt.Print(arraySinInicializar)
+
+> [0 0 0]
+```
+Si fuera un array de `bool`
+```go
+var arraySinInicializar [3]bool
+fmt.Print(arraySinInicializar)
+
+> [false false false]
+```
+
+- Puedo copiar un `array` a otro `array`?
+
+Claro que se puede. Solo existe una restricción y es que ambos `array` deben ser del mismo tipo y tamaño.
+```go
+var arrayEnteros5 [5]int = [5]int{1, 1, 1, 1, 1}
+var otroArrayEnteros5 [5]int
+
+fmt.Print(arrayEnteros5)
+fmt.Print(otroArrayEnteros5)
+otroArrayEnteros5 = arrayEnteros5
+fmt.Print(otroArrayEnteros5)
+
+> [1 1 1 1 1]
+> [0 0 0 0 0]
+> [1 1 1 1 1]
+```
+```go
+var arrayEnteros5 [5]int = [5]int{1, 1, 1, 1, 1}
+var arrayEnteros6 [6]int
+
+arrayEnteros6 = arrayEnteros5 // Error: No compila [5]int no es aplicable a [6]int
+```
+```go
+var arrayEnteros5 [5]int = [5]int{1, 1, 1, 1, 1}
+var arrayFloat5 [5]float64
+
+arrayFloat5 = arrayFloat5 // Error: No compila [5]int no es aplicable a [5]float64
+```
+
+Solo queda mencionar que al asignar una array a otro lo que estamos haciendo es copiar todo su contenido en una nueva dirección en memoria por lo que, si el `array` es muy grande (millones de datos) estaríamos duplicando el uso de memoria en caso de copiarlo. 
+
+- Cómo agrego elementos a un `array` ya definido?
+
+No se puede. Simple y sencillo. Un `array` definido de, por ejemplo, 103 elementos siempre tendrá 103 elementos hasta que finalice el programa. Podrá tener valores basura o que decidamos ignorar pero el largo (`len()` siempre será de 103). Entonces, cómo trabajamos si necesitamos ir agregando datos a un `array` de forma progresiva sin saber cuántos datos tendremos al final? Utilizando un `slice`, esa es la respuesta. Qué es un `slice`? Se encuentra explicado en otro apartado.
+
+## Qué es un `slice`?
+Proximamente... primero tenemos que ver otras cositas. Pero se puede ver el apartado cómo uso un `slice`? (que no requiere saber ¿qué es? en profundidad)
+
+## Cómo uso un `slice`?
+Un `slice` en términos generales se utiliza exactamente igual que un `array` pero presenta otras funcionalidades adicionales que hacen que este tipo de dato sea más utilizado que el mismo `array`.
+
+Veamos como se define un `slice`
+```go
+var unSlice []int
+```
+Qué podemos notar de lo anterior? A primera vista parecería que nos olvidamos de poner la cantidad de elementos que tiene, pero no es así. Un `slice` se define igual que un `array` solo que sin un tamaño fijo, el `slice` tiene  tamaño variable. Y cuál es ese tamaño variable? o sea, qué tamaño tiene ese `unSlice`? Muy sencillo, podemos usar nuestra función `len(unSlice)` para saber qué tamaño tiene. Veamos como sería
+```go
+var unSlice []int
+fmt.Printf("el tamaño de unSlice es: %d\n", len(unSlice))
+
+> el tamaño de unSlice es: 0
+```
+Podemos ver qué, cuando declaramos un `slice` sin una inicialización, el mismo se crea con 0 elementos. Y pero... salimos de un `array` de tamaño fijo y nos venimos a un `slice` de tamaño 0, para qué? 
+
+Bueno, como bien mencionamos antes, los `slice` tienen tamaño variable, o sea, no debería preocuparnos que nuestro `slice` tenga tamaño 0 ya que debe existir una forma de agrandarlo. Y por su puesto, existe. La forma es la siguiente
+```go
+var unSlice []int
+fmt.Printf("el tamaño inicial es: %d\n", len(unSlice))
+unSlice = append(unSlice, 20)
+fmt.Printf("el nuevo tamaño es: %d\n", len(unSlice))
+
+> el tamaño inicial es: 0
+> el nuevo tamaño es: 1
+```
+Vemos como inicialmente tiene un tamaño de 0 y cuando le agregamos o _appendeamos_ un valor nuevo, este `slice` crece. Para ello utilizamos otra función pero que solo aplica a `slice` y es `append()`. `append(<slice>, <elem>, ...)` opera de la siguiente manera, dado un `<slice>`, y una serie de elementos `<elem>` (puede ser uno o varios separados por `,`) crea un nuevo `slice` copiado de `<slice>`, agrega el nuevo elemento, y devuelve el `slice` con el elemento `<elem>` agregado. Por eso debemos hacer `unSlice = append(unSlice, 20)` y guardarnos el nuevo `slice` con el valor agregado.
+
+Cómo es que esto sucede tras bambalinas? _Ver el apartado Qué es un `slice`?_ donde se explica en detalle cómo es que funciona y cómo es que un `slice` en realidad por detrás usa nuestro querido e incomprendido `array`.
+
+Faltaría ver cómo declarar un `slice` con con algún valor o valores por defecto . La forma de hacerlo es la siguiente
+```go
+var unSlice []string = []string{"hola", "mundo"}
+fmt.Printf("el tamaño inicial es: %d\n", len(unSlice))
+fmt.Printf("y contiene los siguientes elementos: %v\n", unSlice)
+fmt.Printf("el primer elemento es: %s\n", unSlice[0])
+fmt.Printf("el segundo elemento es: %s\n", unSlice[1])
+
+> el tamaño inicial es: 2
+> y contiene los siguientes elementos: [hola mundo]
+> el primer elemento es: hola
+> el segundo elemento es: mundo
+```
+
+Nada demasiado loco, no? Declaramos un `slice` de `string` que contendrá, en principio, dos valores `hola` y `mundo`. Uno con `indice = 0` y el otro con `indice = 1` (igual que los `array`).
+
+- Cómo itero un `slice`?
+
+Bueno, a decir verdad no hay que explicar nada diferente. La forma de iterar un `slice` es la misma en la que se itera un `array`.
+```go
+var unSlice []int = []int{5, 4, 3, 2, 1}
+var i int
+for i = 0; i < len(unSlice); i++ {
+	fmt.Printf("el elemento %d es %d\n", i, unSlice[i])
+}
+
+> el elemento 0 es 5
+> el elemento 1 es 4
+> el elemento 2 es 3
+> el elemento 3 es 2
+> el elemento 4 es 1
+```
