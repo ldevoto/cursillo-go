@@ -926,39 +926,39 @@ Bien, ahora nuestro `array` de cuotas ya cuenta con las cuotas disponibles que q
 
 Los valores de los elementos del `array` son accedidos a través del nombre + un desplazamiento. Este desplazamiento es conocido como `indice`. El índice nos dice a qué elemento del array queremos acceder. Supongamos que queremos mostrar solo el primer elemento del `array`, o sea la cuota 1
 ```go
-fmt.Printf("La primer couta disponible es %d", cuotas[0])
+fmt.Printf("La primer cuota disponible es %d", cuotas[0])
 
-> La primer couta disponible es 1
+> La primer cuota disponible es 1
 ```
 Notar que para acceder a un elemento en particular, es necesario indicar el `indice` del elemento y que el `indice` comienza en 0 (esto es así en casi todos los lenguajes).
 Lo que estamos haciendo es acceder al primer elemento del `array` de cuotas y obtener su contenido (en este caso el valor `1`).
 Qué pasaría si quiero mostrar todas las cuotas disponibles?
 Bueno, una forma de hacerlo sería así
 ```go
-fmt.Printf("couta disponible: %d\n", cuotas[0])
-fmt.Printf("couta disponible: %d\n", cuotas[1])
-fmt.Printf("couta disponible: %d\n", cuotas[2])
-fmt.Printf("couta disponible: %d\n", cuotas[3])
-fmt.Printf("couta disponible: %d\n", cuotas[4])
+fmt.Printf("cuota disponible: %d\n", cuotas[0])
+fmt.Printf("cuota disponible: %d\n", cuotas[1])
+fmt.Printf("cuota disponible: %d\n", cuotas[2])
+fmt.Printf("cuota disponible: %d\n", cuotas[3])
+fmt.Printf("cuota disponible: %d\n", cuotas[4])
 
-> couta disponible: 1
-> couta disponible: 2
-> couta disponible: 3
-> couta disponible: 6
-> couta disponible: 12
+> cuota disponible: 1
+> cuota disponible: 2
+> cuota disponible: 3
+> cuota disponible: 6
+> cuota disponible: 12
 ```
 Como podemos ver no difiere mucho de la primer forma, solo fuimos cambiando el valor del indice y pudimos acceder a todos los elementos del `array`. Ahora, es un tanto repetitivo, no? No se puede hacer de otra forma? Porque uno bien podría preguntarse, y que gano usando un `array` en lugar de 5 variables `cuota1`, `cuota2`, `cuota3` ,`cuota4` y `cuota5`? Y la respuesta es: Claro que se puede hacer de otra forma y allí vamos.
 ```go
 var i int
 for i = 0; i < len(cuotas); i++ {
-	fmt.Printf("couta disponible: %d\n", cuotas[i])
+	fmt.Printf("cuota disponible: %d\n", cuotas[i])
 }
 
-> couta disponible: 1
-> couta disponible: 2
-> couta disponible: 3
-> couta disponible: 6
-> couta disponible: 12
+> cuota disponible: 1
+> cuota disponible: 2
+> cuota disponible: 3
+> cuota disponible: 6
+> cuota disponible: 12
 ```
 Esta forma es cómo se trabajan los `array` en realidad. Es raro acceder a un elemento en particular del `array` con un número literal como índice. Lo habitual es recorrer los `array` desde el `indice = 0` hasta el `indice = len(array) - 1` (`len()` es una función que dado un `array` devuelve su largo). Notar que si accediéramos al `indice = len(array)` estaríamos tratando de acceder a un elemento fuera del rango válido. Por ejemplo
 ```go
