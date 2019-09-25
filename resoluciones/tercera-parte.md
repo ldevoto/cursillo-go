@@ -546,3 +546,434 @@ func main() {
 	}
 }
 ```
+
+### Segunda tanda
+En esta tanda vamos a tratar de sacar ese artista que llevamos dentro. Para es importante que respetes los formatos planteados. No agregues espacios, enters, tabs, etc. a menos que asi se visualice. Demás está decir que cada ejercicio está pensado para ser _pintado_ usando ciclos `for` (anidados o no) por lo que tener un `fmt.Print(...)` con todo el dibujo no es válido. A dibujar!
+
+#### 1. Dibujar la siguiente figura en consola
+```
+***** *****
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const quantity = 11
+	var i int
+	
+	for i = 0; i < quantity; i++ {
+		if i != quantity / 2 {
+			fmt.Print("*")
+		} else {
+			fmt.Print(" ")
+		}
+	}
+	fmt.Println()
+}
+```
+
+#### 2. Dibujar la siguiente figura en consola
+```
+**********
+**********
+**********
+**********
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 4
+	const columnQuantity = 10
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			fmt.Print("*")
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 3. Dibujar la siguiente figura en consola
+```
+**********
+*        *
+**********
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 3
+	const columnQuantity = 10
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		if i % 2 == 0 {
+			for j = 0; j < columnQuantity; j++ {
+				fmt.Print("*")
+			}
+			fmt.Println()
+		} else {
+			fmt.Print("*")
+			for j = 0; j < columnQuantity - 2; j++ {
+				fmt.Print(" ")
+			}
+			fmt.Print("*\n")
+		}
+	}
+	fmt.Println()
+}
+```
+
+#### 4. Dibujar la siguiente figura en consola
+```
+**********
+*        *
+**********
+*        *
+**********
+*        *
+**********
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 7
+	const columnQuantity = 10
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		if i % 2 == 0 {
+			for j = 0; j < columnQuantity; j++ {
+				fmt.Print("*")
+			}
+			fmt.Println()
+		} else {
+			fmt.Print("*")
+			for j = 0; j < columnQuantity - 2; j++ {
+				fmt.Print(" ")
+			}
+			fmt.Print("*\n")
+		}
+	}
+	fmt.Println()
+}
+```
+
+#### 5. Dibujar la siguiente figura en consola
+```
+*    
+**   
+***  
+**** 
+*****
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 5
+	const columnQuantity = rowQuantity
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			if j <= i {
+				fmt.Print("*")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 6. Dibujar la siguiente figura en consola
+```
+*****
+**** 
+***  
+**   
+*    
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 5
+	const columnQuantity = rowQuantity
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			if j < rowQuantity - i {
+				fmt.Print("*")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 7. Dibujar la siguiente figura en consola
+```
+    *
+   **
+  ***
+ ****
+*****
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 5
+	const columnQuantity = rowQuantity
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			if j < rowQuantity - 1 - i {
+				fmt.Print(" ")
+			} else {
+				fmt.Print("*")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 8. Dibujar la siguiente figura en consola
+```
+*****
+ ****
+  ***
+   **
+    *
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 5
+	const columnQuantity = rowQuantity
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			if j < i {
+				fmt.Print(" ")
+			} else {
+				fmt.Print("*")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 9. Dibujar la siguiente figura en consola
+```
+    *    
+   ***   
+  *****  
+ ******* 
+*********
+ ******* 
+  *****  
+   ***   
+    *    
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 9
+	const columnQuantity = rowQuantity
+	const middleColumn = columnQuantity / 2
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 0; j < columnQuantity; j++ {
+			if i <= rowQuantity / 2 {
+				if j >= middleColumn - i && j <= middleColumn + i {
+					fmt.Print("*")
+				} else {
+					fmt.Print(" ")
+				}
+			} else {
+				if j >= middleColumn - i && j <= middleColumn + i {
+					fmt.Print("*")
+				} else {
+					fmt.Print(" ")
+				}
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 10. Encontrar el patrón y dibujar la siguiente figura en consola
+```
+*.*.*.*.*.
+**.**.**.*
+***.***.**
+****.****.
+*****.****
+******.***
+*******.**
+********.*
+*********.
+**********
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const rowQuantity = 10
+	const columnQuantity = 10
+	var i int
+	var j int
+	
+	for i = 0; i < rowQuantity; i++ {
+		for j = 1; j <= columnQuantity; j++ {
+			if j % (i + 2) == 0 {
+				fmt.Print(".")
+			} else {
+				fmt.Print("*")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 11. Dibujar la siguiente función lineal en consola (para valientes)
+>f(x) = x
+
+Considerando que cada paso en x es 1 y cada paso en y es 1
+```
+     |    *
+     |   * 
+     |  *  
+     | *   
+     |*    
+-----*-----
+    *|     
+   * |     
+  *  |     
+ *   |     
+*    |     
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const minX int = -5
+	const maxX int = 5
+	const minY int = -5
+	const maxY int = 5
+	var x int
+	var y int
+	
+	for y = maxY; y >= minY; y-- {
+		for x = minX; x <= maxX; x++ {
+			if x == y {
+				fmt.Print("*")
+			} else if x == 0 {
+				fmt.Print("|")
+			} else if y == 0 {
+				fmt.Print("-")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 12. Dibujar la siguiente función en consola (para muy valientes)
+>f(x) = sen(x)
+
+Considerando que cada paso en x es Pi/4 y cada paso en y es 1
+```
+          |          
+          |          
+    *     | *       *
+--*---*---*---*---*--
+*       * |     *    
+          |          
+          |          
+```
+```go
+package main
+
+import "fmt"
+import "math"
+
+func main() {
+	const minX int = -10
+	const maxX int = 10
+	const minY int = -3
+	const maxY int = 3
+	var sinX float64
+	var x int
+	var y int
+	
+	for y = maxY; y >= minY; y-- {
+		for x = minX; x <= maxX; x++ {
+			sinX = math.Sin(float64(x) * math.Pi /  4) // hay que calcular el seno de x considerando que 1x -> Pi / 4
+			if float64(y) > sinX - 0.0001 && float64(y) < sinX + 0.0001 { // si este fuera un == contra sinX nos perderíamos valores porque hay veces que el sinX == 0.0000000000000001 (y no es == 0)
+				fmt.Print("*")
+			} else if x == 0 {
+				fmt.Print("|")
+			} else if y == 0 {
+				fmt.Print("-")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+```

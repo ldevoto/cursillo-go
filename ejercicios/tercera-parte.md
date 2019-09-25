@@ -69,3 +69,132 @@ Para esta primer tanda vamos a tratar de ejercitar el cerebro y acostumbrarlo a 
 - `"son iguales"` -> si representan el mismo string
 - `"son parecidos"` -> si difieren en no mas de 2 letras
 - `"son distintos"` -> si difieren en más de 2 letras
+
+### Segunda tanda
+En esta tanda vamos a tratar de sacar ese artista que llevamos dentro. Para es importante que respetes los formatos planteados. No agregar espacios, enters, tabs, etc. a menos que así se visualice. Demás está decir que cada ejercicio está pensado para ser _pintado_ usando ciclos `for` (anidados o no) por lo que tener un `fmt.Print(...)` con todo el dibujo no es válido. A dibujar!
+
+#### 1. Dibujar la siguiente figura en consola
+```
+***** *****
+```
+
+#### 2. Dibujar la siguiente figura en consola
+```
+**********
+**********
+**********
+**********
+```
+
+#### 3. Dibujar la siguiente figura en consola
+```
+**********
+*        *
+**********
+```
+
+#### 4. Dibujar la siguiente figura en consola
+```
+**********
+*        *
+**********
+*        *
+**********
+*        *
+**********
+```
+
+#### 5. Dibujar la siguiente figura en consola
+```
+*    
+**   
+***  
+**** 
+*****
+```
+
+#### 6. Dibujar la siguiente figura en consola
+```
+*****
+**** 
+***  
+**   
+*    
+```
+
+#### 7. Dibujar la siguiente figura en consola
+```
+    *
+   **
+  ***
+ ****
+*****
+```
+
+#### 8. Dibujar la siguiente figura en consola
+```
+*****
+ ****
+  ***
+   **
+    *
+```
+
+#### 9. Dibujar la siguiente figura en consola
+```
+    *    
+   ***   
+  *****  
+ ******* 
+*********
+ ******* 
+  *****  
+   ***   
+    *    
+```
+
+#### 10. Encontrar el patrón y dibujar la siguiente figura en consola
+```
+*.*.*.*.*.
+**.**.**.*
+***.***.**
+****.****.
+*****.****
+******.***
+*******.**
+********.*
+*********.
+**********
+```
+
+#### 11. Dibujar la siguiente función lineal en consola (para valientes)
+>f(x) = x
+
+Considerando que cada paso en x es 1 y cada paso en y es 1
+```
+     |    *
+     |   * 
+     |  *  
+     | *   
+     |*    
+-----*-----
+    *|     
+   * |     
+  *  |     
+ *   |     
+*    |     
+```
+
+#### 12. Dibujar la siguiente función en consola (para muy valientes)
+>f(x) = sen(x)
+
+Considerando que cada paso en x es Pi/4 y cada paso en y es 1
+```
+          |          
+          |          
+    *     | *       *
+--*---*---*---*---*--
+*       * |     *    
+          |          
+          |          
+```
