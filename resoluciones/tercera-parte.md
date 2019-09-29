@@ -444,6 +444,7 @@ func main() {
 #### 19. Solicitar el ingreso de un string y un número entero que representará un índice en el string e imprimir
 - `"el string a partir de <i> es <s>"` -> si el numero ingresado es un indice válido 
 - `"fuera de rango"` -> si el numero ingresado es un indice invalido
+
 (Reemplazando `<i>` por el numero y `<s>` por el string a partir del índice `<i>` ingresado)
 ```go
 package main
@@ -475,6 +476,7 @@ func main() {
 #### 20. Solicitar el ingreso de un string y dos números enteros que representará un índice de comienzo y de fin en el string e imprimir
 - `"el string a partir de <i1> y hasta <i2> es <s>"` -> si los numeros ingresados son válidos 
 - `"fuera de rango"` -> si al menos uno de los numeros ingresados es un indice invalido
+
 (Reemplazando `<i1>`  e `<i2>` por los indices y `<s>` por el string a partir del índice `<i1>` y hasta `<i2>`)
 ```go
 package main
