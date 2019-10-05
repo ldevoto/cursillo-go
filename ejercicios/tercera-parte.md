@@ -200,3 +200,39 @@ Considerando que cada paso en x es Pi/4 y cada paso en y es 1
           |          
           |          
 ```
+
+### Tercer tanda
+Aclaración: Donde se pida solicitar el ingreso de arrays (independiente del tipo solicitado) se deja al programador definir el tamaño del mismo al momento de compilación salvo que se indique lo contrario.
+
+#### 1. Solicitar el ingreso de un array de dos números reales e imprimir el mayor
+
+#### 2. Solicitar el ingreso de un array de dos números reales e imprimirlos en orden de mayor a menor
+
+#### 3. Solicitar el ingreso de un array de tres números reales e imprimir el mayor
+
+#### 4. Solicitar el ingreso de un array de tres números reales e imprimirlos en orden de mayor a menor
+
+#### 5. Solicitar el ingreso de un array de números reales (los que se quieran) e imprimir el mayor de todos ellos
+
+#### 6. Solicitar el ingreso de un array de números reales (los que se quieran) e imprimirlos en orden de mayor a menor (solo para valientes)
+
+#### 7. Dado un array de números reales, imprimirlos en orden de mayor a menor cortando prematuramente una vez ordenado el array (dependiendo de como resuelvan el ejercicio anterior este ejercicio está repetido o no) (solo para muy valientes)
+
+#### 8. Solicitar el ingreso de dos arrays de números enteros de igual tamaño e imprimir si ambos arrays contienen los mismos elementos (sin importar el orden). Asumir que no hay repetidos
+Ej: 
+[1, 2, 3, 4] [2, 3, 1, 4] -> contienen los mismos elementos
+[-1, 2, 3, 4] [2, -1, 3, 6] -> no contienen los mismos elementos
+
+#### 9. Solicitar el ingreso de dos strings e imprimir
+- `"<s1> contiene al string <s2>"` -> si el primer string contiene al segundo
+- `"<s1> no contiene al string <s2>"` -> si el segundo string no contiene al segundo
+
+#### 10. Solicitar el ingreso de tres strings e imprimir el resultado de hallar el segundo string en el primer string y reemplazarlo por el tercer string
+Ej: 
+- palito ito ote -> imprime `palote`
+- confusion fu tor -> imprime `contorsion`
+- delgadez dele to -> imprime `delgadez` (no se encontró el string a reemplazar)
+
+#### 11. Solicitar el ingreso de un string y un array de strings e imprimir
+- `"<s1> contiene al menos un string del array"` -> si el string contiene al menos un string del array
+- `"<s1> no contiene ningun string del array"` -> si el string no contiene ningún string del array

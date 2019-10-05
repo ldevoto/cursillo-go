@@ -979,3 +979,402 @@ func main() {
 	}
 }
 ```
+
+### Tercer tanda
+Aclaración: Donde se pida solicitar el ingreso de arrays (independiente del tipo solicitado) se deja al programador definir el tamaño del mismo al momento de compilación salvo que se indique lo contrario.
+
+#### 1. Solicitar el ingreso de un array de dos números reales e imprimir el mayor
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var array [2]int
+	var max int
+	var i int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+
+	if array[0] > array[1] {
+		max = array[0]
+	} else {
+		max = array[1]
+	}
+	
+	fmt.Printf("el mayor es: %d\n", max)
+}
+```
+
+#### 2. Solicitar el ingreso de un array de dos números reales e imprimirlos en orden de mayor a menor
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var array [2]int
+	var aux int
+	var i int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+
+	if array[0] < array[1] {
+		aux = array[0]
+		array[0] = array[1]
+		array[1] = aux
+	}
+	fmt.Println(array)
+}
+```
+
+#### 3. Solicitar el ingreso de un array de tres números reales e imprimir el mayor
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var array [3]int
+	var max int
+	var i int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+	
+	max = array[0]
+	if array[1] > max {
+		max = array[1]
+	}
+	if array[2] > max {
+		max = array[2]
+	}
+	
+	fmt.Printf("el mayor es: %d\n", max)
+}
+```
+
+#### 4. Solicitar el ingreso de un array de tres números reales e imprimirlos en orden de mayor a menor
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var array [3]int
+	var aux int
+	var i int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+	
+	if array[1] > array[0] {
+		aux = array[0]
+		array[0] = array[1]
+		array[1] = aux
+	}
+
+	if array[2] > array[1] {
+		if array[2] > array[0] {
+			aux = array[2]
+			array[2] = array[1]
+			array[1] = array[0]
+			array[0] = aux
+		} else {
+			aux = array[2]
+			array[2] = array[1]
+			array[1] = aux
+		}
+	}
+	
+	fmt.Println(array)
+}
+```
+
+#### 5. Solicitar el ingreso de un array de números reales (los que se quieran) e imprimir el mayor de todos ellos
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const cantidad int = 5
+	var array [cantidad]int
+	var max int
+	var i int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+	
+	max = array[0]
+	for i = 1; i < len(array); i++ {
+		if array[i] > max {
+			max = array[i]
+		}
+	}
+	
+	fmt.Printf("el mayor es: %d\n", max)
+}
+```
+
+#### 6. Solicitar el ingreso de un array de números reales (los que se quieran) e imprimirlos en orden de mayor a menor (solo para valientes)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const cantidad int = 5
+	var array [cantidad]int
+	var aux int
+	var i int
+	var j int
+
+	for i = 0; i < len(array); i++ {
+		fmt.Printf("Ingrese el elemento %d: ", array[i])
+		fmt.Scan(&array[i])
+	}
+	
+	for i = 0; i < len(array); i++ {
+		for j = 0; j < len(array); j++ {
+			if array[i] > array[j] {
+				aux = array[i]
+				array[i] = array[j]
+				array[j] = aux
+			} 
+		}
+	}
+	
+	fmt.Println(array)
+}
+```
+
+#### 7. Dado un array de números reales, imprimirlos en orden de mayor a menor cortando prematuramente una vez ordenado el array (dependiendo de como resuelvan el ejercicio anterior este ejercicio está repetido o no) (solo para muy valientes)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var array [5]int = [5]int{1, 32, 4, 42, 123}
+	var aux int
+	var isOrdered bool
+	var i int
+	var j int
+	
+	// este algoritmo de ordenamiento es llamado burbujeo
+	for i = 0; i < len(array); i++ {
+		isOrdered = true
+		for j = 0; j < len(array) - 1; j++ {
+			if array[j + 1] > array[j]  {
+				isOrdered = false
+				aux = array[j + 1]
+				array[j + 1] = array[j]
+				array[j] = aux
+			}
+		}
+		if isOrdered {
+			break
+		}
+	}
+	
+	fmt.Println(array)
+}
+```
+
+#### 8. Solicitar el ingreso de dos arrays de números enteros de igual tamaño e imprimir si ambos arrays contienen los mismos elementos (sin importar el orden). Asumir que no hay repetidos
+Ej: 
+[1, 2, 3, 4] [2, 3, 1, 4] -> contienen los mismos elementos
+[-1, 2, 3, 4] [2, -1, 3, 6] -> no contienen los mismos elementos
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const length int = 5
+	var firstArray [length]int
+	var secondArray [length]int
+	var elementFound bool
+	var i int
+	var j int
+
+	fmt.Printf("Ingrese el primer array de %d elementos: ", length)
+	for i = 0; i < len(firstArray); i++ {
+		fmt.Scan(&firstArray[i])
+	}
+	fmt.Printf("Ingrese el segundo array de %d elementos: ", length)
+	for i = 0; i < len(secondArray); i++ {
+		fmt.Scan(&secondArray[i])
+	}
+
+	for i = 0; i < len(firstArray); i++ {
+		elementFound = false
+		for j = 0; j < len(secondArray); j++ {
+			if firstArray[i] == secondArray[j] {
+				elementFound = true
+				break
+			}
+		}
+		if !elementFound {
+			break
+		}
+	}
+	
+	if elementFound {
+		fmt.Println("Ambos arrays contienen los mismos elementos")
+	} else {
+		fmt.Println("Ambos arrays no contienen los mismos elementos")
+	}
+}
+```
+
+#### 9. Solicitar el ingreso de dos strings e imprimir
+- `"<s1> contiene al string <s2>"` -> si el primer string contiene al segundo
+- `"<s1> no contiene al string <s2>"` -> si el segundo string no contiene al segundo
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var aString string
+	var searchedString string
+	var found bool
+	var i int
+	var j int
+
+	fmt.Print("Ingrese el primer string: ")
+	fmt.Scan(&aString)
+	fmt.Print("Ingrese el string a buscar: ")
+	fmt.Scan(&searchedString)
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if aString[i + j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	
+	if found {
+		fmt.Println("Se encontró el string")
+	} else {
+		fmt.Println("No se encontró el string")
+	}
+}
+```
+
+#### 10. Solicitar el ingreso de tres strings e imprimir el resultado de hallar el segundo string en el primer string y reemplazarlo por el tercer string
+Ej: 
+- palito ito ote -> imprime `palote`
+- confusion fu tor -> imprime `contorsion`
+- delgadez dele to -> imprime `delgadez` (no se encontró el string a reemplazar)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var aString string
+	var searchedString string
+	var replaceString string
+	var replacedString []byte
+	var found bool
+	var i int
+	var j int
+
+	fmt.Print("Ingrese tres strings: ")
+	fmt.Scan(&aString, &searchedString, &replaceString)
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if aString[i + j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if !found {
+			replacedString = append(replacedString, aString[i])
+		} else {
+			for j = 0; j < len(replaceString); j++ {
+				replacedString = append(replacedString, replaceString[j])
+			}
+			for j = i + len(searchedString); j < len(aString); j++ {
+				replacedString = append(replacedString, aString[j])
+			}
+			break
+		}
+	}
+	fmt.Printf("%s\n", replacedString)
+}
+```
+
+#### 11. Solicitar el ingreso de un string y un array de strings e imprimir
+- `"<s1> contiene al menos un string del array"` -> si el string contiene al menos un string del array
+- `"<s1> no contiene ningun string del array"` -> si el string no contiene ningún string del array
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var aString string
+	var searchedStrings [5]string
+	var searchedString string
+	var found bool
+	var i int
+	var j int
+	var k int
+
+	fmt.Print("Ingrese el string: ")
+	fmt.Scan(&aString)
+	fmt.Printf("Ingrese los %d strings a buscar: ", len(searchedStrings))
+	for i = 0; i < len(searchedStrings); i++ {
+		fmt.Scan(&searchedStrings[i])
+	}
+	
+	for i = 0; i < len(searchedStrings); i++ {
+		searchedString = searchedStrings[i]
+		for j = 0; j < len(aString); j++ {
+			found = true
+			for k = 0; k < len(searchedString); k++ {
+				if aString[j + k] != searchedString[k] {
+					found = false
+					break
+				}
+			}
+			if found {
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	
+	if found {
+		fmt.Println("Se encontró el string")
+	} else {
+		fmt.Println("No se encontró el string")
+	}
+}
+```
