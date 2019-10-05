@@ -220,7 +220,9 @@ Aclaración: Donde se pida solicitar el ingreso de arrays (independiente del tip
 
 #### 8. Solicitar el ingreso de dos arrays de números enteros de igual tamaño e imprimir si ambos arrays contienen los mismos elementos (sin importar el orden). Asumir que no hay repetidos
 Ej: 
+
 [1, 2, 3, 4] [2, 3, 1, 4] -> contienen los mismos elementos
+
 [-1, 2, 3, 4] [2, -1, 3, 6] -> no contienen los mismos elementos
 
 #### 9. Solicitar el ingreso de dos strings e imprimir
