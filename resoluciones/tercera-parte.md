@@ -887,7 +887,49 @@ func main() {
 }
 ```
 
-#### 11. Dibujar la siguiente función lineal en consola (para valientes)
+#### 11. Dibujar el siguiente eje de coordenadas
+```
+     |     
+     |     
+     |     
+     |     
+     |     
+-----|-----
+     |     
+     |     
+     |     
+     |     
+     |     
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const minX int = -5
+	const maxX int = 5
+	const minY int = -5
+	const maxY int = 5
+	var x int
+	var y int
+	
+	for y = maxY; y >= minY; y-- {
+		for x = minX; x <= maxX; x++ {
+			if x == 0 {
+				fmt.Print("|")
+			} else if y == 0 {
+				fmt.Print("-")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+```
+
+#### 12. Dibujar la siguiente función lineal en consola (para valientes)
 >f(x) = x
 
 Considerando que cada paso en x es 1 y cada paso en y es 1
@@ -934,7 +976,7 @@ func main() {
 }
 ```
 
-#### 12. Dibujar la siguiente función en consola (para muy valientes)
+#### 13. Dibujar la siguiente función en consola (para muy valientes)
 >f(x) = sen(x)
 
 Considerando que cada paso en x es Pi/4 y cada paso en y es 1

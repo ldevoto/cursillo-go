@@ -169,7 +169,22 @@ En esta tanda vamos a tratar de sacar ese artista que llevamos dentro. Para es i
 **********
 ```
 
-#### 11. Dibujar la siguiente función lineal en consola (para valientes)
+#### 11. Dibujar el siguiente eje de coordenadas
+```
+     |     
+     |     
+     |     
+     |     
+     |     
+-----|-----
+     |     
+     |     
+     |     
+     |     
+     |     
+```
+
+#### 12. Dibujar la siguiente función lineal en consola (para valientes)
 >f(x) = x
 
 Considerando que cada paso en x es 1 y cada paso en y es 1
@@ -187,7 +202,7 @@ Considerando que cada paso en x es 1 y cada paso en y es 1
 *    |     
 ```
 
-#### 12. Dibujar la siguiente función en consola (para muy valientes)
+#### 13. Dibujar la siguiente función en consola (para muy valientes)
 >f(x) = sen(x)
 
 Considerando que cada paso en x es Pi/4 y cada paso en y es 1
