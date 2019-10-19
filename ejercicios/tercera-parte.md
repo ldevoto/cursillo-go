@@ -253,3 +253,7 @@ Ej:
 #### 11. Solicitar el ingreso de un string y un array de strings e imprimir
 - `"<s1> contiene al menos un string del array"` -> si el string contiene al menos un string del array
 - `"<s1> no contiene ningun string del array"` -> si el string no contiene ningún string del array
+
+#### 12. Solicitar el ingreso de un string e imprimir
+- `"<string> es palíndromo"` -> si el string ingresado es palíndromo
+- `"<string> no es palíndromo"` -> si el string ingresado no es palíndromo
