@@ -1422,3 +1422,35 @@ func main() {
 	}
 }
 ```
+
+#### 12. Solicitar el ingreso de un string e imprimir
+- `"<string> es palíndromo"` -> si el string ingresado es palíndromo
+- `"<string> no es palíndromo"` -> si el string ingresado no es palíndromo
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var aString string
+	var isPalindrome bool
+	var i int
+
+	fmt.Print("ingrese un string: ")
+	fmt.Scan(&aString)
+
+	isPalindrome = true
+	for i = 0; i < len(aString)/2; i++ {
+		if aString[i] != aString[len(aString)-i-1] {
+			isPalindrome = false
+			break
+		}
+	}
+
+	if isPalindrome {
+		fmt.Printf("%s es palíndromo\n", aString)
+	} else {
+		fmt.Printf("%s no es palíndromo\n", aString)
+	}
+}
+```
