@@ -257,3 +257,54 @@ Ej:
 #### 12. Solicitar el ingreso de un string e imprimir
 - `"<string> es palíndromo"` -> si el string ingresado es palíndromo
 - `"<string> no es palíndromo"` -> si el string ingresado no es palíndromo
+
+### Cuarta tanda
+En esta cuarta tanda vamos a ejercitar un concepto interesante en el mundo de los ciclos y arrays. Matrices o arrays multidimensionales! 
+Cuando hablemos de filas y columnas nos vamos a referir a 
+- fila -> el primer indice
+- columna -> el segundo indice
+
+#### 1. Dada una matriz de 3 x 3 de números enteros, imprimir el elemento 2 - 2
+
+#### 2. Dada una matriz de 3 x 3 de números enteros, imprimir toda la matriz de la siguiente forma
+```
+     c1 c2 c3  
+    ---------- 
+f1 | n1 n2 n3 |
+f2 | n4 n5 n6 |
+f3 | n7 n8 n9 |
+    ---------- 
+```
+#### 3. Dada una matriz de 3 x 3 de números enteros, imprimir el mayor de toda la matriz
+
+#### 4. Dada una matriz de 3 x 3 de números enteros, imprimir el menor de cada fila
+
+#### 5. Dada una matriz de 3 x 3 de número enteros, imprimir el menor de cada columna
+
+#### 6. Dada una matriz de 3 x 3 de número enteros, imprimir si representa un cuadrante válido según las siguientes reglas
+- la sumatoria de toda la matriz no debe exceder el valor `50`
+- la sumatoria de cada fila no debe exceder el valor `30`
+- la sumatoria de cada columna no debe ser menor al valor `10`
+- ningún valor de la matriz debe exceder el valor `10`
+- ningún valor de la matriz debe ser menor al valor `1`
+
+#### 7. Dada una matriz de 3 x 3 de número enteros, imprimir si representa un cuadrante válido para el SUDOKU según las siguientes reglas
+- los números de cada casillero deben estar entre el `1` y el `9`
+- no deben repetirse números en ningún casillero de la matriz
+
+#### 8. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
+- la matriz representa un laberinto
+- el laberinto puede no tener salida
+- solo existe un posible camino (no hay bifurcaciones)
+- uno comienza en la posición `0,0` y debe llegar a la `4,4`
+- uno puede moverse de a un casillero horizontalmente (izquierda o derecha) o verticalmente (arriba o abajo)
+- una posición `true` representa un camino libre por el que se puede ir
+- una posición `false` representa un camino bloqueado por el que no se puede ir
+
+imprimir:
+- `el camino es: n1,m1 -> n2,m2 -> n3,m3 -> n4,m4 -> etc`
+- `no existe un camino para llegar`
+
+#### Para pensar:
+- Cambiaría algo del ejercicio anterior si la matriz fuera de 10 x 10?
+- Qué pasaría si la restricción de `"solo existe un posible camino (no hay bifurcaciones)"` no estuviera? Podría resolver el ejercicio con las herramientas de las que dispone (sin depender de la dimensión de la matriz)?

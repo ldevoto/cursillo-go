@@ -1454,3 +1454,322 @@ func main() {
 	}
 }
 ```
+
+### Cuarta tanda
+En esta cuarta tanda vamos a ejercitar un concepto no menor en el mundo de los ciclos y arrays. Estamos hablando de arrays multidimensionales o ,mejor conocidos como, matrices. Cuando hablemos de filas y columnas nos vamos a referir a 
+- fila -> el primer indice
+- columna -> el segundo indice
+
+#### 1. Dada una matriz de 3 x 3 de números enteros, imprimir el elemento 2 - 2
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{1,2,3}, [3]int{4,5,6}, [3]int{7,8,9}}
+
+	fmt.Printf("el elemento 2 - 2 es %d\n", matrix[1][1])
+}
+```
+
+#### 2. Dada una matriz de 3 x 3 de números enteros, imprimir toda la matriz de la siguiente forma
+```
+     c1 c2 c3  
+    ---------- 
+f1 | n1 n2 n3 |
+f2 | n4 n5 n6 |
+f3 | n7 n8 n9 |
+    ---------- 
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{1,2,3}, [3]int{4,5,6}, [3]int{7,8,9}}
+	var i int
+	var j int
+
+	fmt.Print("     c1 c2 c3\n")
+	fmt.Print("    ----------\n")
+	for i = 0; i < len(matrix); i++ {
+		fmt.Printf("f%d | ", i + 1)
+		for j = 0; j < len(matrix[i]); j++ {
+			fmt.Printf("%2d ", matrix[i][j])
+		}
+		fmt.Println("|")
+	}
+	fmt.Print("    ----------\n")
+}
+```
+#### 3. Dada una matriz de 3 x 3 de números enteros, imprimir el mayor de toda la matriz
+```go
+package main
+
+import "fmt"
+import "math"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{10,3,12}, [3]int{3,5,4}, [3]int{3,15,1}}
+	var max int = math.MinInt64
+	var i int
+	var j int
+
+	for i = 0; i < len(matrix); i++ {
+		for j = 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] > max {
+				max = matrix[i][j]
+			}
+		}
+	}
+	fmt.Printf("el máximo es: %d\n", max)
+}
+```
+
+#### 4. Dada una matriz de 3 x 3 de números enteros, imprimir el menor de cada fila
+```go
+package main
+
+import "fmt"
+import "math"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{10,3,12}, [3]int{6,5,4}, [3]int{3,15,1}}
+	var min int
+	var i int
+	var j int
+
+	for i = 0; i < len(matrix); i++ {
+		min = math.MaxInt64
+		for j = 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] < min {
+				min = matrix[i][j]
+			}
+		}
+		fmt.Printf("el mínimo en la fila %d es: %d\n", i, min)
+	}
+}
+```
+
+#### 5. Dada una matriz de 3 x 3 de número enteros, imprimir el menor de cada columna
+```go
+package main
+
+import "fmt"
+import "math"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{10,30,12}, [3]int{6,5,4}, [3]int{3,15,1}}
+	var min int
+	var i int
+	var j int
+
+	for i = 0; i < len(matrix); i++ {
+		min = math.MaxInt64
+		for j = 0; j < len(matrix[i]); j++ {
+			if matrix[j][i] < min { // esto se puede hacer si y solo si estamos seguros que la matriz es cuadrada
+				min = matrix[j][i]
+			}
+		}
+		fmt.Printf("el mínimo en la columna %d es: %d\n", i, min)
+	}
+}
+```
+
+#### 6. Dada una matriz de 3 x 3 de número enteros, imprimir si representa un cuadrante válido según las siguientes reglas
+- la sumatoria de toda la matriz no debe exceder el valor `50`
+- la sumatoria de cada fila no debe exceder el valor `30`
+- la sumatoria de cada columna no debe ser menor al valor `10`
+- ningún valor de la matriz debe exceder el valor `10`
+- ningún valor de la matriz debe ser menor al valor `1`
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{4,3,3}, [3]int{3,4,3}, [3]int{3,3,4}}
+	var isValid bool
+	var matrixSum int = 0
+	var rowSum int = 0
+	var columnSum int = 0
+	const maxMatrixValue int = 50
+	const maxRowValue int = 30
+	const minColumnValue int = 10
+	const maxElementValue int = 10
+	const minElementValue int = 1
+	var i int
+	var j int
+
+	isValid = true
+	for i = 0; i < len(matrix); i++ {
+		rowSum = 0
+		columnSum = 0
+		for j = 0; j < len(matrix[i]); j++ {
+			if matrix[i][j] > maxElementValue || matrix[i][j] < minElementValue {
+				isValid = false
+				break
+			}
+			matrixSum += matrix[i][j]
+			rowSum += matrix[i][j]
+			columnSum += matrix[j][i] // de nuevo esto solo se puede hacer si y solo si es una matriz cuadrada
+		}
+		if isValid {
+			if rowSum > maxRowValue {
+				isValid = false
+				break
+			}
+			if columnSum < minColumnValue {
+				isValid = false
+				break
+			}
+		} else {
+			break
+		}	
+	}
+	
+	if isValid && matrixSum > maxMatrixValue {
+		isValid = false
+	}
+	
+	if isValid {
+		fmt.Println("es un cuadrante válido")
+	} else {
+		fmt.Println("es un cuadrante inválido")
+	}
+}
+```
+
+#### 7. Dada una matriz de 3 x 3 de número enteros, imprimir si representa un cuadrante válido para el SUDOKU según las siguientes reglas
+- los números de cada casillero deben estar entre el `1` y el `9`
+- no deben repetirse números en ningún casillero de la matriz
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var matrix [3][3]int = [3][3]int{[3]int{4,3,3}, [3]int{3,4,3}, [3]int{3,3,4}}
+	var elementsOcurrences [9]int
+	var isValid bool
+	const minElementValue int = 1
+	const maxElementValue int = 9
+	var i int
+	var j int
+
+	isValid = true
+	for i = 0; i < len(matrix); i++ {
+		for j = 0; j < len(matrix); j++ {
+			if matrix[i][j] > maxElementValue || matrix[i][j] < minElementValue {
+				isValid = false
+				break
+			}
+			elementsOcurrences[matrix[i][j] - 1]++
+			if elementsOcurrences[matrix[i][j] - 1] > 1 {
+				isValid = false
+				break
+			}
+		}
+		if !isValid {
+			break
+		}
+	}
+	
+	if isValid {
+		fmt.Println("es un cuadrante válido")
+	} else {
+		fmt.Println("es un cuadrante inválido")
+	}
+}
+```
+
+#### 8. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
+- la matriz representa un laberinto
+- el laberinto puede no tener salida
+- solo existe un posible camino (no hay bifurcaciones)
+- uno comienza en la posición `0,0` y debe llegar a la `4,4`
+- uno puede moverse de a un casillero horizontalmente (izquierda o derecha) o verticalmente (arriba o abajo)
+- una posición `true` representa un camino libre por el que se puede ir
+- una posición `false` representa un camino bloqueado por el que no se puede ir
+
+imprimir:
+- `el camino es: n1,m1 -> n2,m2 -> n3,m3 -> n4,m4 -> etc`
+- `no existe un camino para llegar`
+
+#### Para pensar:
+- Cambiaría algo del ejercicio anterior si la matriz fuera de 10 x 10?
+- Qué pasaría si la restricción de `"solo existe un posible camino (no hay bifurcaciones)"` no estuviera? Podría resolver el ejercicio con las herramientas de las que dispone (sin depender de la dimensión de la matriz)?
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const dimension int = 5
+	var maze [dimension][dimension]bool = [dimension][dimension]bool{
+		[dimension]bool{true,true,true,true,true}, 
+		[dimension]bool{false,false,false,false,true}, 
+		[dimension]bool{false,false,true,true,true}, 
+		[dimension]bool{false,false,true,false,false},
+		[dimension]bool{false,false,true,true,true},
+	}
+	var path []string = []string{}
+	var blocked bool = false
+	var arrived bool = false
+	const NONE byte = 0
+	const UP byte = 1
+	const DOWN byte = 2
+	const LEFT byte = 3
+	const RIGHT byte = 4
+	var lastMove byte = NONE
+	var i int = 0
+	var j int = 0
+
+	if maze[i][j] {
+		path = append(path, fmt.Sprintf("%d,%d", i, j))
+	} else {
+		blocked = true
+	}
+
+	for !arrived && !blocked {
+		if i == dimension - 1 && j == dimension - 1 {
+			arrived = true
+			continue
+		}
+		
+		if lastMove != LEFT && j + 1 < dimension && maze[i][j + 1] {
+			lastMove = RIGHT
+			j++
+		} else if lastMove != UP && i + 1 < dimension && maze[i + 1][j] {
+			lastMove = DOWN
+			i++
+		} else if lastMove != RIGHT && j > 0 && maze[i][j - 1] {
+			lastMove = LEFT
+			j--
+		} else if lastMove != DOWN && i > 0 && maze[i - 1][j] {
+			lastMove = UP
+			i--
+		} else {
+			blocked = true
+		}
+		
+		if !blocked {
+			path = append(path, fmt.Sprintf("%d,%d", i, j))
+		}
+	}
+	
+	if blocked {
+		fmt.Println("no existe un camino para llegar")
+	} else if arrived {
+		fmt.Print("el camino es: ")
+		for i = 0; i < len(path) - 1; i++ {
+			fmt.Printf("%s -> ", path[i])
+		}
+		fmt.Printf("%s\n", path[i])
+	} else {
+		fmt.Println("Error en la lógica. Ni se bloqueó, ni llegó.")
+	}
+}
+```
