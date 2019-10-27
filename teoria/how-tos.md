@@ -24,6 +24,8 @@
 - [Cómo uso un `array`? (segunda parte)](#cómo-uso-un-array-segunda-parte)
 - [Qué es un `slice`?](#qué-es-un-slice)
 - [Cómo uso un `slice`?](#cómo-uso-un-slice)
+- [Qué es una `matriz`?](#qué-es-una-matriz)
+- [Cómo uso una `matriz`?](#cómo-uso-una-matriz)
 
 ## Cómo luce la estructura base de un programa en GO?
 ```go
@@ -1119,4 +1121,106 @@ for i = 0; i < len(unSlice); i++ {
 > el elemento 2 es 3
 > el elemento 3 es 2
 > el elemento 4 es 1
+```
+
+## Qué es una `matriz`?
+Una `matriz` no es más que un `array` multidimensionado o de muchas dimensiones. Es decir, que para saber lo que es una `matriz` estamos a medio camino. Conocemos ya lo que es un `array` solo nos hace falta entender a que nos referimos cuando hablamos de multidimensión. 
+
+Repasemos un segundo cómo se declaraba un `array` y como se inicializaba
+```go
+var arrayDeInt [2]int = [2]int{0, 1}
+
+var arrayDeFloat64 [2]float64 = [2]float64{2.3, 5.0}
+
+var arrayDeBool [2]bool = [2]bool{true, false}
+
+var arrayDeString [2]string = [2]string{"hola", "chau"}
+```
+Declaramos 4 `arrays`, uno de `int`, otro de `float64`, otro de `bool` y otro de `string`. Y cada uno lo inicializamos con valores válidos para ese tipo de dato. Como podemos ver, no hay ninguna restricción en cuanto al tipo del que puede ser el `array`
+
+Entonces podemos preguntarnos, qué tipo de dato puede guardar un `array`? Existen solo esos 4 tipos?  Qué pasaría si quisiera declarar un `array` de `byte`? o de `rune`? o de `int64`?
+La respuesta a todas esas preguntas es: Un `array` (o `slice`) puede ser de cualquier tipo, incluso de otro `array`.. Si, así como suena. Podemos tener un `array` de `array`.
+
+Y eso es lo que estábamos buscando, la multidimensión, un `array` de `array`. 
+Veamos como se define
+```go
+var matrizInt [2][3]int
+```
+Acá estamos declarando un `array` de 2 elementos donde cada uno de esos elementos es a su vez un `array` de 3 elementos de tipo `int`.  Osea, tenemos un `array` de `array` de `int`. 
+Veamos como inicializar la matriz anterior
+```go
+var matrizInt [2][3]int = [2]{[3]{1, 2, 3}, [3]{4, 5, 6}}
+```
+Vemos que para inicializar nuestra matriz de 2x3 (2 filas y 3 columnas) necesitamos pasarle dos filas de tres valores cada una. Si vemos los valores de la primera fila son  `1, 2 y 3` y los de la segunda `4, 5 y 6`. Considerando lo anterior podemos pensar la `matriz` declarada de la siguiente forma
+```go
+var matrizInt [2][3]int = [2]{[3]{1, 2, 3}, [3]{4, 5, 6}}
+
+     c1 c2 c3
+f1 | 1  2  3 |
+f2 | 4  5  6 |
+
+Donde:
+  f1 -> fila 1 {1, 2, 3}
+  f2 -> fila 2 {4, 5,  6}
+  c1 -> columna 1 {1, 4}
+  c2 -> columna 2 {2, 5}
+  c3 -> columna 3 {3, 6}
+```
+
+## Cómo uso una `matriz`?
+La forma de utilizar una `matriz` no difiere de la de un array, salvo por el hecho de que en lugar de tener un solo índice, ahora hay que trabajar pensando en dos.
+
+Veamos como se accede al elemento del medio de una matriz de 3x3
+```go
+var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+fmt.Println(matriz[1][1])
+
+> 5
+```
+Notar cómo el primer índice nos posiciona sobre la fila 2, y el segundo índice, sobre la columna 2. Notar ademas que, al igual que los `array` y `slice`, las `matriz` se indexan en 0, es decir que para acceder al primer elemento de la matriz se require como índice el 0.
+
+Veamos cómo cambiar el valor de arriba a la derecha de una matriz de 3x3
+```go
+var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+matriz[0][2] = 10
+fmt.Println(matriz[0][2])
+
+> 10
+```
+En este caso el primer índice nos posiciona sobre la primer fila y el segundo índice nos desplaza hasta la tercer columna.
+
+Veamos cómo se itera una `matriz`
+```go
+var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+for i = 0; i < len(matriz); i++ {
+	for j = 0; j < len(matriz[i]); j++ {
+		fmt.Println(matriz[i][j])
+	}
+}
+
+> 1
+> 2
+> 3
+> 4
+> 5
+> 6
+> 7
+> 8
+> 9
+```
+Dos cosas que mencionar acá:
+- `len(matriz)` funciona ya que `matriz` no es más que un `array` (un `array` de `array` de `int`)
+- `len(matriz[i])` funciona ya que `matriz[i]` no es más que un `array` (un `array` de `int`)
+
+Veamos por último como obtener y cambiar filas enteras
+```go
+var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+var fila1 [3]int = matriz[i]
+fmt.Println(fila1)
+var reemplazo [3]int = [3]int{6, 5, 4}
+matriz[i] = reemplazo
+fmt.Println(matriz)
+
+> [4 5 6]
+> [[1 2 3] [6 5 4] [7 8 9]]
 ```
