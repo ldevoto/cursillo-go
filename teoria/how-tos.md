@@ -1149,11 +1149,11 @@ var matrizInt [2][3]int
 Acá estamos declarando un `array` de 2 elementos donde cada uno de esos elementos es a su vez un `array` de 3 elementos de tipo `int`.  Osea, tenemos un `array` de `array` de `int`. 
 Veamos como inicializar la matriz anterior
 ```go
-var matrizInt [2][3]int = [2]{[3]{1, 2, 3}, [3]{4, 5, 6}}
+var matrizInt [2][3]int = [2][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}}
 ```
 Vemos que para inicializar nuestra matriz de 2x3 (2 filas y 3 columnas) necesitamos pasarle dos filas de tres valores cada una. Si vemos los valores de la primera fila son  `1, 2 y 3` y los de la segunda `4, 5 y 6`. Considerando lo anterior podemos pensar la `matriz` declarada de la siguiente forma
 ```go
-var matrizInt [2][3]int = [2]{[3]{1, 2, 3}, [3]{4, 5, 6}}
+var matrizInt [2][3]int = [2][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}}
 
      c1 c2 c3
 f1 | 1  2  3 |
@@ -1172,7 +1172,7 @@ La forma de utilizar una `matriz` no difiere de la de un array, salvo por el hec
 
 Veamos como se accede al elemento del medio de una matriz de 3x3
 ```go
-var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+var matriz [3][3]int = [3][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}, [3]int{7, 8, 9}}
 fmt.Println(matriz[1][1])
 
 > 5
@@ -1181,7 +1181,7 @@ Notar cómo el primer índice nos posiciona sobre la fila 2, y el segundo índic
 
 Veamos cómo cambiar el valor de arriba a la derecha de una matriz de 3x3
 ```go
-var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+var matriz [3][3]int = [3][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}, [3]int{7, 8, 9}}
 matriz[0][2] = 10
 fmt.Println(matriz[0][2])
 
@@ -1191,7 +1191,7 @@ En este caso el primer índice nos posiciona sobre la primer fila y el segundo �
 
 Veamos cómo se itera una `matriz`
 ```go
-var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+var matriz [3][3]int = [3][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}, [3]int{7, 8, 9}}
 for i = 0; i < len(matriz); i++ {
 	for j = 0; j < len(matriz[i]); j++ {
 		fmt.Println(matriz[i][j])
@@ -1214,7 +1214,7 @@ Dos cosas que mencionar acá:
 
 Veamos por último como obtener y cambiar filas enteras
 ```go
-var matriz [3][3]int{[3]{1, 2, 3}, [3]{4, 5, 6}, [3]int{7, 8, 9}}
+var matriz [3][3]int = [3][3]int{[3]int{1, 2, 3}, [3]int{4, 5, 6}, [3]int{7, 8, 9}}
 var fila1 [3]int = matriz[i]
 fmt.Println(fila1)
 var reemplazo [3]int = [3]int{6, 5, 4}
