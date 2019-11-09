@@ -292,7 +292,31 @@ f3 | n7 n8 n9 |
 - los números de cada casillero deben estar entre el `1` y el `9`
 - no deben repetirse números en ningún casillero de la matriz
 
-#### 8. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
+#### 8. Dada una matriz de 9 x 9 números enteros, imprimir la matriz de la siguiente forma 
+```
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+```
+#### e indicar si representa una solución válida para el SUDOKU según las siguientes reglas
+- las filas deben contener solo números del `1` al `9`
+- las filas no deben contener números repetidos
+- las columnas deben contener solo números del `1` al `9`
+- las columnas no debe contener números repetidos
+- cada cuadrante de 3 x 3 debe contener solo números del `1` al `9`
+- cada cuadrante de 3 x 3 no debe contener números repetidos
+
+#### 9. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
 - la matriz representa un laberinto
 - el laberinto puede no tener salida
 - solo existe un posible camino (no hay bifurcaciones)

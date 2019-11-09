@@ -1685,7 +1685,116 @@ func main() {
 }
 ```
 
-#### 8. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
+#### 8. Dada una matriz de 9 x 9 números enteros, imprimir la matriz de la siguiente forma 
+```
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
+| n n n | n n n | n n n |
++ - - - + - - - + - - - +
+```
+#### e indicar si representa una solución válida para el SUDOKU según las siguientes reglas
+- las filas deben contener solo números del `1` al `9`
+- las filas no deben contener números repetidos
+- las columnas deben contener solo números del `1` al `9`
+- las columnas no debe contener números repetidos
+- cada cuadrante de 3 x 3 debe contener solo números del `1` al `9`
+- cada cuadrante de 3 x 3 no debe contener números repetidos
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var sudoku [9][9]int = [9][9]int{
+		[9]int{1, 2, 3, 4, 5, 6, 7, 8, 9},
+		[9]int{7, 8, 9, 1, 2, 3, 4, 5, 6},
+		[9]int{4, 5, 6, 7, 8, 9, 1, 2, 3},
+		[9]int{9, 1, 2, 3, 4, 5, 6, 7, 8},
+		[9]int{6, 7, 8, 9, 1, 2, 3, 4, 5},
+		[9]int{3, 4, 5, 6, 7, 8, 9, 1, 2},
+		[9]int{8, 9, 1, 2, 3, 4, 5, 6, 7},
+		[9]int{5, 6, 7, 8, 9, 1, 2, 3, 4},
+		[9]int{2, 3, 4, 5, 6, 7, 8, 9, 1},
+	}
+	var i int
+	var j int
+	const line = "+ - - - + - - - + - - - +"
+
+	for i = 0; i < len(sudoku); i++ {
+		if i%3 == 0 {
+			fmt.Printf("%s\n", line)
+		}
+		for j = 0; j < len(sudoku[i]); j++ {
+			if j%3 == 0 {
+				fmt.Printf("| %d ", sudoku[i][j])
+			} else {
+				fmt.Printf("%d ", sudoku[i][j])
+			}
+		}
+		fmt.Println("|")
+	}
+	fmt.Printf("%s\n", line)
+
+	var rowOcurrences [9]int
+	var columnOcurrences [9][9]int
+	var boxOcurrences [3][9]int
+	const min_value int = 1
+	const max_value int = 9
+	var element int
+	var isValid bool
+
+	isValid = true
+	for i = 0; i < len(sudoku); i++ {
+		rowOcurrences = [9]int{}
+		if i%3 == 0 {
+			boxOcurrences = [3][9]int{}
+		}
+		for j = 0; j < len(sudoku[i]); j++ {
+			element = sudoku[i][j]
+			if element > max_value || element < min_value {
+				isValid = false
+				break
+			}
+			rowOcurrences[element-1]++
+			columnOcurrences[j][element-1]++
+			boxOcurrences[j/3][element-1]++
+			if rowOcurrences[element-1] > 1 {
+				isValid = false
+				break
+			}
+			if columnOcurrences[j][element-1] > 1 {
+				isValid = false
+				break
+			}
+			if boxOcurrences[j/3][element-1] > 1 {
+				fmt.Print(boxOcurrences)
+				isValid = false
+				break
+			}
+		}
+		if !isValid {
+			break
+		}
+	}
+
+	if isValid {
+		fmt.Println("Es una solución válida para el SUDOKU")
+	} else {
+		fmt.Println("No es una solución válida para el SUDOKU")
+	}
+}
+```
+
+#### 9. Dado un array de 5 x 5 booleanos determinar cual será el camino (solo para valientes) para llegar de un punto a otro de la matriz teniendo en cuenta que 
 - la matriz representa un laberinto
 - el laberinto puede no tener salida
 - solo existe un posible camino (no hay bifurcaciones)
