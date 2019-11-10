@@ -1745,33 +1745,40 @@ func main() {
 	fmt.Printf("%s\n", line)
 
 	var rowOcurrences [9]int
-	var columnOcurrences [9][9]int
+	var columnOcurrences [9]int
 	var boxOcurrences [3][9]int
-	const min_value int = 1
-	const max_value int = 9
+	const minValue int = 1
+	const maxValue int = 9
 	var element int
+	var invertElement int
 	var isValid bool
 
 	isValid = true
 	for i = 0; i < len(sudoku); i++ {
 		rowOcurrences = [9]int{}
+		columnOcurrences = [9]int{}
 		if i%3 == 0 {
 			boxOcurrences = [3][9]int{}
 		}
 		for j = 0; j < len(sudoku[i]); j++ {
 			element = sudoku[i][j]
-			if element > max_value || element < min_value {
+			invertElement = sudoku[j][i]
+			if element > maxValue || element < minValue {
+				isValid = false
+				break
+			}
+			if invertElement > maxValue || invertElement < minValue {
 				isValid = false
 				break
 			}
 			rowOcurrences[element-1]++
-			columnOcurrences[j][element-1]++
+			columnOcurrences[invertElement-1]++
 			boxOcurrences[j/3][element-1]++
 			if rowOcurrences[element-1] > 1 {
 				isValid = false
 				break
 			}
-			if columnOcurrences[j][element-1] > 1 {
+			if columnOcurrences[invertElement-1] > 1 {
 				isValid = false
 				break
 			}
