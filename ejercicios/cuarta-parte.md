@@ -57,3 +57,85 @@ Pista: buscar en google `console color escape codes`
 
 Donde cada número debe verse de un color distinto.
 ```
+
+#### 13. Construir una función que dado un string devuelva el mismo string pero sin espacios por delante. (nombrarla `leftTrim`)
+
+#### 14. Construir una función que dado un string devuelva el mismo string pero sin espacios por detrás. (nombrarla `rightTrim`)
+
+#### 15. Construir una función que dado un string devuelva el mismo string pero sin espacios por delante ni por detrás. (nombrarla `trim`)
+
+#### 16. Construir una función que dado un string y un número entero devuelva el string a partir del número usado como índice. Si el índice es inválido devolver un string vacío.
+
+#### 17. Contruir una función que dado un string y dos números enteros devuelva el string a partir del primer número usado como índice de comienzo y usando el segundo como largo del string. Si el largo es mayor al posible restante, devolver el string hasta el final. Si el índice es inválido devolver un string vacío. (nombrarla `substr`).
+
+#### 18. Construir una función que dado un string y un byte devuelva un entero que represente el índice de la primer ocurrencia de ese byte en el string. Si el byte no se encuentra devolver `-1`. (nombrarla `findFirstChar`).
+
+#### 19. Construir una función que dado un string y un byte devuelva un slice de enteros que represente todos los índices con las ocurrencias de ese byte en el string (nombrarla `findAllChar`).
+
+#### 20. Construir una función que dados dos strings devuelva un entero que represente el índice de la primer ocurrencia del segundo string en el primero. Si el string no se encuentra devolver `-1`. (nombrarla `findFirstString`).
+
+#### 21. Construir una función que dados dos strings devuelva un slice de enteros que contengan los índices de todas las ocurrencias del segundo string en el primero (nombrarla `findAllString`).
+
+#### 22. Construir una función que dado un string y un byte devuelva un slice de strings que contenga todas las particiones del string obtenido de dividirlo por el byte. (nombrarla `splitByChar`)
+Ej:
+```go
+var strings []string = splitByChar("Programar es divertido!", ' ')
+fmt.Println(strings)
+
+> ["Programar", "es", "divertido!"]
+```
+
+#### 23. Construir una función que dados dos strings devuelva un slice de strings que contenga todas las particiones del primer string obtenido de dividirlo por el segundo string. (nombrarla `splitByString`)
+Ej:
+```go
+var strings []string = splitByString("la cama la puerta y la mesa", "la")
+fmt.Println(strings)
+
+> [" cama ", " puerta y ", " mesa"]
+```
+
+#### 24. Construir una función que dados dos strings devuelva un bool dependiendo si el primer string contiene al segundo. (nombrarla `contains`)
+
+#### 25. Construir una función que dado un slice de strings y un string devuelva un string con todos los strings del slice concatenados con el string dado. (nombrarla `join`)
+Ej:
+```go
+var strings []string = []string{"hola", "que", "tal?"}
+var joinedString string = join(strings, "--")
+fmt.Println(joinedString)
+
+> "hola--que--tal?"
+```
+
+#### 26. Construir una función que dado un un array de 3 enteros devuelva el mismo array pero invertido (nombrarla `reverseInt3`).
+Para pensar: Qué pasaría si en lugar de 3 números enteros, ahora quisiéramos una de 4? y si quisiéramos otra de 5? qué desventaja presenta esto a utilizar un slice?
+
+#### 27. Construir una función que dado un slice de números enteros lo devuelva en orden inverso (nombrarla `reverseInt`).
+Analizar el resultado del siguiente pedazo de código:
+```go
+const array3 [3]int = [3]int{1,2,3}
+const slice3 []int = []int{1,2,3}
+fmt.Printf("Array antes de la ejecución: %v\n", array3)
+fmt.Printf("Slice antes de la ejecución: %v\n", slice3)
+reverseInt3(array3) // ignoramos lo que nos devuelve
+reverseInt(slice3) // ignoramos lo que nos devuelve
+fmt.Printf("Array después de la ejecución: %v\n", array3)
+fmt.Printf("Slice después de la ejecución: %v\n", slice3)
+```
+Qué vemos que sucede?
+
+#### 28. Construir una función que dado un slice de strings lo devuelva en orden inverso (nombrarla `reverseString`).
+
+#### 29. Construir un programa que dado el siguiente texto imprima en pantalla
+- la cantidad de párrafos que contiene
+- la cantidad de palabras que contiene
+- la cantidad de caracteres que contiene
+- la cantidad de palabras `ipsum` que contiene
+- el indice de la primer palabra `Quisque` que aparezca
+- todo el texto pero de atrás hacia adelante (las palabras)
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet leo vitae magna rutrum vestibulum. Aliquam erat volutpat. Praesent id nulla et orci gravida mollis. Vestibulum tincidunt interdum nunc sit amet malesuada. Pellentesque aliquam risus in magna ornare, vel dignissim lectus maximus. Sed euismod mi nec est laoreet consequat. Nam et velit quis dolor mollis ullamcorper.
+Integer sodales ornare risus, at vehicula enim dapibus eget. Quisque at interdum turpis. Cras interdum suscipit magna sit amet congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu erat vel ante euismod tincidunt vel et nunc. Mauris varius scelerisque volutpat. Ut facilisis ipsum vitae hendrerit convallis. Proin tristique imperdiet dolor, eu laoreet massa suscipit non. Vestibulum lobortis, massa condimentum aliquet pulvinar, enim lectus imperdiet massa, placerat porta dui dolor ac mauris. Donec suscipit elit sem, id ultrices ligula placerat id. Vivamus dictum justo velit, eget tempus metus dapibus non. Sed venenatis est non lacus dapibus, posuere rutrum ipsum condimentum. Integer quis tincidunt libero, semper suscipit enim. Sed vel fermentum quam, et sodales dolor.
+Mauris volutpat eros quis pretium sodales. Nulla ultricies mollis dui eget suscipit. Aenean pellentesque enim turpis, nec consectetur dolor pellentesque id. Vivamus in mi bibendum orci bibendum sagittis. Quisque dignissim imperdiet nibh, ut dignissim eros egestas vitae. Phasellus gravida vulputate congue. Nullam id rutrum lacus, nec tempor ipsum.
+Quisque eu gravida enim. Quisque auctor neque ante, ac varius mi suscipit id. Integer nulla ex, accumsan vitae augue ac, faucibus iaculis elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce condimentum erat eu tortor laoreet vulputate sed sed massa. Morbi fermentum elit vitae elit semper elementum at vulputate enim. Aenean id nisl mollis, pulvinar est sit amet, pretium diam.
+Morbi nec leo vel massa hendrerit euismod eu ut nisl. Sed dignissim, risus et interdum interdum, eros augue viverra urna, a sodales sapien turpis a justo. Donec quis tortor ipsum. Praesent tempor sit amet purus non auctor. Mauris et pharetra quam. Ut sed laoreet nulla. Ut dictum aliquet neque, malesuada finibus enim imperdiet nec. Sed id ultrices mi. Sed sit amet venenatis turpis. Aliquam erat volutpat.
+```
