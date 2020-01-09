@@ -257,3 +257,738 @@ func printAllCollors() {
 	fmt.Println(reset)
 }
 ```
+
+#### 13. Construir una función que dado un string devuelva el mismo string pero sin espacios por delante. (nombrarla `leftTrim`)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(leftTrim("  los espacios ya no están"))
+}
+
+func leftTrim(aString string) string {
+	var i int
+	var trimmedString []byte
+	for i = 0; i < len(aString); i++ {
+		if aString[i] != ' ' {
+			break
+		}
+	}
+	for ; i < len(aString); i++ {
+		trimmedString = append(trimmedString, aString[i])
+	}
+	return string(trimmedString)
+}
+```
+
+#### 14. Construir una función que dado un string devuelva el mismo string pero sin espacios por detrás. (nombrarla `rightTrim`)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(rightTrim("no se ve pero los espacios ya no están   "))
+}
+
+func rightTrim(aString string) string {
+	var trimmedString []byte
+	var lastChar int
+	var i int
+	
+	for i = len(aString) - 1; i >= 0; i-- {
+		if aString[i] != ' ' {
+			lastChar = i + 1
+			break
+		}
+	}
+	trimmedString = make([]byte, lastChar)
+	for i = 0; i < lastChar; i++ {
+		trimmedString[i] = aString[i]
+	}
+	
+	return string(trimmedString)
+}
+```
+
+#### 15. Construir una función que dado un string devuelva el mismo string pero sin espacios por delante ni por detrás. (nombrarla `trim`)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(trim("  sin espacios!  "))
+}
+
+func trim(aString string) string {
+	return leftTrim(rightTrim(aString))
+}
+
+// Funcion anteriormente hecha
+func leftTrim(aString string) string {
+	var i int
+	var trimmedString []byte
+	for i = 0; i < len(aString); i++ {
+		if aString[i] != ' ' {
+			break
+		}
+	}
+	for ; i < len(aString); i++ {
+		trimmedString = append(trimmedString, aString[i])
+	}
+	return string(trimmedString)
+}
+
+// Funcion anteriormente hecha
+func rightTrim(aString string) string {
+	var trimmedString []byte
+	var lastChar int
+	var i int
+	
+	for i = len(aString) - 1; i >= 0; i-- {
+		if aString[i] != ' ' {
+			lastChar = i + 1
+			break
+		}
+	}
+	trimmedString = make([]byte, lastChar)
+	for i = 0; i < lastChar; i++ {
+		trimmedString[i] = aString[i]
+	}
+	
+	return string(trimmedString)
+}
+```
+
+#### 16. Construir una función que dado un string y un número entero devuelva el string a partir del número usado como índice. Si el índice es inválido devolver un string vacío.
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(getStringFrom("no sale pero esto si", 8))
+}
+
+func getStringFrom(aString string, index int) string {
+	var subString []byte
+	var i int
+	if index < 0 || index >= len(aString) {
+		return ""
+	}
+	for i = index; i < len(aString); i++ {
+		subString = append(subString, aString[i])
+	}
+	return string(subString)
+}
+```
+
+#### 17. Contruir una función que dado un string y dos números enteros devuelva el string a partir del primer número usado como índice de comienzo y usando el segundo como largo del string. Si el largo es mayor al posible restante, devolver el string hasta el final. Si el índice es inválido devolver un string vacío. (nombrarla `substr`).
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(substr("no sale, esto si y esto no", 5, 6))
+}
+
+func substr(aString string, index int, length int) string {
+	var subString []byte
+	var actualLength int
+	var i int
+	if index < 0 || index >= len(aString) {
+		return ""
+	}
+	for i = index; i < len(aString) && i < index + length; i++ {
+		subString = append(subString, aString[i])
+		actualLength ++
+	}
+	return string(subString)
+}
+```
+
+#### 18. Construir una función que dado un string y un byte devuelva un entero que represente el índice de la primer ocurrencia de ese byte en el string. Si el byte no se encuentra devolver `-1`. (nombrarla `findFirstChar`).
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(findFirstChar("El primer char va a ser 3", 'p'))
+}
+
+func findFirstChar(aString string, char byte) int {
+	var found bool
+	var i int
+	for i = 0; i < len(aString); i++ {
+		if aString[i] == char {
+			found = true
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+```
+
+#### 19. Construir una función que dado un string y un byte devuelva un slice de enteros que represente todos los índices con las ocurrencias de ese byte en el string (nombrarla `findAllChar`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(findAllChar("Va a imprimir [1 3]", 'a'))
+}
+
+func findAllChar(aString string, char byte) []int {
+	var indexesFound []int
+	var i int
+	for i = 0; i < len(aString); i++ {
+		if aString[i] == char {
+			indexesFound = append(indexesFound, i)
+		}
+	}
+	return indexesFound
+}
+```
+
+#### 20. Construir una función que dados dos strings devuelva un entero que represente el índice de la primer ocurrencia del segundo string en el primero. Si el string no se encuentra devolver `-1`. (nombrarla `findFirstString`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(findFirstString("El primer string va a ser 17", "va"))
+}
+
+func findFirstString(aString string, searchedString string) int {
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i + j >= len(aString) || aString[i + j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+```
+
+#### 21. Construir una función que dados dos strings devuelva un slice de enteros que contengan los índices de todas las ocurrencias del segundo string en el primero (nombrarla `findAllString`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(findAllString("Todos los strings van a ser [9 23]", " s"))
+}
+
+func findAllString(aString string, searchedString string) []int {
+	var indexesFound []int
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i + j >= len(aString) || aString[i + j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			indexesFound = append(indexesFound, i)
+		}
+	}
+	return indexesFound
+}
+```
+
+#### 22. Construir una función que dado un string y un byte devuelva un slice de strings que contenga todas las particiones del string obtenido de dividirlo por el byte. (nombrarla `splitByChar`)
+Ej:
+```go
+var strings []string = splitByChar("Programar es divertido!", ' ')
+fmt.Println(strings)
+
+> ["Programar", "es", "divertido!"]
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(splitByChar("Programar es divertido!", ' '))
+}
+
+func splitByChar(aString string, char byte) []string {
+	var splittedString []string
+	var start string
+	var end string
+	var foundIndex int
+
+	end = aString
+	foundIndex = findFirstChar(end, char)
+	for foundIndex != -1 {
+		start = substr(end, 0, foundIndex)
+		end = substr(end, foundIndex+1, len(end))
+		if len(start) != 0 {
+			splittedString = append(splittedString, start)
+		}
+		foundIndex = findFirstChar(end, char)
+	}
+	if len(end) != 0 {
+		splittedString = append(splittedString, end)
+	}
+
+	return splittedString
+}
+
+// Funcion anteriormente hecha
+func findFirstChar(aString string, char byte) int {
+	var found bool
+	var i int
+	for i = 0; i < len(aString); i++ {
+		if aString[i] == char {
+			found = true
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+
+// Funcion anteriormente hecha
+func substr(aString string, index int, length int) string {
+	var subString []byte
+	var actualLength int
+	var i int
+	if index < 0 || index >= len(aString) {
+		return ""
+	}
+	for i = index; i < len(aString) && i < index+length; i++ {
+		subString = append(subString, aString[i])
+		actualLength++
+	}
+	return string(subString)
+}
+```
+
+#### 23. Construir una función que dados dos strings devuelva un slice de strings que contenga todas las particiones del primer string obtenido de dividirlo por el segundo string. (nombrarla `splitByString`)
+Ej:
+```go
+var strings []string = splitByString("la cama la puerta y la mesa", "la")
+fmt.Println(strings)
+
+> [" cama ", " puerta y ", " mesa"]
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(splitByString("la cama la puerta y la mesa", "la"))
+}
+
+func splitByString(aString string, searchedString string) []string {
+	var splittedString []string
+	var start string
+	var end string
+	var foundIndex int
+	var i int
+
+	if len(searchedString) == 0 {
+		for i = 0; i < len(aString); i++ {
+			splittedString = append(splittedString, string(aString[i]))
+		}
+	} else {
+		end = aString
+		foundIndex = findFirstString(end, searchedString)
+		for foundIndex != -1 {
+			start = substr(end, 0, foundIndex)
+			end = substr(end, foundIndex+len(searchedString), len(end))
+			if len(start) != 0 {
+				splittedString = append(splittedString, start)
+			}
+			foundIndex = findFirstString(end, searchedString)
+		}
+		if len(end) != 0 {
+			splittedString = append(splittedString, end)
+		}
+	}
+
+	return splittedString
+}
+
+// Funcion anteriormente hecha
+func findFirstString(aString string, searchedString string) int {
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i+j >= len(aString) || aString[i+j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+
+// Funcion anteriormente hecha
+func substr(aString string, index int, length int) string {
+	var subString []byte
+	var actualLength int
+	var i int
+	if index < 0 || index >= len(aString) {
+		return ""
+	}
+	for i = index; i < len(aString) && i < index+length; i++ {
+		subString = append(subString, aString[i])
+		actualLength++
+	}
+	return string(subString)
+}
+```
+
+#### 24. Construir una función que dados dos strings devuelva un bool dependiendo si el primer string contiene al segundo. (nombrarla `contains`)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(contains("veamos si lo contiene", "contiene"))
+}
+
+func contains(aString string, otherString string) bool {
+	return findFirstString(aString, otherString) != -1
+}
+
+// Funcion anteriormente hecha
+func findFirstString(aString string, searchedString string) int {
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i+j >= len(aString) || aString[i+j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+```
+
+#### 25. Construir una función que dado un slice de strings y un string devuelva un string con todos los strings del slice concatenados con el string dado. (nombrarla `join`)
+Ej:
+```go
+var strings []string = []string{"hola", "que", "tal?"}
+var joinedString string = join(strings, "--")
+fmt.Println(joinedString)
+
+> "hola--que--tal?"
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(join([]string{"hola", "que", "tal?"}, "--"))
+}
+
+func join(strings []string, jointString string) string {
+	var joinnedString []byte
+	var i int
+	var j int
+	for i = 0; i < len(strings); i++ {
+		for j = 0; j < len(strings[i]); j++ {
+			joinnedString = append(joinnedString, strings[i][j])
+		}
+		if i != len(strings) - 1 {
+			for j = 0; j < len(jointString); j++ {
+				joinnedString = append(joinnedString, jointString[j])
+			}
+		}
+	}
+	return string(joinnedString)
+}
+```
+
+#### 26. Construir una función que dado un un array de 3 enteros devuelva el mismo array pero invertido (nombrarla `reverseInt3`).
+Para pensar: Qué pasaría si en lugar de 3 números enteros, ahora quisiéramos una de 4? y si quisiéramos otra de 5? qué desventaja presenta esto a utilizar un slice?
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(reverseInt3([3]int{1, 2 ,3}))
+}
+
+func reverseInt3(numbers [3]int) [3]int {
+	var aux int
+	var i int
+	for i = 0; i < len(numbers) / 2; i++ {
+		aux = numbers[i]
+		numbers[i] = numbers[len(numbers)-1-i]
+		numbers[len(numbers)-1-i] = aux
+	}
+	return numbers
+}
+```
+Usar un array en lugar de un slice es mucho más restrictivo a la hora de querer crear funciones genéricas. Si quisiéramos nuevas funciones para array de 4, 5, 6, etc valores tendríamos que reescribir la misma función una y otra vez solo cambiando el tipo de dato que recibe y que devuelve la función.
+
+#### 27. Construir una función que dado un slice de números enteros lo devuelva en orden inverso (nombrarla `reverseInt`).
+Analizar el resultado del siguiente pedazo de código:
+```go
+const array3 [3]int = [3]int{1,2,3}
+const slice3 []int = []int{1,2,3}
+fmt.Printf("Array antes de la ejecución: %v\n", array3)
+fmt.Printf("Slice antes de la ejecución: %v\n", slice3)
+reverseInt3(array3) // ignoramos lo que nos devuelve
+reverseInt(slice3) // ignoramos lo que nos devuelve
+fmt.Printf("Array después de la ejecución: %v\n", array3)
+fmt.Printf("Slice después de la ejecución: %v\n", slice3)
+```
+Qué vemos que sucede?
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(reverseInt([]int{1, 2 ,3, 4, 5, 6}))
+}
+
+func reverseInt(numbers []int) []int {
+	var aux int
+	var i int
+	for i = 0; i < len(numbers) / 2; i++ {
+		aux = numbers[i]
+		numbers[i] = numbers[len(numbers)-1-i]
+		numbers[len(numbers)-1-i] = aux
+	}
+	return numbers
+}
+```
+Si ejecutamos el pedazo de código anterior veremos que en el primer caso el array queda con el orden original y por el contrario el slice cambia y queda con el orden inverso. Esto se debe a cómo están implementados estos dos tipos de datos. Podríamos decir que cuando uno pasa un array a una función lo que hace en realidad es pasar una copia de todo el array. Pero cuando uno pasa un slice (que por detrás usa un array) estamos pasando una copia del slice pero no del array. Por lo que al tocar el slice dentro de la función estamos afectando al slice de afuera (en realidad estamos afectando el array que está por detrás)
+
+#### 28. Construir una función que dado un slice de strings lo devuelva en orden inverso (nombrarla `reverseString`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(reverseString([]string{"hola", "mundo", "!"}))
+}
+
+func reverseString(strings []string) []string {
+	var aux string
+	var i int
+	for i = 0; i < len(strings) / 2; i++ {
+		aux = strings[i]
+		strings[i] = strings[len(strings)-1-i]
+		strings[len(strings)-1-i] = aux
+	}
+	return strings
+}
+```
+
+#### 29. Construir un programa que dado el siguiente texto imprima en pantalla
+- la cantidad de párrafos que contiene
+- la cantidad de palabras que contiene
+- la cantidad de caracteres que contiene
+- la cantidad de palabras `ipsum` que contiene
+- el indice de la primer palabra `Quisque` que aparezca
+- todo el texto pero de atrás hacia adelante (las palabras)
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet leo vitae magna rutrum vestibulum. Aliquam erat volutpat. Praesent id nulla et orci gravida mollis. Vestibulum tincidunt interdum nunc sit amet malesuada. Pellentesque aliquam risus in magna ornare, vel dignissim lectus maximus. Sed euismod mi nec est laoreet consequat. Nam et velit quis dolor mollis ullamcorper.
+Integer sodales ornare risus, at vehicula enim dapibus eget. Quisque at interdum turpis. Cras interdum suscipit magna sit amet congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu erat vel ante euismod tincidunt vel et nunc. Mauris varius scelerisque volutpat. Ut facilisis ipsum vitae hendrerit convallis. Proin tristique imperdiet dolor, eu laoreet massa suscipit non. Vestibulum lobortis, massa condimentum aliquet pulvinar, enim lectus imperdiet massa, placerat porta dui dolor ac mauris. Donec suscipit elit sem, id ultrices ligula placerat id. Vivamus dictum justo velit, eget tempus metus dapibus non. Sed venenatis est non lacus dapibus, posuere rutrum ipsum condimentum. Integer quis tincidunt libero, semper suscipit enim. Sed vel fermentum quam, et sodales dolor.
+Mauris volutpat eros quis pretium sodales. Nulla ultricies mollis dui eget suscipit. Aenean pellentesque enim turpis, nec consectetur dolor pellentesque id. Vivamus in mi bibendum orci bibendum sagittis. Quisque dignissim imperdiet nibh, ut dignissim eros egestas vitae. Phasellus gravida vulputate congue. Nullam id rutrum lacus, nec tempor ipsum.
+Quisque eu gravida enim. Quisque auctor neque ante, ac varius mi suscipit id. Integer nulla ex, accumsan vitae augue ac, faucibus iaculis elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce condimentum erat eu tortor laoreet vulputate sed sed massa. Morbi fermentum elit vitae elit semper elementum at vulputate enim. Aenean id nisl mollis, pulvinar est sit amet, pretium diam.
+Morbi nec leo vel massa hendrerit euismod eu ut nisl. Sed dignissim, risus et interdum interdum, eros augue viverra urna, a sodales sapien turpis a justo. Donec quis tortor ipsum. Praesent tempor sit amet purus non auctor. Mauris et pharetra quam. Ut sed laoreet nulla. Ut dictum aliquet neque, malesuada finibus enim imperdiet nec. Sed id ultrices mi. Sed sit amet venenatis turpis. Aliquam erat volutpat.
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const text string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet leo vitae magna rutrum vestibulum. Aliquam erat volutpat. Praesent id nulla et orci gravida mollis. Vestibulum tincidunt interdum nunc sit amet malesuada. Pellentesque aliquam risus in magna ornare, vel dignissim lectus maximus. Sed euismod mi nec est laoreet consequat. Nam et velit quis dolor mollis ullamcorper.
+	Integer sodales ornare risus, at vehicula enim dapibus eget. Quisque at interdum turpis. Cras interdum suscipit magna sit amet congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu erat vel ante euismod tincidunt vel et nunc. Mauris varius scelerisque volutpat. Ut facilisis ipsum vitae hendrerit convallis. Proin tristique imperdiet dolor, eu laoreet massa suscipit non. Vestibulum lobortis, massa condimentum aliquet pulvinar, enim lectus imperdiet massa, placerat porta dui dolor ac mauris. Donec suscipit elit sem, id ultrices ligula placerat id. Vivamus dictum justo velit, eget tempus metus dapibus non. Sed venenatis est non lacus dapibus, posuere rutrum ipsum condimentum. Integer quis tincidunt libero, semper suscipit enim. Sed vel fermentum quam, et sodales dolor.
+	Mauris volutpat eros quis pretium sodales. Nulla ultricies mollis dui eget suscipit. Aenean pellentesque enim turpis, nec consectetur dolor pellentesque id. Vivamus in mi bibendum orci bibendum sagittis. Quisque dignissim imperdiet nibh, ut dignissim eros egestas vitae. Phasellus gravida vulputate congue. Nullam id rutrum lacus, nec tempor ipsum.
+	Quisque eu gravida enim. Quisque auctor neque ante, ac varius mi suscipit id. Integer nulla ex, accumsan vitae augue ac, faucibus iaculis elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce condimentum erat eu tortor laoreet vulputate sed sed massa. Morbi fermentum elit vitae elit semper elementum at vulputate enim. Aenean id nisl mollis, pulvinar est sit amet, pretium diam.
+	Morbi nec leo vel massa hendrerit euismod eu ut nisl. Sed dignissim, risus et interdum interdum, eros augue viverra urna, a sodales sapien turpis a justo. Donec quis tortor ipsum. Praesent tempor sit amet purus non auctor. Mauris et pharetra quam. Ut sed laoreet nulla. Ut dictum aliquet neque, malesuada finibus enim imperdiet nec. Sed id ultrices mi. Sed sit amet venenatis turpis. Aliquam erat volutpat.`
+
+	fmt.Printf("Contiene %d páraffos.\n", len(splitByString(text, "\n")))
+	fmt.Printf("Contiene %d palabras\n", len(splitByString(join(splitByString(text, "\n"), " "), " ")))
+	fmt.Printf("Contiene %d caracteres\n", len(text))
+	fmt.Printf("Contiene %d palabras ipsum\n", len(findAllString(text, "ipsum")))
+	fmt.Printf("La primer palabra Quisque se encuentra en el indice %d\n", findFirstString(text, "Quisque"))
+	fmt.Printf("EL texto de atrás hacia adelante es: \n%s\n", reverseString(splitByString(text, " ")))
+}
+
+func splitByString(aString string, searchedString string) []string {
+	var splittedString []string
+	var start string
+	var end string
+	var foundIndex int
+	var i int
+
+	if len(searchedString) == 0 {
+		for i = 0; i < len(aString); i++ {
+			splittedString = append(splittedString, string(aString[i]))
+		}
+	} else {
+		end = aString
+		foundIndex = findFirstString(end, searchedString)
+		for foundIndex != -1 {
+			start = substr(end, 0, foundIndex)
+			end = substr(end, foundIndex+len(searchedString), len(end))
+			if len(start) != 0 {
+				splittedString = append(splittedString, start)
+			}
+			foundIndex = findFirstString(end, searchedString)
+		}
+		if len(end) != 0 {
+			splittedString = append(splittedString, end)
+		}
+	}
+
+	return splittedString
+}
+
+func findFirstString(aString string, searchedString string) int {
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i+j >= len(aString) || aString[i+j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			break
+		}
+	}
+	if found {
+		return i
+	}
+	return -1
+}
+
+func substr(aString string, index int, length int) string {
+	var subString []byte
+	var actualLength int
+	var i int
+	if index < 0 || index >= len(aString) {
+		return ""
+	}
+	for i = index; i < len(aString) && i < index+length; i++ {
+		subString = append(subString, aString[i])
+		actualLength++
+	}
+	return string(subString)
+}
+
+func findAllString(aString string, searchedString string) []int {
+	var indexesFound []int
+	var found bool
+	var i int
+	var j int
+
+	for i = 0; i < len(aString); i++ {
+		found = true
+		for j = 0; j < len(searchedString); j++ {
+			if i+j >= len(aString) || aString[i+j] != searchedString[j] {
+				found = false
+				break
+			}
+		}
+		if found {
+			indexesFound = append(indexesFound, i)
+		}
+	}
+	return indexesFound
+}
+
+func reverseString(strings []string) []string {
+	var aux string
+	var i int
+	for i = 0; i < len(strings)/2; i++ {
+		aux = strings[i]
+		strings[i] = strings[len(strings)-1-i]
+		strings[len(strings)-1-i] = aux
+	}
+	return strings
+}
+
+func join(strings []string, jointString string) string {
+	var joinnedString []byte
+	var i int
+	var j int
+	for i = 0; i < len(strings); i++ {
+		for j = 0; j < len(strings[i]); j++ {
+			joinnedString = append(joinnedString, strings[i][j])
+		}
+		if i != len(strings)-1 {
+			for j = 0; j < len(jointString); j++ {
+				joinnedString = append(joinnedString, jointString[j])
+			}
+		}
+	}
+	return string(joinnedString)
+}
+```
