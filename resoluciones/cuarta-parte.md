@@ -992,3 +992,397 @@ func join(strings []string, jointString string) string {
 	return string(joinnedString)
 }
 ```
+
+#### 30. Construir una función que dado un slice de strings devuelva un slice de números enteros donde cada elemento es el largo del string en la misma posición del slice dado (nombrarla `mapToLength`).
+Ej:
+```go
+var strings []string = []string{"hola", "mundo", "!"}
+var lengths []int = mapToLength(strings)
+fmt.Println(lengths)
+
+> [4, 5, 1]
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(mapToLength([]string{"hola", "mundo", "!"}))
+}
+
+func mapToLength(strings []string) []int {
+	var lengths []int
+	var i int
+	for i = 0; i < len(strings); i++ {
+		lengths = append(lengths, len(strings[i]))
+	}
+	return lengths
+}
+```
+
+#### 31. Construir una función que dado un slice de bools devuelva true si todos los valores del slice son true o false si no (nombrarla `allTrue`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(allTrue([]bool{true, true, false, true}))
+}
+
+func allTrue(bools []bool) bool {
+	var isTrue bool = true
+	var i int
+	for i = 0; i < len(bools); i++ {
+		if !bools[i] {
+			isTrue = false
+			break
+		} 
+	}
+	return isTrue
+}
+```
+
+#### 32. Construir una función que dado un slice de bools devuelva true si al menos un valor del slice es true o false si no (nombrarla `anyTrue`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(anyTrue([]bool{true, true, false, true}))
+}
+
+func anyTrue(bools []bool) bool {
+	var someTrue bool
+	var i int
+	for i = 0; i < len(bools); i++ {
+		if bools[i] {
+			someTrue = true
+			break
+		} 
+	}
+	return someTrue
+}
+```
+
+#### 33. Construir una función que dado un slice de números decimales devuelva la suma de todos (nombrarla `sumFloat`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(sumFloat([]float64{2.2, 3.1, 5.9, 4}))
+}
+
+func sumFloat(floats []float64) float64 {
+	var sum float64
+	var i int
+	for i = 0; i < len(floats); i++ {
+		sum += floats[i]
+	}
+	return sum
+}
+```
+
+#### 34. Construir una función que dado un slice de números decimales devuelva el promedio de todos (nombrarla `averageFloat`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(averageFloat([]float64{2.2, 3.1, 5.9, 4}))
+}
+
+func averageFloat(floats []float64) float64 {
+	var sum float64
+	var i int
+	for i = 0; i < len(floats); i++ {
+		sum += floats[i]
+	}
+	if len(floats) == 0 {
+		return 0
+	}
+	return sum / float64(len(floats))
+}
+```
+
+#### 35. Construir una función que dado un slice de números decimales devuelva un array de 2 números decimales donde en la posición 0 estará el mayor y en la 1 el menor de todos. Si el slice no tiene elementos, devolver el array con 0 en ambos valores (nombrarla `minMaxFloat`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(minMaxFloat([]float64{2.2, 3.1, 5.9, 4}))
+}
+
+func minMaxFloat(floats []float64) [2]float64 {
+	var minMaxArr [2]float64
+	var min float64
+	var max float64
+	var i int
+	if len(floats) > 0 {
+		min = floats[0]
+		max = floats[0]
+	}
+	for i = 0; i < len(floats); i++ {
+		if floats[i] > max {
+			max = floats[i]
+		}
+		if floats[i] < min {
+			min = floats[i]
+		}
+	}
+	minMaxArr = [2]float64{max, min}
+	return minMaxArr
+}
+```
+
+#### 36. Construir una función que dado un slice de números enteros devuelva un slice con los números ordenados de menor a mayor (nombrarla `ascOrderInt`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(ascOrderInt([]int{7, 3, 1, 5, 4, 2, 6}))
+}
+
+func ascOrderInt(numbers []int) []int {
+	var ordered bool
+	var aux int
+	var i int
+	var j int
+	for i = 0; i < len(numbers); i++ {
+		ordered = true
+		for j = 0; j < len(numbers) - 1; j++ {
+			if numbers[j] > numbers[j+1] {
+				aux = numbers[j]
+				numbers[j] = numbers[j+1]
+				numbers[j+1] = aux
+				ordered = false
+			}
+		}
+		if ordered {
+			break
+		}
+	}
+	return numbers
+}
+```
+
+#### 37. Construir una función que dado un slice de números enteros devuelva un slice con los números ordenados de mayor a menor (nombrarla `descOrderInt`).
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(descOrderInt([]int{7, 3, 1, 5, 4, 2, 6}))
+}
+
+func descOrderInt(numbers []int) []int {
+	var ordered bool
+	var aux int
+	var i int
+	var j int
+	for i = 0; i < len(numbers); i++ {
+		ordered = true
+		for j = 0; j < len(numbers) - 1; j++ {
+			if numbers[j] < numbers[j+1] {
+				aux = numbers[j]
+				numbers[j] = numbers[j+1]
+				numbers[j+1] = aux
+				ordered = false
+			}
+		}
+		if ordered {
+			break
+		}
+	}
+	return numbers
+}
+```
+
+#### 38. Construir una función que dado un número entero devuelva un string con el día de la semana que representa (nombrarla `dayOfWeek`) según la siguiente tabla:
+- 1 -> Domingo
+- 2 -> Lunes
+- 3 -> Martes
+- 4 -> Miércoles
+- 5 -> Jueves
+- 6 -> Viernes
+- 7 -> Sábado
+- otro -> Error
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(dayOfWeek(1))
+}
+
+func dayOfWeek(day int) string {
+	switch day {
+	case 1: return "Domingo"
+	case 2: return "Lunes"
+	case 3: return "Martes"
+	case 4: return "Miércoles"
+	case 5: return "Jueves"
+	case 6: return "Viernes"
+	case 7: return "Sábado"
+	default: return "Error"
+	}
+}
+```
+
+#### 39. Construir una función que corrobore el funcionamiento de la función anterior. Debe probar todos los posibles casos (puede crear todas las funciones adicionales que crea convenientes)  e imprimir 
+- `Caso <x> -> OK` -> si la función devolvió lo esperado
+- `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
+
+El `OK` debe aparecer en verde y el `ERROR` debe aparecer en rojo. El `<x>` debe ser reemplazado por el número probado en cada caso.
+```go
+package main
+
+import "fmt"
+
+func main() {
+	checkDayOfWeek()
+}
+
+func checkDayOfWeek() {
+	const cases int = 8
+	var inputs [cases]int = [cases]int{1,2,3,4,5,6,7,8}
+	var outputs [cases]string = [cases]string{"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Error"}
+	var i int
+	for i = 0; i < cases; i++ {
+		fmt.Printf("Caso %d -> %s\n", inputs[i], getStatus(dayOfWeek(inputs[i]) == outputs[i]))
+	} 
+}
+
+func getStatus(result bool) string {
+	if result {
+		return inGreen("OK")
+	} else {
+		return inRed("ERROR")
+	}
+}
+
+func dayOfWeek(day int) string {
+	switch day {
+	case 1: return "Domingo"
+	case 2: return "Lunes"
+	case 3: return "Martes"
+	case 4: return "Miércoles"
+	case 5: return "Jueves"
+	case 6: return "Viernes"
+	case 7: return "Sábado"
+	default: return "Error"
+	}
+}
+
+func inGreen(aString string) string {
+	const reset string = "\u001b[0m"
+	const green string = "\u001b[32m"
+	return green + aString + reset
+}
+
+func inRed(aString string) string {
+	const reset string = "\u001b[0m"
+	const red string = "\u001b[31m"
+	return red + aString + reset
+}
+```
+
+#### 40. Construir una función que corrobore el funcionamiento de la función `leftTrim`, `rightTrim` y `trim`. Debe probar todos los posibles casos por cada función (puede crear todas las funciones adicionales que crea convenientes)  e imprimir 
+- `Caso <x> -> OK` -> si la función devolvió lo esperado
+- `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
+
+El `OK` debe aparecer en verde y el `ERROR` debe aparecer en rojo. El `<x>` debe ser reemplazado por el string probado en cada caso.
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var inputs []string = []string{"", "  ", "hola", "  hola", "hola  ", "  hola  ", "  hola mundo  "}
+	var leftTrimOutputs []string = []string{"", "", "hola", "hola", "hola  ", "hola  ", "hola mundo  "}
+	var rightTrimOutputs []string = []string{"", "", "hola", "  hola", "hola", "  hola", "  hola mundo"}
+	var trimOutputs []string = []string{"", "", "hola", "hola", "hola", "hola", "hola mundo"}
+
+	fmt.Println("\nProbando leftTrim:")
+	checkFunction(leftTrim, inputs, leftTrimOutputs)
+	fmt.Println("\nProbando rightTrim:")
+	checkFunction(rightTrim, inputs, rightTrimOutputs)
+	fmt.Println("\nProbando trim:")
+	checkFunction(trim, inputs, trimOutputs)
+}
+
+func checkFunction(testedFunction func(string) string, inputs []string, outputs []string) {
+	var i int
+	for i = 0; i < len(inputs); i++ {
+		fmt.Printf("Caso %q -> %s\n", inputs[i], getStatus(testedFunction(inputs[i]) == outputs[i]))
+	}
+}
+
+func getStatus(result bool) string {
+	if result {
+		return inGreen("OK")
+	} else {
+		return inRed("ERROR")
+	}
+}
+
+func leftTrim(aString string) string {
+	var i int
+	var trimmedString []byte
+	for i = 0; i < len(aString); i++ {
+		if aString[i] != ' ' {
+			break
+		}
+	}
+	for ; i < len(aString); i++ {
+		trimmedString = append(trimmedString, aString[i])
+	}
+	return string(trimmedString)
+}
+
+func rightTrim(aString string) string {
+	var trimmedString []byte
+	var lastChar int
+	var i int
+
+	for i = len(aString) - 1; i >= 0; i-- {
+		if aString[i] != ' ' {
+			lastChar = i + 1
+			break
+		}
+	}
+	trimmedString = make([]byte, lastChar)
+	for i = 0; i < lastChar; i++ {
+		trimmedString[i] = aString[i]
+	}
+
+	return string(trimmedString)
+}
+
+func trim(aString string) string {
+	return leftTrim(rightTrim(aString))
+}
+
+func inGreen(aString string) string {
+	const reset string = "\u001b[0m"
+	const green string = "\u001b[32m"
+	return green + aString + reset
+}
+
+func inRed(aString string) string {
+	const reset string = "\u001b[0m"
+	const red string = "\u001b[31m"
+	return red + aString + reset
+}
+```

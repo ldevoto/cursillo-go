@@ -139,3 +139,49 @@ Mauris volutpat eros quis pretium sodales. Nulla ultricies mollis dui eget susci
 Quisque eu gravida enim. Quisque auctor neque ante, ac varius mi suscipit id. Integer nulla ex, accumsan vitae augue ac, faucibus iaculis elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce condimentum erat eu tortor laoreet vulputate sed sed massa. Morbi fermentum elit vitae elit semper elementum at vulputate enim. Aenean id nisl mollis, pulvinar est sit amet, pretium diam.
 Morbi nec leo vel massa hendrerit euismod eu ut nisl. Sed dignissim, risus et interdum interdum, eros augue viverra urna, a sodales sapien turpis a justo. Donec quis tortor ipsum. Praesent tempor sit amet purus non auctor. Mauris et pharetra quam. Ut sed laoreet nulla. Ut dictum aliquet neque, malesuada finibus enim imperdiet nec. Sed id ultrices mi. Sed sit amet venenatis turpis. Aliquam erat volutpat.
 ```
+
+#### 30. Construir una función que dado un slice de strings devuelva un slice de números enteros donde cada elemento es el largo del string en la misma posición del slice dado (nombrarla `mapToLength`).
+Ej:
+```go
+var strings []string = []string{"hola", "mundo", "!"}
+var lengths []int = mapToLength(strings)
+fmt.Println(lengths)
+
+> [4, 5, 1]
+```
+
+#### 31. Construir una función que dado un slice de bools devuelva true si todos los valores del slice son true o false si no (nombrarla `allTrue`).
+
+#### 32. Construir una función que dado un slice de bools devuelva true si al menos un valor del slice es true o false si no (nombrarla `anyTrue`).
+
+#### 33. Construir una función que dado un slice de números decimales devuelva la suma de todos (nombrarla `sumFloat`).
+
+#### 34. Construir una función que dado un slice de números decimales devuelva el promedio de todos (nombrarla `averageFloat`).
+
+#### 35. Construir una función que dado un slice de números decimales devuelva un array de 2 números decimales donde en la posición 0 estará el mayor y en la 1 el menor de todos. Si el slice no tiene elementos, devolver el array con 0 en ambos valores (nombrarla `minMaxFloat`).
+
+#### 36. Construir una función que dado un slice de números enteros devuelva un slice con los números ordenados de menor a mayor (nombrarla `ascOrderInt`).
+
+#### 37. Construir una función que dado un slice de números enteros devuelva un slice con los números ordenados de mayor a menor (nombrarla `descOrderInt`).
+
+#### 38. Construir una función que dado un número entero devuelva un string con el día de la semana que representa (nombrarla `dayOfWeek`) según la siguiente tabla:
+- 1 -> Domingo
+- 2 -> Lunes
+- 3 -> Martes
+- 4 -> Miércoles
+- 5 -> Jueves
+- 6 -> Viernes
+- 7 -> Sábado
+- otro -> Error
+
+#### 39. Construir una función que corrobore el funcionamiento de la función anterior. Debe probar todos los posibles casos (puede crear todas las funciones adicionales que crea convenientes)  e imprimir 
+-> `Caso <x> -> OK` -> si la función devolvió lo esperado
+-> `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
+
+El `OK` debe aparecer en verde y el `ERROR` debe aparecer en rojo. El `<x>` debe ser reemplazado por el número probado en cada caso.
+
+#### 40. Construir una función que corrobore el funcionamiento de la función `leftTrim`, `rightTrim` y `trim`. Debe probar todos los posibles casos por cada función (puede crear todas las funciones adicionales que crea convenientes)  e imprimir 
+- `Caso <x> -> OK` -> si la función devolvió lo esperado
+- `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
+
+El `OK` debe aparecer en verde y el `ERROR` debe aparecer en rojo. El `<x>` debe ser reemplazado por el string probado en cada caso.
