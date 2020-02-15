@@ -175,8 +175,8 @@ fmt.Println(lengths)
 - otro -> Error
 
 #### 39. Construir una función que corrobore el funcionamiento de la función anterior. Debe probar todos los posibles casos (puede crear todas las funciones adicionales que crea convenientes)  e imprimir 
--> `Caso <x> -> OK` -> si la función devolvió lo esperado
--> `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
+- `Caso <x> -> OK` -> si la función devolvió lo esperado
+- `Caso <x> -> ERROR` -> si la función no devolvió lo esperado
 
 El `OK` debe aparecer en verde y el `ERROR` debe aparecer en rojo. El `<x>` debe ser reemplazado por el número probado en cada caso.
 
