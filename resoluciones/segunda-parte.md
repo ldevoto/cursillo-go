@@ -133,57 +133,62 @@ func main() {
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var number1 int
-	var number2 int
-	var number3 int
+	var number2 int 
+	var number3 int 
 	var number4 int
-	var max int
-	var middleMax int
-	var middleMin int
-	var min int
 
 	fmt.Println("Ingrese cuatro números enteros")
-	fmt.Scanf("%d %d %d %d", &number1, &number2, &number3, &number4)
+	fmt.Scan(&number1, &number2, &number3, &number4)
 
-	if number1 > number2 {
-		max = number1
-		middleMax = number2
-	} else {
-		max = number2
-		middleMax = number1
+	var first int = number1
+	var second int = number2
+	var third int = number3
+	var fourth int = number4
+	var aux int
+
+	if fourth > third {
+		aux = third
+		third = fourth
+		fourth = aux
 	}
 
-	if number3 > max {
-		middleMin = middleMax
-		middleMax = max
-		max = number3
-	} else if number3 > middleMax {
-		middleMin = middleMax
-		middleMax = number3
-	} else {
-		middleMin = number3
+	if third > second {
+		aux = second
+		second = third
+		third = aux
 	}
 
-	if number4 > max {
-		min = middleMin
-		middleMin = middleMax
-		middleMax = max
-		max = number4
-	} else if number4 > middleMax {
-		min = middleMin
-		middleMin = middleMax
-		middleMax = number4
-	} else if number4 > middleMin {
-		min = middleMin
-		middleMin = number4
-	} else {
-		min = number4
+	if second > first {
+		aux = first
+		first = second
+		second = aux
 	}
 
-	fmt.Println(max, middleMax, middleMin, min)
+	if fourth > third {
+		aux = third
+		third = fourth
+		fourth = aux
+	}
+
+	if third > second {
+		aux = second
+		second = third
+		third = aux
+	}
+
+	if fourth > third {
+		aux = third
+		third = fourth
+		fourth = aux
+	}
+
+	fmt.Printf("El orden es: %d - %d - %d - %d", first, second, third, fourth)
 }
 ```
 
