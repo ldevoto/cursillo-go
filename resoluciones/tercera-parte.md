@@ -477,7 +477,330 @@ func main() {
 ```
 
 ### Segunda tanda
-En esta Segunda tanda vamos a estar trabando con arrays y slices. Como bien se aclara en el comienzo de esta **tercer parte**, no usar la librería de "strings".
+Abandonamos el dibujo en esta segunda tanda pero seguimos con los `for`. Vamos a estar jugando ahora con las condiciones de corte, repeticiones, confirmaciones y algunas cositas más.
+
+#### 1. Imprimir una cuenta regresiva de 100 a 0 en saltos de a 3
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+
+	for i = 100; i >= 0; i -= 3 {
+		fmt.Println(i)
+	}
+}
+```
+
+#### 2. Solicitar el ingreso de dos números enteros e imprimir todo el rango de números que se encuentre entre ellos (hacerlo de menor a mayor)
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+	var number1 int
+	var number2 int
+	var start int
+	var end int
+
+	fmt.Print("Ingrese dos números enteros: ")
+	fmt.Scan(&number1, &number2)
+
+	start = number1
+	end = number2
+
+	if number1 > number2 {
+		start = number2
+		end = number1
+	}
+
+	for i = start; i <= end; i++ {
+		fmt.Println(i)
+	}
+}
+```
+
+#### 3. Solicitar el ingreso de dos números enteros e imprimir cuántos números múltiplos de 11 existen entre ellos
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+	var number1 int
+	var number2 int
+	var start int
+	var end int
+	var count int
+
+	fmt.Print("Ingrese dos números enteros: ")
+	fmt.Scan(&number1, &number2)
+
+	start = number1
+	end = number2
+
+	if number1 > number2 {
+		start = number2
+		end = number1
+	}
+
+	for i = start; i <= end; i++ {
+		if i%11 == 0 {
+			count++
+		}
+	}
+
+	fmt.Printf("Existen %d múltiplos de 11\n", count)
+}
+```
+
+#### 4. Solicitar el ingreso de un número entero e imprimir cuáles y cuántos divisores positivos tiene. Adicionalmente indicar si el número es primo
+- Ej: 
+```
+> Ingrese un número entero: 21
+> Divisores: 1, 3, 7, 21
+> Tiene 5 divisores
+> 21 no es primo
+```
+Recordatorio: Un número es primo si y solo si tiene unicamente 2 divisores: 1 y el mismo número (en rigor de verdad, la definición de primo contempla divisores negativos pero no nos interesa para este caso). Por ejemplo el número 5 es primo ya que los únicos divisores que tiene son 1 y 5.
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+	var number int
+	var divisors int
+
+	fmt.Print("Ingrese un número entero: ")
+	fmt.Scan(&number)
+
+	fmt.Print("Divisores: ")
+	for i = 1; i <= number; i++ {
+		if number%i == 0 {
+			fmt.Printf("%d, ", i)
+			divisors++
+		}
+	}
+
+	fmt.Printf("\nTiene %d divisores\n", divisors)
+	if divisors == 2 {
+		fmt.Printf("%d es primo\n", number)
+	} else {
+		fmt.Printf("%d no es primo\n", number)
+	}
+}
+```
+
+#### 5. Imprimir la tabla de multiplicar del 9 de la siguiente forma
+```
+9 x 1 = 9
+9 x 2 = 18
+9 x 3 = 27
+...
+9 x 10 = 90
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+	const NUMBER int = 9
+
+	for i = 1; i <= 10; i++ {
+		fmt.Printf("%d x %d = %d\n", NUMBER, i, i*NUMBER)
+	}
+}
+```
+
+#### 6. Imprimir la tabla de multiplicar de cada uno de los números del 1 al 10 de la siguiente forma
+```
+Tabla del 1
+1 x 1 = 1
+1 x 2 = 2
+...
+
+Tabla del 2
+2 x 1 = 2
+2 x 2 = 4
+...
+
+Tabla del 10
+10 x 1 = 10
+10 x 2 = 10
+...
+10 x 10 = 100
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var i int
+	var j int
+
+	for i = 1; i <= 10; i++ {
+		fmt.Printf("\nTabla del %d\n", i)
+		for j = 1; j <= 10; j++ {
+			fmt.Printf("%d x %d = %d\n", i, j, i*j)
+		}
+	}
+}
+```
+
+#### 7. Emular una calculadora de la siguiente forma:
+- Preguntar que operación desea realizar el usuario
+    - `"+"` -> Suma ambos números
+    - `"-"` -> Resta el segundo número al primero
+    - `"*"` -> Multiplica ambos números
+    - `"/"` -> Divide el primer número por el segundo
+    - `"^"` -> Eleva el primer número al segundo
+- Solicitar los números reales a operar
+- Imprimir el resultado
+- Preguntar al usuario si desea realizar otra operación
+    - si indica que `"si"` -> reinciar la calculadora
+    - si indica que `"no"` -> salir
+    - si ingresa cualquier otra cosa -> repreguntar
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	const PLUS string = "+"
+	const MINUS string = "-"
+	const TIMES string = "*"
+	const DIVISION string = "/"
+	const POWER string = "^"
+	const YES string = "si"
+	const NO string = "no"
+	var operation string
+	var answer string
+	var number1 float32
+	var number2 float32
+
+	for answer != NO {
+		fmt.Print("Ingrese que operacion desea realizar: ")
+		fmt.Scan(&operation)
+
+		fmt.Print("Ingrese los operandos: ")
+		fmt.Scan(&number1, &number2)
+
+		switch operation {
+		case PLUS:
+			fmt.Printf("%.2f + %.2f = %.2f\n", number1, number2, number1+number2)
+		case MINUS:
+			fmt.Printf("%.2f - %.2f = %.2f\n", number1, number2, number1-number2)
+		case TIMES:
+			fmt.Printf("%.2f x %.2f = %.2f\n", number1, number2, number1*number2)
+		case DIVISION:
+			if number2 == 0 {
+				fmt.Println("No se puede realizar la operación")
+			} else {
+				fmt.Printf("%.2f / %.2f = %.2f\n", number1, number2, number1/number2)
+			}
+		case POWER:
+			fmt.Printf("%.2f ^ %.2f = %.2f\n", number1, number2, math.Pow(float64(number1), float64(number2)))
+		default:
+			fmt.Printf("Operación erronea\n")
+		}
+
+		answer = ""
+		for answer != NO && answer != YES {
+			fmt.Print("Desea realizar otra operación? ")
+			fmt.Scan(&answer)
+		}
+	}
+}
+```
+
+#### 8. Realizar un programa que será utilizado por profesores universitarios para llevar el estado de una cursada dada que cumpla con los siguientes requisitos:
+- Preguntar de que cursada se trata
+- Pedir el ingreso de cuántas notas se van a procesar por alumno
+- Por cada alumno, solicitar el ingreso de las notas y mostrar el promedio
+- El sistema debe preguntar luego de cada alumno si todavía hay alguno pendiente y en caso de no haber más finalizar.
+- Finalmente indicar de cuántos alumnos está compuesto el curso y cuál es el promedio general
+
+Ej: 
+```
+Ingrese el nombre de la cursada: Matemática AR1B
+Cuántas notas hay por alumno?: 3
+Quedan alumnos por procesar (si/no)?: si
+Ingrese nombre de alumno: Sol
+Ingrese nota 1: 8
+Ingrese nota 2: 10
+Ingrese nota 3: 4
+El promedio de Sol es 7.33
+Quedan alumnos por procesar (si/no)?: si
+Ingrese nombre de alumno: Axel
+Ingrese nota 1: 2
+Ingrese nota 2: 4
+Ingrese nota 3: 4
+El promedio de Axel es 3.33
+Quedan alumnos por procesar (si/no)?: no
+El curso Matemática AR1B está compuesto por 2 alumnos. El promedio general es: 5.33
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const YES string = "si"
+	const NO string = "no"
+	var courseName string
+	var marksQuantity int
+	var studentName string
+	var studentMark float32
+	var studentSum float32
+	var studentQuantity int
+	var courseSum float32
+	var answer string
+	var i int
+
+	fmt.Print("Ingrese el nombre de la cursada: ")
+	fmt.Scan(&courseName)
+	for marksQuantity <= 0 {
+		fmt.Print("Cuántas notas hay por alumno?: ")
+		fmt.Scan(&marksQuantity)
+	}
+
+	studentQuantity = 0
+	for answer != NO {
+		fmt.Print("Quedan alumnos por procesar (si/no)?: ")
+		fmt.Scan(&answer)
+		if answer == YES {
+			studentQuantity++
+			studentSum = 0
+			fmt.Print("Ingrese nombre del alumno: ")
+			fmt.Scan(&studentName)
+			for i = 0; i < marksQuantity; i++ {
+				fmt.Printf("Ingrese nota %d: ", i+1)
+				fmt.Scan(&studentMark)
+				studentSum += studentMark
+			}
+			courseSum += studentSum
+			fmt.Printf("El promedio de %s es %.2f\n", studentName, studentSum/float32(marksQuantity))
+		}
+	}
+	fmt.Printf("El curso %s está compuesto por %d alumnos. El promedio general es: %.2f\n", courseName, studentQuantity, courseSum/float32(studentQuantity*marksQuantity))
+}
+```
+
+### Tercer tanda
+En esta Tercer tanda vamos a estar trabajando con arrays y slices. Como bien se aclara en el comienzo de esta **tercer parte**, no usar la librería de "strings".
 
 #### 1. Dado un array de 5 enteros imprimir el tercer elemento
 ```go
@@ -1023,7 +1346,7 @@ func main() {
 }
 ```
 
-### Tercer tanda
+### Cuarta tanda
 Aclaración: Donde se pida solicitar el ingreso de arrays (independiente del tipo solicitado) se deja al programador definir el tamaño del mismo al momento de compilación salvo que se indique lo contrario.
 
 #### 1. Solicitar el ingreso de un array de dos números reales e imprimir el mayor

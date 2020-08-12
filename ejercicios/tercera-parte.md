@@ -148,7 +148,95 @@ Considerando que cada paso en x es Pi/4 y cada paso en y es 1
 ```
 
 ### Segunda tanda
-En esta Segunda tanda vamos a estar trabando con arrays y slices. Como bien se aclara en el comienzo de esta **tercer parte**, no usar la librería de "strings".
+Abandonamos el dibujo en esta segunda tanda pero seguimos con los `for`. Vamos a estar jugando ahora con las condiciones de corte, repeticiones, confirmaciones y algunas cositas más.
+
+#### 1. Imprimir una cuenta regresiva de 100 a 0 en saltos de a 3
+
+#### 2. Solicitar el ingreso de dos números enteros e imprimir todo el rango de números que se encuentre entre ellos (hacerlo de menor a mayor)
+
+#### 3. Solicitar el ingreso de dos números enteros e imprimir cuántos números múltiplos de 11 existen entre ellos
+
+#### 4. Solicitar el ingreso de un número entero e imprimir cuáles y cuántos divisores positivos tiene. Adicionalmente indicar si el número es primo
+- Ej: 
+```
+> Ingrese un número entero: 21
+> Divisores: 1, 3, 7, 21
+> Tiene 5 divisores
+> 21 no es primo
+```
+Recordatorio: Un número es primo si y solo si tiene unicamente 2 divisores: 1 y el mismo número (en rigor de verdad, la definición de primo contempla divisores negativos pero no nos interesa para este caso). Por ejemplo el número 5 es primo ya que los únicos divisores que tiene son 1 y 5.
+
+#### 5. Imprimir la tabla de multiplicar del 9 de la siguiente forma
+```
+9 x 1 = 9
+9 x 2 = 18
+9 x 3 = 27
+...
+9 x 10 = 90
+```
+
+#### 6. Imprimir la tabla de multiplicar de cada uno de los números del 1 al 10 de la siguiente forma
+```
+Tabla del 1
+1 x 1 = 1
+1 x 2 = 2
+...
+
+Tabla del 2
+2 x 1 = 2
+2 x 2 = 4
+...
+
+Tabla del 10
+10 x 1 = 10
+10 x 2 = 10
+...
+10 x 10 = 100
+```
+
+#### 7. Emular una calculadora de la siguiente forma:
+- Preguntar que operación desea realizar el usuario
+    - `"+"` -> Suma ambos números
+    - `"-"` -> Resta el segundo número al primero
+    - `"*"` -> Multiplica ambos números
+    - `"/"` -> Divide el primer número por el segundo
+    - `"^"` -> Eleva el primer número al segundo
+- Solicitar los números reales a operar
+- Imprimir el resultado
+- Preguntar al usuario si desea realizar otra operación
+    - si indica que `"si"` -> reinciar la calculadora
+    - si indica que `"no"` -> salir
+    - si ingresa cualquier otra cosa -> repreguntar
+
+#### 8. Realizar un programa que será utilizado por profesores universitarios para llevar el estado de una cursada dada que cumpla con los siguientes requisitos:
+- Preguntar de que cursada se trata
+- Pedir el ingreso de cuántas notas se van a procesar por alumno
+- Por cada alumno, solicitar el ingreso de las notas y mostrar el promedio
+- El sistema debe preguntar luego de cada alumno si todavía hay alguno pendiente y en caso de no haber más finalizar.
+- Finalmente indicar de cuántos alumnos está compuesto el curso y cuál es el promedio general
+
+Ej: 
+```
+Ingrese el nombre de la cursada: Matemática AR1B
+Cuántas notas hay por alumno?: 3
+Quedan alumnos por procesar (si/no)?: si
+Ingrese nombre de alumno: Sol
+Ingrese nota 1: 8
+Ingrese nota 2: 10
+Ingrese nota 3: 4
+El promedio de Sol es 7.33
+Quedan alumnos por procesar (si/no)?: si
+Ingrese nombre de alumno: Axel
+Ingrese nota 1: 2
+Ingrese nota 2: 4
+Ingrese nota 3: 4
+El promedio de Axel es 3.33
+Quedan alumnos por procesar (si/no)?: no
+El curso Matemática AR1B está compuesto por 2 alumnos. El promedio general es: 5.33
+```
+
+### Tercer tanda
+En esta Terver tanda vamos a estar trabajando con arrays y slices. Como bien se aclara en el comienzo de esta **tercer parte**, no usar la librería de "strings".
 
 #### 1. Dado un array de 5 enteros imprimir el tercer elemento
 
@@ -217,7 +305,7 @@ En esta Segunda tanda vamos a estar trabando con arrays y slices. Como bien se a
 - `"son parecidos"` -> si difieren en no mas de 2 letras
 - `"son distintos"` -> si difieren en más de 2 letras
 
-### Tercer tanda
+### Cuarta tanda
 Aclaración: Donde se pida solicitar el ingreso de arrays (independiente del tipo solicitado) se deja al programador definir el tamaño del mismo al momento de compilación salvo que se indique lo contrario.
 
 #### 1. Solicitar el ingreso de un array de dos números reales e imprimir el mayor
